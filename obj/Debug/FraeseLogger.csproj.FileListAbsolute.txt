@@ -1,0 +1,8 @@
+D:\Projects\FraeseLogger\FraeseLogger\bin\Debug\utility.dll
+D:\Projects\FraeseLogger\FraeseLogger\bin\Debug\utility.xml
+D:\Projects\FraeseLogger\FraeseLogger\obj\Debug\FraeseLogger.LoggerDlg.resources
+D:\Projects\FraeseLogger\FraeseLogger\obj\Debug\FraeseLogger.csproj.GenerateResource.Cache
+D:\Projects\FraeseLogger\FraeseLogger\bin\Debug\fraeselogger.dll
+D:\Projects\FraeseLogger\FraeseLogger\bin\Debug\fraeselogger.pdb
+D:\Projects\FraeseLogger\FraeseLogger\obj\Debug\fraeselogger.dll
+D:\Projects\FraeseLogger\FraeseLogger\obj\Debug\fraeselogger.pdb
