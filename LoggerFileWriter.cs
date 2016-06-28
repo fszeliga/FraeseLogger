@@ -13,13 +13,14 @@ namespace FraeseLogger
 
         public LoggerFileWriter(bool writeTitle)
         {
-            LoggerInstance.Instance.logCount = 0;
+            li.logCount = 0;
             this.writeTitle = writeTitle;
         }
 
         public void logCNC()
         {
-            using(System.IO.StreamWriter file = new StreamWriter(@"C:\Users\Filip Szeliga\Documents\TestFile.txt"))
+            String filename = li.LogFileDir + li.log_filename;
+            using(System.IO.StreamWriter file = new StreamWriter(@filename))
             {
                 if (writeTitle)
                 {
@@ -43,7 +44,7 @@ namespace FraeseLogger
                 }
 
 
-                while (LoggerInstance.Instance.logThreadRunning)
+                while (li.logThreadRunning)
                 {
                     /*
                      1- aktives NC-Programm
@@ -81,8 +82,8 @@ namespace FraeseLogger
                     line += DateTime.Now.ToString("HH:mm:ss.ff");
 
                     file.WriteLine(line);
-                    LoggerInstance.Instance.logCount += 1;
-                    System.Threading.Thread.Sleep(LoggerInstance.Instance.logInterval);
+                    li.logCount += 1;
+                    System.Threading.Thread.Sleep(li.logInterval);
                 }
             }
 

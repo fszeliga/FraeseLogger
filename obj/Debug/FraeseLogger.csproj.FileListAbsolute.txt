@@ -6,3 +6,4 @@ D:\Projects\FraeseLogger\FraeseLogger\bin\Debug\fraeselogger.dll
 D:\Projects\FraeseLogger\FraeseLogger\bin\Debug\fraeselogger.pdb
 D:\Projects\FraeseLogger\FraeseLogger\obj\Debug\fraeselogger.dll
 D:\Projects\FraeseLogger\FraeseLogger\obj\Debug\fraeselogger.pdb
+D:\Projects\FraeseLogger\FraeseLogger\obj\Debug\FraeseLogger.csprojResolveAssemblyReference.cache

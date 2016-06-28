@@ -55,6 +55,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="InputBox.cs" />
     <Compile Include="LoggerFileWriter.cs" />
     <Compile Include="LoggerInstance.cs" />
     <Compile Include="LoggerDlg.cs">

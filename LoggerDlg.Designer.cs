@@ -58,16 +58,26 @@
             this.val_lblFirmware = new System.Windows.Forms.Label();
             this.timer = new System.Windows.Forms.Timer(this.components);
             this.lblLogCount = new System.Windows.Forms.Label();
-            this.lblStatusBar = new System.Windows.Forms.Label();
             this.ckbWriteTitle = new System.Windows.Forms.CheckBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
+            this.lblStatus = new System.Windows.Forms.Label();
+            this.btnOutputFolder = new System.Windows.Forms.Button();
+            this.val_lblLogCount = new System.Windows.Forms.Label();
+            this.lblUsedInterval = new System.Windows.Forms.Label();
+            this.val_lblUsedInterval = new System.Windows.Forms.Label();
+            this.btnFilename = new System.Windows.Forms.Button();
+            this.lblFilename = new System.Windows.Forms.Label();
+            this.lblOutputFolder = new System.Windows.Forms.Label();
+            this.val_lblOutputFolder = new System.Windows.Forms.Label();
+            this.val_lblFilename = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.numLogInterval)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnStartStopLogging
             // 
-            this.btnStartStopLogging.Location = new System.Drawing.Point(439, 450);
+            this.btnStartStopLogging.Location = new System.Drawing.Point(12, 448);
             this.btnStartStopLogging.Name = "btnStartStopLogging";
             this.btnStartStopLogging.Size = new System.Drawing.Size(129, 23);
             this.btnStartStopLogging.TabIndex = 0;
@@ -82,7 +92,7 @@
             0,
             0,
             0});
-            this.numLogInterval.Location = new System.Drawing.Point(367, 452);
+            this.numLogInterval.Location = new System.Drawing.Point(483, 451);
             this.numLogInterval.Maximum = new decimal(new int[] {
             10000,
             0,
@@ -373,25 +383,16 @@
             // lblLogCount
             // 
             this.lblLogCount.AutoSize = true;
-            this.lblLogCount.Location = new System.Drawing.Point(533, 427);
+            this.lblLogCount.Location = new System.Drawing.Point(438, 401);
             this.lblLogCount.Name = "lblLogCount";
-            this.lblLogCount.Size = new System.Drawing.Size(35, 13);
+            this.lblLogCount.Size = new System.Drawing.Size(81, 13);
             this.lblLogCount.TabIndex = 3;
-            this.lblLogCount.Text = "label1";
-            // 
-            // lblStatusBar
-            // 
-            this.lblStatusBar.AutoSize = true;
-            this.lblStatusBar.Location = new System.Drawing.Point(9, 460);
-            this.lblStatusBar.Name = "lblStatusBar";
-            this.lblStatusBar.Size = new System.Drawing.Size(35, 13);
-            this.lblStatusBar.TabIndex = 4;
-            this.lblStatusBar.Text = "label1";
+            this.lblLogCount.Text = "Logged Entries:";
             // 
             // ckbWriteTitle
             // 
             this.ckbWriteTitle.AutoSize = true;
-            this.ckbWriteTitle.Location = new System.Drawing.Point(367, 427);
+            this.ckbWriteTitle.Location = new System.Drawing.Point(147, 452);
             this.ckbWriteTitle.Name = "ckbWriteTitle";
             this.ckbWriteTitle.Size = new System.Drawing.Size(128, 17);
             this.ckbWriteTitle.TabIndex = 5;
@@ -401,20 +402,121 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(275, 455);
+            this.label1.Location = new System.Drawing.Point(387, 455);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(92, 13);
             this.label1.TabIndex = 6;
             this.label1.Text = "Log Intervall in ms";
             // 
+            // lblStatus
+            // 
+            this.lblStatus.AutoSize = true;
+            this.lblStatus.Location = new System.Drawing.Point(12, 477);
+            this.lblStatus.Name = "lblStatus";
+            this.lblStatus.Size = new System.Drawing.Size(34, 13);
+            this.lblStatus.TabIndex = 7;
+            this.lblStatus.Text = "UNIN";
+            // 
+            // btnOutputFolder
+            // 
+            this.btnOutputFolder.Location = new System.Drawing.Point(12, 390);
+            this.btnOutputFolder.Name = "btnOutputFolder";
+            this.btnOutputFolder.Size = new System.Drawing.Size(59, 23);
+            this.btnOutputFolder.TabIndex = 8;
+            this.btnOutputFolder.Text = "Ändern";
+            this.btnOutputFolder.UseVisualStyleBackColor = true;
+            this.btnOutputFolder.Click += new System.EventHandler(this.lblOutputFolderPicker_Click);
+            // 
+            // val_lblLogCount
+            // 
+            this.val_lblLogCount.AutoSize = true;
+            this.val_lblLogCount.Location = new System.Drawing.Point(515, 402);
+            this.val_lblLogCount.Name = "val_lblLogCount";
+            this.val_lblLogCount.Size = new System.Drawing.Size(34, 13);
+            this.val_lblLogCount.TabIndex = 9;
+            this.val_lblLogCount.Text = "UNIN";
+            // 
+            // lblUsedInterval
+            // 
+            this.lblUsedInterval.AutoSize = true;
+            this.lblUsedInterval.Location = new System.Drawing.Point(429, 422);
+            this.lblUsedInterval.Name = "lblUsedInterval";
+            this.lblUsedInterval.Size = new System.Drawing.Size(90, 13);
+            this.lblUsedInterval.TabIndex = 10;
+            this.lblUsedInterval.Text = "Log Intervall (ms):";
+            // 
+            // val_lblUsedInterval
+            // 
+            this.val_lblUsedInterval.AutoSize = true;
+            this.val_lblUsedInterval.Location = new System.Drawing.Point(518, 423);
+            this.val_lblUsedInterval.Name = "val_lblUsedInterval";
+            this.val_lblUsedInterval.Size = new System.Drawing.Size(34, 13);
+            this.val_lblUsedInterval.TabIndex = 11;
+            this.val_lblUsedInterval.Text = "UNIN";
+            // 
+            // btnFilename
+            // 
+            this.btnFilename.Location = new System.Drawing.Point(12, 419);
+            this.btnFilename.Name = "btnFilename";
+            this.btnFilename.Size = new System.Drawing.Size(59, 23);
+            this.btnFilename.TabIndex = 12;
+            this.btnFilename.Text = "Ändern";
+            this.btnFilename.UseVisualStyleBackColor = true;
+            this.btnFilename.Click += new System.EventHandler(this.btnFilename_Click);
+            // 
+            // lblFilename
+            // 
+            this.lblFilename.AutoSize = true;
+            this.lblFilename.Location = new System.Drawing.Point(73, 425);
+            this.lblFilename.Name = "lblFilename";
+            this.lblFilename.Size = new System.Drawing.Size(66, 13);
+            this.lblFilename.TabIndex = 13;
+            this.lblFilename.Text = "Datei Name:";
+            // 
+            // lblOutputFolder
+            // 
+            this.lblOutputFolder.AutoSize = true;
+            this.lblOutputFolder.Location = new System.Drawing.Point(73, 395);
+            this.lblOutputFolder.Name = "lblOutputFolder";
+            this.lblOutputFolder.Size = new System.Drawing.Size(77, 13);
+            this.lblOutputFolder.TabIndex = 14;
+            this.lblOutputFolder.Text = "Output Ordner:";
+            // 
+            // val_lblOutputFolder
+            // 
+            this.val_lblOutputFolder.AutoSize = true;
+            this.val_lblOutputFolder.Location = new System.Drawing.Point(147, 395);
+            this.val_lblOutputFolder.Name = "val_lblOutputFolder";
+            this.val_lblOutputFolder.Size = new System.Drawing.Size(35, 13);
+            this.val_lblOutputFolder.TabIndex = 15;
+            this.val_lblOutputFolder.Text = "label2";
+            // 
+            // val_lblFilename
+            // 
+            this.val_lblFilename.AutoSize = true;
+            this.val_lblFilename.Location = new System.Drawing.Point(146, 425);
+            this.val_lblFilename.Name = "val_lblFilename";
+            this.val_lblFilename.Size = new System.Drawing.Size(35, 13);
+            this.val_lblFilename.TabIndex = 16;
+            this.val_lblFilename.Text = "label2";
+            // 
             // LoggerDlg
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(580, 485);
+            this.ClientSize = new System.Drawing.Size(580, 500);
+            this.Controls.Add(this.val_lblFilename);
+            this.Controls.Add(this.val_lblOutputFolder);
+            this.Controls.Add(this.lblOutputFolder);
+            this.Controls.Add(this.lblFilename);
+            this.Controls.Add(this.btnFilename);
+            this.Controls.Add(this.val_lblUsedInterval);
+            this.Controls.Add(this.lblUsedInterval);
+            this.Controls.Add(this.val_lblLogCount);
+            this.Controls.Add(this.btnOutputFolder);
+            this.Controls.Add(this.lblStatus);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.ckbWriteTitle);
-            this.Controls.Add(this.lblStatusBar);
             this.Controls.Add(this.lblLogCount);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Controls.Add(this.numLogInterval);
@@ -460,8 +562,18 @@
         private System.Windows.Forms.Label lblFirmware;
         private System.Windows.Forms.Label val_lblFirmware;
         private System.Windows.Forms.Label lblLogCount;
-        private System.Windows.Forms.Label lblStatusBar;
         private System.Windows.Forms.CheckBox ckbWriteTitle;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog1;
+        private System.Windows.Forms.Label lblStatus;
+        private System.Windows.Forms.Button btnOutputFolder;
+        private System.Windows.Forms.Label val_lblLogCount;
+        private System.Windows.Forms.Label lblUsedInterval;
+        private System.Windows.Forms.Label val_lblUsedInterval;
+        private System.Windows.Forms.Button btnFilename;
+        private System.Windows.Forms.Label lblFilename;
+        private System.Windows.Forms.Label lblOutputFolder;
+        private System.Windows.Forms.Label val_lblOutputFolder;
+        private System.Windows.Forms.Label val_lblFilename;
     }
 }

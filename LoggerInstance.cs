@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using De.Boenigk.SMC5D.Basics;
 using De.Boenigk.Utility.CNC.Info;
+using System.IO;
 
 namespace FraeseLogger
 {
@@ -14,7 +15,21 @@ namespace FraeseLogger
         private De.Boenigk.Utility.CNC.Info.MachInfo machInfo;
          
         private LoggerInstance() {
-           
+            string appPath = System.AppDomain.CurrentDomain.BaseDirectory;// Path.GetDirectoryName(Path.GetDirectoryName(System.IO.Directory.GetCurrentDirectory()));
+            LogFileDir = appPath + "Live Log Files\\";
+            try
+            {
+                if (!Directory.Exists(LogFileDir))
+                {
+                    // Try to create the directory.
+                    DirectoryInfo di = Directory.CreateDirectory(LogFileDir);
+                }
+            }
+            catch (IOException ioex)
+            {
+                loggerStatus = ioex.Message;
+            }
+            log_filename = DateTime.Now.ToString("yyyy-dd-M--HH-mm-ss") + ".txt";
         }
 
         public static LoggerInstance Instance
@@ -33,6 +48,7 @@ namespace FraeseLogger
          * Start LoggerInstance Class
          */
         public int logInterval { get; set; }
+        public String LogFileDir { get; set; }
         public String serialNr { get; private set; }
         public String firmware { get; private set; }
         public double volt1 { get; private set; }
@@ -48,10 +64,13 @@ namespace FraeseLogger
         private String startTime;
         private String endTIme;
         private String endschalter = "todo";
+        public bool heightSensorActive { get; set; }
 
 
         public int logCount { get; set; }
         public bool logThreadRunning { get; set; }
+        public String log_filename { get; set; }
+        public String loggerStatus { get; set; }
 
         public void readFromCNC()
         {
