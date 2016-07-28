@@ -21,7 +21,7 @@ namespace FraeseLogger
         public LoggerDlg()
         {
             InitializeComponent();
-
+            
             val_lblOutputFolder.Text = li.LogFileDir;
             val_lblFilename.Text = li.log_filename;
 
@@ -38,23 +38,31 @@ namespace FraeseLogger
             val_lblSN.Text = li.serialNr;
             val_lblFirmware.Text = li.firmware;
 
-            val_lblActiveProg.Text = li.ActiveProg;
+            val_lblActiveProg.Text = li.activeProg;
 
-            if (li.DoorOpen) val_lblDoorStatus.Text = "Auf";
+            if (li.doorOpen) val_lblDoorStatus.Text = "Auf";
             else val_lblDoorStatus.Text = "Zu";
 
-            if (li.SpindleOn) val_lblSpindleStatus.Text = "Spindel ist an";
+            if (li.spindleOn) val_lblSpindleStatus.Text = "Spindel ist an";
             else val_lblSpindleStatus.Text = "Spindel ist aus";
 
-            val_lblCutSpeed.Text = li.CutSpeed;
-            val_lblMaxCutSpeed.Text = li.MaxCutSpeed;
-            val_lblFeedRate.Text = li.Vorschub + li.VorschubEinheit;
-
-            val_lblStartTime.Text = li.StartTime;
-            val_lblEndTime.Text = li.EndTIme;
+            val_lblCutSpeed.Text = li.cutSpeed;
+            val_lblMaxCutSpeed.Text = li.maxCutSpeed;
+            val_lblFeedRate.Text = li.vorschub + li.vorschubEinheit;
+            val_lblWorktime.Text = li.worktime.ToString();
+            val_lblStartTime.Text = li.startTime;
+            val_lblEndTime.Text = li.endTIme;
 
             lblStatus.Text = li.loggerStatus;
-                       
+
+            val_lblHeightSensorActive.Text = li.heightSensorActive.ToString();
+
+            val_lblFreilauf.Text = li.freilauf.ToString();
+
+            val_lblEndschalter.Text = li.endschalterX + " | " + li.endschalterY + " | " + li.endschalterZ;
+            val_lblGCode.Text = li.gCodeLine + " | " + li.gCode;
+            val_lblPositions.Text = li.positions.toString();
+            val_lblSpindlespeed.Text = li.spidlespeed.ToString();
         }
         private void buttonStart_Click(object sender, EventArgs e)
         {
@@ -84,8 +92,9 @@ namespace FraeseLogger
         {
             if (folderBrowserDialog1.ShowDialog() == DialogResult.OK)
             {
-                li.LogFileDir = folderBrowserDialog1.SelectedPath;
+                li.LogFileDir = folderBrowserDialog1.SelectedPath + "\\";
                 val_lblOutputFolder.Text = li.LogFileDir;
+                btnStartStopLogging.Enabled = true;
             }
         }
 
@@ -140,5 +149,6 @@ namespace FraeseLogger
                 val_lblFilename.Text = li.log_filename;
             }
         }
+
     }
 }

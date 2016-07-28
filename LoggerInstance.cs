@@ -12,23 +12,12 @@ namespace FraeseLogger
     {
         private static LoggerInstance instance;
         private Connector myConn;
-        private De.Boenigk.Utility.CNC.Info.MachInfo machInfo;
-         
-        private LoggerInstance() {
-            string appPath = System.AppDomain.CurrentDomain.BaseDirectory;// Path.GetDirectoryName(Path.GetDirectoryName(System.IO.Directory.GetCurrentDirectory()));
-            LogFileDir = appPath + "Live Log Files\\";
-            try
-            {
-                if (!Directory.Exists(LogFileDir))
-                {
-                    // Try to create the directory.
-                    DirectoryInfo di = Directory.CreateDirectory(LogFileDir);
-                }
-            }
-            catch (IOException ioex)
-            {
-                loggerStatus = ioex.Message;
-            }
+        private MachInfo machInfo;
+
+        private LoggerInstance()
+        {
+            //string appPath = AppDomain.CurrentDomain.BaseDirectory;
+            LogFileDir = "Wähle einen Output Ordner!";//= appPath + "Live Log Files\\";
             log_filename = DateTime.Now.ToString("yyyy-dd-M--HH-mm-ss") + ".txt";
         }
 
@@ -47,30 +36,52 @@ namespace FraeseLogger
         /*
          * Start LoggerInstance Class
          */
+        public struct globPos
+        {
+            public int x, y, z;
+            public globPos(int x1, int y1, int z1)
+            {
+                x = x1;
+                y = y1;
+                z = z1;
+            }
+
+            public string toString()
+            {
+                return x + " | " + y + " | " + z;
+            }
+        }
+
+        public String gCode { get; private set; }
+        public int gCodeLine { get; private set; }
+        public double volt1 { get; private set; }
+        public double volt2 { get; private set; }
+        public String activeProg { get; private set; }
+        public bool doorOpen { get; private set; }
+        public bool spindleOn { get; private set; }
+        public bool freilauf { get; private set; }
+        public String cutSpeed { get; private set; }
+        public String maxCutSpeed { get; private set; }
+        public String vorschubEinheit { get; private set; }
+        public String vorschub { get; private set; }
+        public TimeSpan worktime { get; private set; }
+        public String startTime { get; private set; }
+        public DateTime startDateTime { get; private set; }
+        public String endTIme { get; private set; }
+        public bool endschalterX { get; private set; }
+        public bool endschalterY { get; private set; }
+        public bool endschalterZ { get; private set; }
+        public double spidlespeed { get; private set; }
+        public bool heightSensorActive { get; private set; }
+        public globPos positions { get; private set; }
         public int logInterval { get; set; }
         public String LogFileDir { get; set; }
         public String serialNr { get; private set; }
         public String firmware { get; private set; }
-        public double volt1 { get; private set; }
-        public double volt2 { get; private set; }
-        private String activeProg;
-        private bool doorOpen;
-        private bool spindleOn;
-        private String cutSpeed;
-        private String maxCutSpeed;
-        private String vorschubEinheit;
-        private String vorschub;
-        private String worktime = "todo";
-        private String startTime;
-        private String endTIme;
-        private String endschalter = "todo";
-        public bool heightSensorActive { get; set; }
-
-
         public int logCount { get; set; }
         public bool logThreadRunning { get; set; }
         public String log_filename { get; set; }
-        public String loggerStatus { get; set; }
+        public String loggerStatus { get; private set; }
 
         public void readFromCNC()
         {
@@ -86,15 +97,40 @@ namespace FraeseLogger
             if (machInfo.JobInfo.SpeedUnitMMMinute) vorschubEinheit = "mm/m";
             else vorschubEinheit = "mm/s";
 
+            if (myConn.Job != null)
+            {
+                freilauf = !myConn.Job.GetCurrent().Down;
+                spidlespeed = myConn.Job.GetCurrent().SpindleSpeed;
+            }
+            else
+            {
+                freilauf = true;
+                spidlespeed = 0;
+            }
+
             vorschub = machInfo.JobInfo.JobSpeed.ToString();
+
+            if (myConn.SMCSettings.HeightSensor.MeasureToolPin == Input.Default)
+            {
+                heightSensorActive = false;
+            }
+            else
+            {
+                heightSensorActive = true;
+            }
 
             if (machInfo.JobInfo.StartJobTimeTicks > 0)
             {
-                startTime = new DateTime(machInfo.JobInfo.StartJobTimeTicks).ToLongDateString() + " " + new DateTime(machInfo.JobInfo.StartJobTimeTicks).ToLongTimeString();
+                startDateTime = new DateTime(machInfo.JobInfo.StartJobTimeTicks); //save DateTime object for calculations
+
+                worktime = DateTime.Now.Subtract(startDateTime);
+
+                startTime = startDateTime.ToLongDateString() + " " + startDateTime.ToLongTimeString(); // human readable start time
             }
             else
             {
                 startTime = "?";
+                worktime = new TimeSpan(0);
             }
 
             if (machInfo.JobInfo.EndJobTimeTicks > 0)
@@ -105,6 +141,17 @@ namespace FraeseLogger
             {
                 endTIme = "?";
             }
+
+            Switch theSwitch = new Switch(myConn);
+            endschalterX = theSwitch.IsInputOn(InputConverter.GetInput(myConn.SMCSettings.AxisX.ReferencePinNumber), false);
+            endschalterY = theSwitch.IsInputOn(InputConverter.GetInput(myConn.SMCSettings.AxisY.ReferencePinNumber), false);
+            endschalterZ = theSwitch.IsInputOn(InputConverter.GetInput(myConn.SMCSettings.AxisZ.ReferencePinNumber), false);
+
+            gCode = machInfo.JobInfo.GCode;
+            gCodeLine = machInfo.JobInfo.GCodeLine;
+
+            positions = new globPos(myConn.GlobPosition.X, myConn.GlobPosition.Y, myConn.GlobPosition.Z);
+
         }
 
         public Connector Connector
@@ -128,149 +175,6 @@ namespace FraeseLogger
             set
             {
                 machInfo = value;
-            }
-        }
-
-        public string ActiveProg
-        {
-            get
-            {
-                return activeProg;
-            }
-
-            set
-            {
-                activeProg = value;
-            }
-        }
-
-        public bool DoorOpen
-        {
-            get
-            {
-                return doorOpen;
-            }
-
-            set
-            {
-                doorOpen = value;
-            }
-        }
-
-        public bool SpindleOn
-        {
-            get
-            {
-                return spindleOn;
-            }
-
-            set
-            {
-                spindleOn = value;
-            }
-        }
-
-        public string CutSpeed
-        {
-            get
-            {
-                return cutSpeed;
-            }
-
-            set
-            {
-                cutSpeed = value;
-            }
-        }
-
-        public string MaxCutSpeed
-        {
-            get
-            {
-                return maxCutSpeed;
-            }
-
-            set
-            {
-                maxCutSpeed = value;
-            }
-        }
-
-        public string Vorschub
-        {
-            get
-            {
-                return vorschub;
-            }
-
-            set
-            {
-                vorschub = value;
-            }
-        }
-
-        public string Worktime
-        {
-            get
-            {
-                return worktime;
-            }
-
-            set
-            {
-                worktime = value;
-            }
-        }
-
-        public string StartTime
-        {
-            get
-            {
-                return startTime;
-            }
-
-            set
-            {
-                startTime = value;
-            }
-        }
-
-        public string EndTIme
-        {
-            get
-            {
-                return endTIme;
-            }
-
-            set
-            {
-                endTIme = value;
-            }
-        }
-
-        public string Endschalter
-        {
-            get
-            {
-                return endschalter;
-            }
-
-            set
-            {
-                endschalter = value;
-            }
-        }
-
-        public string VorschubEinheit
-        {
-            get
-            {
-                return vorschubEinheit;
-            }
-
-            set
-            {
-                vorschubEinheit = value;
             }
         }
     }

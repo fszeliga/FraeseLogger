@@ -33,13 +33,11 @@
   <ItemGroup>
     <Reference Include="cncgraf.iplugin, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>.\cncgraf.iplugin.dll</HintPath>
+      <HintPath>..\..\..\..\..\Program Files\Boenigk\cncGraF 7\cncgraf.iplugin.dll</HintPath>
     </Reference>
-    <Reference Include="MachInfo">
-      <HintPath>C:\Users\Filip Szeliga\Documents\Boenigk\cncGraF7\plugins\FraeserLogger\MachInfo.dll</HintPath>
-    </Reference>
-    <Reference Include="smc5d.core">
-      <HintPath>..\..\app\bin\Release\smc5d.core.dll</HintPath>
+    <Reference Include="smc5d.core, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\Program Files\Boenigk\cncGraF 7\smc5d.core.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -55,7 +53,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="InputBox.cs" />
     <Compile Include="LoggerFileWriter.cs" />
     <Compile Include="LoggerInstance.cs" />
     <Compile Include="LoggerDlg.cs">
@@ -75,8 +72,8 @@
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>echo $(SolutionDir)$(OutDir)$(TargetFileName)
-echo "C:\Users\Filip Szeliga\Documents\Boenigk\cncGraF7\plugins\FraeserLogger\$(TargetFileName)"
-xcopy /y "$(SolutionDir)$(OutDir)$(TargetFileName)" "C:\Users\Filip Szeliga\Documents\Boenigk\cncGraF7\plugins\FraeserLogger\"</PostBuildEvent>
+echo "C:\Users\Filip\Documents\Boenigk\cncGraF7\plugins\FraeseLogger\$(TargetFileName)"
+xcopy /y "$(SolutionDir)$(OutDir)$(TargetFileName)" "C:\Users\Filip\Documents\Boenigk\cncGraF7\plugins\FraeseLogger\"</PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

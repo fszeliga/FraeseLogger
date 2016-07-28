@@ -53,15 +53,24 @@
             this.val_lblDoorStatus = new System.Windows.Forms.Label();
             this.val_lblSpindleStatus = new System.Windows.Forms.Label();
             this.val_lblCutSpeed = new System.Windows.Forms.Label();
-            this.label21 = new System.Windows.Forms.Label();
+            this.val_lblEndschalter = new System.Windows.Forms.Label();
             this.val_lblMaxCutSpeed = new System.Windows.Forms.Label();
             this.val_lblFirmware = new System.Windows.Forms.Label();
+            this.lblHeightSensorActive = new System.Windows.Forms.Label();
+            this.val_lblHeightSensorActive = new System.Windows.Forms.Label();
+            this.lblFreilauf = new System.Windows.Forms.Label();
+            this.val_lblFreilauf = new System.Windows.Forms.Label();
+            this.lblGCode = new System.Windows.Forms.Label();
+            this.val_lblGCode = new System.Windows.Forms.Label();
+            this.lblPositions = new System.Windows.Forms.Label();
+            this.val_lblPositions = new System.Windows.Forms.Label();
+            this.lblSpindlespeed = new System.Windows.Forms.Label();
+            this.val_lblSpindlespeed = new System.Windows.Forms.Label();
             this.timer = new System.Windows.Forms.Timer(this.components);
             this.lblLogCount = new System.Windows.Forms.Label();
             this.ckbWriteTitle = new System.Windows.Forms.CheckBox();
             this.label1 = new System.Windows.Forms.Label();
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
-            this.lblStatus = new System.Windows.Forms.Label();
             this.btnOutputFolder = new System.Windows.Forms.Button();
             this.val_lblLogCount = new System.Windows.Forms.Label();
             this.lblUsedInterval = new System.Windows.Forms.Label();
@@ -71,13 +80,15 @@
             this.lblOutputFolder = new System.Windows.Forms.Label();
             this.val_lblOutputFolder = new System.Windows.Forms.Label();
             this.val_lblFilename = new System.Windows.Forms.Label();
+            this.lblStatus = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.numLogInterval)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnStartStopLogging
             // 
-            this.btnStartStopLogging.Location = new System.Drawing.Point(12, 448);
+            this.btnStartStopLogging.Enabled = false;
+            this.btnStartStopLogging.Location = new System.Drawing.Point(12, 592);
             this.btnStartStopLogging.Name = "btnStartStopLogging";
             this.btnStartStopLogging.Size = new System.Drawing.Size(129, 23);
             this.btnStartStopLogging.TabIndex = 0;
@@ -92,7 +103,7 @@
             0,
             0,
             0});
-            this.numLogInterval.Location = new System.Drawing.Point(483, 451);
+            this.numLogInterval.Location = new System.Drawing.Point(483, 595);
             this.numLogInterval.Maximum = new decimal(new int[] {
             10000,
             0,
@@ -115,6 +126,7 @@
             // 
             // tableLayoutPanel1
             // 
+            this.tableLayoutPanel1.AutoSize = true;
             this.tableLayoutPanel1.ColumnCount = 2;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 29.67626F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 70.32374F));
@@ -139,12 +151,22 @@
             this.tableLayoutPanel1.Controls.Add(this.val_lblDoorStatus, 1, 3);
             this.tableLayoutPanel1.Controls.Add(this.val_lblSpindleStatus, 1, 4);
             this.tableLayoutPanel1.Controls.Add(this.val_lblCutSpeed, 1, 10);
-            this.tableLayoutPanel1.Controls.Add(this.label21, 1, 5);
+            this.tableLayoutPanel1.Controls.Add(this.val_lblEndschalter, 1, 5);
             this.tableLayoutPanel1.Controls.Add(this.val_lblMaxCutSpeed, 1, 11);
             this.tableLayoutPanel1.Controls.Add(this.val_lblFirmware, 1, 1);
+            this.tableLayoutPanel1.Controls.Add(this.lblHeightSensorActive, 0, 12);
+            this.tableLayoutPanel1.Controls.Add(this.val_lblHeightSensorActive, 1, 12);
+            this.tableLayoutPanel1.Controls.Add(this.lblFreilauf, 0, 13);
+            this.tableLayoutPanel1.Controls.Add(this.val_lblFreilauf, 1, 13);
+            this.tableLayoutPanel1.Controls.Add(this.lblGCode, 0, 14);
+            this.tableLayoutPanel1.Controls.Add(this.val_lblGCode, 1, 14);
+            this.tableLayoutPanel1.Controls.Add(this.lblPositions, 0, 15);
+            this.tableLayoutPanel1.Controls.Add(this.val_lblPositions, 1, 15);
+            this.tableLayoutPanel1.Controls.Add(this.lblSpindlespeed, 0, 16);
+            this.tableLayoutPanel1.Controls.Add(this.val_lblSpindlespeed, 1, 16);
             this.tableLayoutPanel1.Location = new System.Drawing.Point(12, 12);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 12;
+            this.tableLayoutPanel1.RowCount = 17;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 25F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 25F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 25F));
@@ -156,8 +178,13 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 25F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 25F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 25F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(556, 345);
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 25F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 27F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 28F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 27F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 27F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 26F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(556, 481);
             this.tableLayoutPanel1.TabIndex = 2;
             // 
             // lblSN
@@ -219,9 +246,9 @@
             this.lblEndschalter.AutoSize = true;
             this.lblEndschalter.Location = new System.Drawing.Point(3, 125);
             this.lblEndschalter.Name = "lblEndschalter";
-            this.lblEndschalter.Size = new System.Drawing.Size(63, 13);
+            this.lblEndschalter.Size = new System.Drawing.Size(103, 13);
             this.lblEndschalter.TabIndex = 9;
-            this.lblEndschalter.Text = "Endschalter";
+            this.lblEndschalter.Text = "Endschalter X | Y | Z";
             // 
             // lblWorktime
             // 
@@ -349,14 +376,14 @@
             this.val_lblCutSpeed.TabIndex = 15;
             this.val_lblCutSpeed.Text = "UNIN";
             // 
-            // label21
+            // val_lblEndschalter
             // 
-            this.label21.AutoSize = true;
-            this.label21.Location = new System.Drawing.Point(168, 125);
-            this.label21.Name = "label21";
-            this.label21.Size = new System.Drawing.Size(34, 13);
-            this.label21.TabIndex = 20;
-            this.label21.Text = "UNIN";
+            this.val_lblEndschalter.AutoSize = true;
+            this.val_lblEndschalter.Location = new System.Drawing.Point(168, 125);
+            this.val_lblEndschalter.Name = "val_lblEndschalter";
+            this.val_lblEndschalter.Size = new System.Drawing.Size(34, 13);
+            this.val_lblEndschalter.TabIndex = 20;
+            this.val_lblEndschalter.Text = "UNIN";
             // 
             // val_lblMaxCutSpeed
             // 
@@ -376,6 +403,96 @@
             this.val_lblFirmware.TabIndex = 23;
             this.val_lblFirmware.Text = "UNIN";
             // 
+            // lblHeightSensorActive
+            // 
+            this.lblHeightSensorActive.AutoSize = true;
+            this.lblHeightSensorActive.Location = new System.Drawing.Point(3, 300);
+            this.lblHeightSensorActive.Name = "lblHeightSensorActive";
+            this.lblHeightSensorActive.Size = new System.Drawing.Size(146, 13);
+            this.lblHeightSensorActive.TabIndex = 24;
+            this.lblHeightSensorActive.Text = "Werkzeuglängensensor Aktiv";
+            // 
+            // val_lblHeightSensorActive
+            // 
+            this.val_lblHeightSensorActive.AutoSize = true;
+            this.val_lblHeightSensorActive.Location = new System.Drawing.Point(168, 300);
+            this.val_lblHeightSensorActive.Name = "val_lblHeightSensorActive";
+            this.val_lblHeightSensorActive.Size = new System.Drawing.Size(34, 13);
+            this.val_lblHeightSensorActive.TabIndex = 25;
+            this.val_lblHeightSensorActive.Text = "UNIN";
+            // 
+            // lblFreilauf
+            // 
+            this.lblFreilauf.AutoSize = true;
+            this.lblFreilauf.Location = new System.Drawing.Point(3, 327);
+            this.lblFreilauf.Name = "lblFreilauf";
+            this.lblFreilauf.Size = new System.Drawing.Size(41, 13);
+            this.lblFreilauf.TabIndex = 26;
+            this.lblFreilauf.Text = "Freilauf";
+            // 
+            // val_lblFreilauf
+            // 
+            this.val_lblFreilauf.AutoSize = true;
+            this.val_lblFreilauf.Location = new System.Drawing.Point(168, 327);
+            this.val_lblFreilauf.Name = "val_lblFreilauf";
+            this.val_lblFreilauf.Size = new System.Drawing.Size(34, 13);
+            this.val_lblFreilauf.TabIndex = 27;
+            this.val_lblFreilauf.Text = "UNIN";
+            // 
+            // lblGCode
+            // 
+            this.lblGCode.AutoSize = true;
+            this.lblGCode.Location = new System.Drawing.Point(3, 355);
+            this.lblGCode.Name = "lblGCode";
+            this.lblGCode.Size = new System.Drawing.Size(104, 13);
+            this.lblGCode.TabIndex = 28;
+            this.lblGCode.Text = "GCode Line | GCode";
+            // 
+            // val_lblGCode
+            // 
+            this.val_lblGCode.AutoSize = true;
+            this.val_lblGCode.Location = new System.Drawing.Point(168, 355);
+            this.val_lblGCode.Name = "val_lblGCode";
+            this.val_lblGCode.Size = new System.Drawing.Size(34, 13);
+            this.val_lblGCode.TabIndex = 29;
+            this.val_lblGCode.Text = "UNIN";
+            // 
+            // lblPositions
+            // 
+            this.lblPositions.AutoSize = true;
+            this.lblPositions.Location = new System.Drawing.Point(3, 382);
+            this.lblPositions.Name = "lblPositions";
+            this.lblPositions.Size = new System.Drawing.Size(89, 13);
+            this.lblPositions.TabIndex = 30;
+            this.lblPositions.Text = "Positions X | Y | Z";
+            // 
+            // val_lblPositions
+            // 
+            this.val_lblPositions.AutoSize = true;
+            this.val_lblPositions.Location = new System.Drawing.Point(168, 382);
+            this.val_lblPositions.Name = "val_lblPositions";
+            this.val_lblPositions.Size = new System.Drawing.Size(34, 13);
+            this.val_lblPositions.TabIndex = 31;
+            this.val_lblPositions.Text = "UNIN";
+            // 
+            // lblSpindlespeed
+            // 
+            this.lblSpindlespeed.AutoSize = true;
+            this.lblSpindlespeed.Location = new System.Drawing.Point(3, 409);
+            this.lblSpindlespeed.Name = "lblSpindlespeed";
+            this.lblSpindlespeed.Size = new System.Drawing.Size(87, 13);
+            this.lblSpindlespeed.TabIndex = 32;
+            this.lblSpindlespeed.Text = "Spindel Drehzahl";
+            // 
+            // val_lblSpindlespeed
+            // 
+            this.val_lblSpindlespeed.AutoSize = true;
+            this.val_lblSpindlespeed.Location = new System.Drawing.Point(168, 409);
+            this.val_lblSpindlespeed.Name = "val_lblSpindlespeed";
+            this.val_lblSpindlespeed.Size = new System.Drawing.Size(34, 13);
+            this.val_lblSpindlespeed.TabIndex = 33;
+            this.val_lblSpindlespeed.Text = "UNIN";
+            // 
             // timer
             // 
             this.timer.Tick += new System.EventHandler(this.timer_Tick);
@@ -383,7 +500,7 @@
             // lblLogCount
             // 
             this.lblLogCount.AutoSize = true;
-            this.lblLogCount.Location = new System.Drawing.Point(438, 401);
+            this.lblLogCount.Location = new System.Drawing.Point(438, 545);
             this.lblLogCount.Name = "lblLogCount";
             this.lblLogCount.Size = new System.Drawing.Size(81, 13);
             this.lblLogCount.TabIndex = 3;
@@ -392,7 +509,7 @@
             // ckbWriteTitle
             // 
             this.ckbWriteTitle.AutoSize = true;
-            this.ckbWriteTitle.Location = new System.Drawing.Point(147, 452);
+            this.ckbWriteTitle.Location = new System.Drawing.Point(147, 596);
             this.ckbWriteTitle.Name = "ckbWriteTitle";
             this.ckbWriteTitle.Size = new System.Drawing.Size(128, 17);
             this.ckbWriteTitle.TabIndex = 5;
@@ -402,24 +519,15 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(387, 455);
+            this.label1.Location = new System.Drawing.Point(387, 599);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(92, 13);
             this.label1.TabIndex = 6;
             this.label1.Text = "Log Intervall in ms";
             // 
-            // lblStatus
-            // 
-            this.lblStatus.AutoSize = true;
-            this.lblStatus.Location = new System.Drawing.Point(12, 477);
-            this.lblStatus.Name = "lblStatus";
-            this.lblStatus.Size = new System.Drawing.Size(34, 13);
-            this.lblStatus.TabIndex = 7;
-            this.lblStatus.Text = "UNIN";
-            // 
             // btnOutputFolder
             // 
-            this.btnOutputFolder.Location = new System.Drawing.Point(12, 390);
+            this.btnOutputFolder.Location = new System.Drawing.Point(12, 534);
             this.btnOutputFolder.Name = "btnOutputFolder";
             this.btnOutputFolder.Size = new System.Drawing.Size(59, 23);
             this.btnOutputFolder.TabIndex = 8;
@@ -430,7 +538,7 @@
             // val_lblLogCount
             // 
             this.val_lblLogCount.AutoSize = true;
-            this.val_lblLogCount.Location = new System.Drawing.Point(515, 402);
+            this.val_lblLogCount.Location = new System.Drawing.Point(515, 546);
             this.val_lblLogCount.Name = "val_lblLogCount";
             this.val_lblLogCount.Size = new System.Drawing.Size(34, 13);
             this.val_lblLogCount.TabIndex = 9;
@@ -439,7 +547,7 @@
             // lblUsedInterval
             // 
             this.lblUsedInterval.AutoSize = true;
-            this.lblUsedInterval.Location = new System.Drawing.Point(429, 422);
+            this.lblUsedInterval.Location = new System.Drawing.Point(429, 566);
             this.lblUsedInterval.Name = "lblUsedInterval";
             this.lblUsedInterval.Size = new System.Drawing.Size(90, 13);
             this.lblUsedInterval.TabIndex = 10;
@@ -448,7 +556,7 @@
             // val_lblUsedInterval
             // 
             this.val_lblUsedInterval.AutoSize = true;
-            this.val_lblUsedInterval.Location = new System.Drawing.Point(518, 423);
+            this.val_lblUsedInterval.Location = new System.Drawing.Point(518, 567);
             this.val_lblUsedInterval.Name = "val_lblUsedInterval";
             this.val_lblUsedInterval.Size = new System.Drawing.Size(34, 13);
             this.val_lblUsedInterval.TabIndex = 11;
@@ -456,7 +564,7 @@
             // 
             // btnFilename
             // 
-            this.btnFilename.Location = new System.Drawing.Point(12, 419);
+            this.btnFilename.Location = new System.Drawing.Point(12, 563);
             this.btnFilename.Name = "btnFilename";
             this.btnFilename.Size = new System.Drawing.Size(59, 23);
             this.btnFilename.TabIndex = 12;
@@ -467,7 +575,7 @@
             // lblFilename
             // 
             this.lblFilename.AutoSize = true;
-            this.lblFilename.Location = new System.Drawing.Point(73, 425);
+            this.lblFilename.Location = new System.Drawing.Point(73, 569);
             this.lblFilename.Name = "lblFilename";
             this.lblFilename.Size = new System.Drawing.Size(66, 13);
             this.lblFilename.TabIndex = 13;
@@ -476,7 +584,7 @@
             // lblOutputFolder
             // 
             this.lblOutputFolder.AutoSize = true;
-            this.lblOutputFolder.Location = new System.Drawing.Point(73, 395);
+            this.lblOutputFolder.Location = new System.Drawing.Point(73, 539);
             this.lblOutputFolder.Name = "lblOutputFolder";
             this.lblOutputFolder.Size = new System.Drawing.Size(77, 13);
             this.lblOutputFolder.TabIndex = 14;
@@ -485,7 +593,7 @@
             // val_lblOutputFolder
             // 
             this.val_lblOutputFolder.AutoSize = true;
-            this.val_lblOutputFolder.Location = new System.Drawing.Point(147, 395);
+            this.val_lblOutputFolder.Location = new System.Drawing.Point(147, 539);
             this.val_lblOutputFolder.Name = "val_lblOutputFolder";
             this.val_lblOutputFolder.Size = new System.Drawing.Size(35, 13);
             this.val_lblOutputFolder.TabIndex = 15;
@@ -494,17 +602,26 @@
             // val_lblFilename
             // 
             this.val_lblFilename.AutoSize = true;
-            this.val_lblFilename.Location = new System.Drawing.Point(146, 425);
+            this.val_lblFilename.Location = new System.Drawing.Point(146, 569);
             this.val_lblFilename.Name = "val_lblFilename";
             this.val_lblFilename.Size = new System.Drawing.Size(35, 13);
             this.val_lblFilename.TabIndex = 16;
             this.val_lblFilename.Text = "label2";
             // 
+            // lblStatus
+            // 
+            this.lblStatus.AutoSize = true;
+            this.lblStatus.Location = new System.Drawing.Point(12, 621);
+            this.lblStatus.Name = "lblStatus";
+            this.lblStatus.Size = new System.Drawing.Size(34, 13);
+            this.lblStatus.TabIndex = 7;
+            this.lblStatus.Text = "UNIN";
+            // 
             // LoggerDlg
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(580, 500);
+            this.ClientSize = new System.Drawing.Size(580, 643);
             this.Controls.Add(this.val_lblFilename);
             this.Controls.Add(this.val_lblOutputFolder);
             this.Controls.Add(this.lblOutputFolder);
@@ -556,7 +673,7 @@
         private System.Windows.Forms.Label val_lblWorktime;
         private System.Windows.Forms.Label val_lblStartTime;
         private System.Windows.Forms.Label val_lblEndTime;
-        private System.Windows.Forms.Label label21;
+        private System.Windows.Forms.Label val_lblEndschalter;
         private System.Windows.Forms.Label val_lblMaxCutSpeed;
         private System.Windows.Forms.Timer timer;
         private System.Windows.Forms.Label lblFirmware;
@@ -565,7 +682,6 @@
         private System.Windows.Forms.CheckBox ckbWriteTitle;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog1;
-        private System.Windows.Forms.Label lblStatus;
         private System.Windows.Forms.Button btnOutputFolder;
         private System.Windows.Forms.Label val_lblLogCount;
         private System.Windows.Forms.Label lblUsedInterval;
@@ -575,5 +691,16 @@
         private System.Windows.Forms.Label lblOutputFolder;
         private System.Windows.Forms.Label val_lblOutputFolder;
         private System.Windows.Forms.Label val_lblFilename;
+        private System.Windows.Forms.Label lblHeightSensorActive;
+        private System.Windows.Forms.Label val_lblHeightSensorActive;
+        private System.Windows.Forms.Label lblFreilauf;
+        private System.Windows.Forms.Label val_lblFreilauf;
+        private System.Windows.Forms.Label lblStatus;
+        private System.Windows.Forms.Label lblGCode;
+        private System.Windows.Forms.Label val_lblGCode;
+        private System.Windows.Forms.Label lblPositions;
+        private System.Windows.Forms.Label val_lblPositions;
+        private System.Windows.Forms.Label lblSpindlespeed;
+        private System.Windows.Forms.Label val_lblSpindlespeed;
     }
 }
