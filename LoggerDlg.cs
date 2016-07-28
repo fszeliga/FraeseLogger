@@ -17,6 +17,8 @@ namespace FraeseLogger
         //private De.Boenigk.Utility.CNC.Info.MachInfo myMachInfo;
         //private Connector myConnector;
         private LoggerInstance li = LoggerInstance.Instance;
+        private bool toggleState = false; // false means log none
+        CheckBox[] _checkBoxes;
 
         public LoggerDlg()
         {
@@ -24,6 +26,25 @@ namespace FraeseLogger
             
             val_lblOutputFolder.Text = li.LogFileDir;
             val_lblFilename.Text = li.log_filename;
+
+            _checkBoxes = new CheckBox[]{
+                this.cb_lblActiveProg,
+                this.cb_lblDoorStatus,
+                this.cb_lblSpindleStatus,
+                this.cb_lblEndschalter,
+                this.cb_lblStartTime,
+                this.cb_lblEndTime,
+                this.cb_lblWorktime,
+                this.cb_lblFeedRate,
+                this.cb_lblCutSpeed,
+                this.cb_lblMaxCutSpeed,
+                this.cb_lblHeightSensorActive,
+                this.cb_lblFreilauf,
+                this.cb_lblGCode,
+                this.cb_lblPositions,
+                this.cb_lblSpindlespeed,
+                this.cb_lblSpannung
+            };
 
             timer.Start();
             LoggerInstance.Instance.logInterval = Convert.ToInt32(numLogInterval.Value);
@@ -62,21 +83,61 @@ namespace FraeseLogger
             val_lblEndschalter.Text = li.endschalterX + " | " + li.endschalterY + " | " + li.endschalterZ;
             val_lblGCode.Text = li.gCodeLine + " | " + li.gCode;
             val_lblPositions.Text = li.positions.toString();
-            val_lblSpindlespeed.Text = li.spidlespeed.ToString();
+            val_lblSpindlespeed.Text = li.spindlespeed.ToString();
+
+            val_lblSpannung.Text = li.volt1.ToString() + " | " + li.volt2.ToString();
         }
         private void buttonStart_Click(object sender, EventArgs e)
         {
             if (LoggerInstance.Instance.logThreadRunning)
             {
+                checkLogSelectionEnabled(true);//enable all log selection checkboxes
                 //stop logging
                 li.logThreadRunning = false;
                 btnStartStopLogging.Text = "Start Logging";
             }
             else
-            {                
+            {
                 //start logging
+
+                checkLogSelectionEnabled(false);//disable all log selection checkboxes
                 LoggerInstance.Instance.logThreadRunning = true;
                 LoggerFileWriter log = new LoggerFileWriter(ckbWriteTitle.Checked);
+
+                log.logActiveProg = this.cb_lblActiveProg.Checked;
+                log.logDoorStatus = this.cb_lblDoorStatus.Checked;
+                log.logSpindleStatus = this.cb_lblSpindleStatus.Checked;
+                log.logEndschalter = this.cb_lblEndschalter.Checked;
+                log.logStartTime = this.cb_lblStartTime.Checked;
+                log.logEndTime = this.cb_lblEndTime.Checked;
+                log.logWorktime = this.cb_lblWorktime.Checked;
+                log.logFeedRate = this.cb_lblFeedRate.Checked;
+                log.logCutSpeed = this.cb_lblCutSpeed.Checked;
+                log.logMaxCutSpeed = this.cb_lblMaxCutSpeed.Checked;
+                log.logHeightSensorActive = this.cb_lblHeightSensorActive.Checked;
+                log.logFreilauf = this.cb_lblFreilauf.Checked;
+                log.logGCode = this.cb_lblGCode.Checked;
+                log.logPositions = this.cb_lblPositions.Checked;
+                log.logSpindleSpeed = this.cb_lblSpindlespeed.Checked;
+                log.logSpannung = this.cb_lblSpannung.Checked;
+
+                LoggerInstance.Instance.logActiveProg = this.cb_lblActiveProg.Checked;
+                LoggerInstance.Instance.logDoorStatus = this.cb_lblDoorStatus.Checked;
+                LoggerInstance.Instance.logSpindleStatus = this.cb_lblSpindleStatus.Checked;
+                LoggerInstance.Instance.logEndschalter = this.cb_lblEndschalter.Checked;
+                LoggerInstance.Instance.logStartTime = this.cb_lblStartTime.Checked;
+                LoggerInstance.Instance.logEndTime = this.cb_lblEndTime.Checked;
+                LoggerInstance.Instance.logWorktime = this.cb_lblWorktime.Checked;
+                LoggerInstance.Instance.logFeedRate = this.cb_lblFeedRate.Checked;
+                LoggerInstance.Instance.logCutSpeed = this.cb_lblCutSpeed.Checked;
+                LoggerInstance.Instance.logMaxCutSpeed = this.cb_lblMaxCutSpeed.Checked;
+                LoggerInstance.Instance.logHeightSensorActive = this.cb_lblHeightSensorActive.Checked;
+                LoggerInstance.Instance.logFreilauf = this.cb_lblFreilauf.Checked;
+                LoggerInstance.Instance.logGCode = this.cb_lblGCode.Checked;
+                LoggerInstance.Instance.logPositions = this.cb_lblPositions.Checked;
+                LoggerInstance.Instance.logSpindleSpeed = this.cb_lblSpindlespeed.Checked;
+                LoggerInstance.Instance.logSpannung = this.cb_lblSpannung.Checked;
+
                 Thread logThread = new Thread(new ThreadStart(log.logCNC));
                 logThread.Start();
                 btnStartStopLogging.Text = "Stop Logging";
@@ -148,6 +209,30 @@ namespace FraeseLogger
                 li.log_filename = value;
                 val_lblFilename.Text = li.log_filename;
             }
+        }
+
+        private void btn_toggleAll_Click(object sender, EventArgs e)
+        {
+            if (toggleState)
+            {
+                checkLogSelectionToggle(false);//AllowDrop are on, so turn them off
+                toggleState = false;//just turned all off
+            }
+            else
+            {
+                checkLogSelectionToggle(true);
+                toggleState = true;//just turned all back on
+            }
+        }
+
+        private void checkLogSelectionToggle(bool v)
+        {
+            foreach (var checkBox in _checkBoxes) checkBox.Checked = v;
+        }
+        
+        private void checkLogSelectionEnabled(bool v)
+        {
+            foreach (var checkBox in _checkBoxes) checkBox.Enabled = v;
         }
 
     }

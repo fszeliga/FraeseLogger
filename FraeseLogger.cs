@@ -30,6 +30,7 @@ namespace FraeseLogger {
         /// <returns>plugin results</returns>
         public PluginResult Execute(PluginArgs aPluginArgs)
         {
+            LoggerInstance.Instance.init();
             LoggerInstance.Instance.Connector = aPluginArgs.Connector;
             LoggerInstance.Instance.MachInfo = aPluginArgs.MachInfo;
 

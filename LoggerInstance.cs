@@ -105,7 +105,7 @@ namespace FraeseLogger
         public bool endschalterX { get; private set; }
         public bool endschalterY { get; private set; }
         public bool endschalterZ { get; private set; }
-        public double spidlespeed { get; private set; }
+        public double spindlespeed { get; private set; }
         public bool heightSensorActive { get; private set; }
         public globPos positions = new globPos();
         public int logInterval { get; set; }
@@ -118,76 +118,154 @@ namespace FraeseLogger
         public String loggerStatus { get; private set; }
         public String statusMSG { get; private set; }
 
+        public void init()
+        {
+            statusMSG = "";
+            serialNr = "";
+            firmware = "";
+            volt1 = 0.0;
+            volt2 = 0.0;
+            activeProg = "";
+            doorOpen = false;
+            spindleOn = false;
+            cutSpeed = "";
+            maxCutSpeed = "";
+            vorschubEinheit = "";
+            freilauf = false;
+            spindlespeed = 0.0;
+            vorschub = "";
+            heightSensorActive = false;
+            startDateTime = DateTime.Now; //save DateTime object for calculations
+            startTime = "?";
+            worktime = new TimeSpan(0);
+            endTIme = "?";
+            endschalterX = false;
+            endschalterY = false;
+            endschalterZ = false;
+            gCode = "";
+            gCodeLine = 0;
+            positions.X = 0;
+            positions.Y = 0;
+            positions.Z = 0;
+        }
+
         public void readFromCNC()
         {
+            if (myConn == null) return;
             statusMSG = "";
             serialNr = myConn.SN;
             firmware = myConn.FirmwareVersion.ToString();
-            volt1 = myConn.AD1Volt;
-            volt2 = myConn.AD2Volt;
-            activeProg = machInfo.FileName;
-            doorOpen = myConn.IsHoodOpen();
-            spindleOn = myConn.IsSpindleOn();
-            cutSpeed = myConn.CurrentSpeed.ToString();
-            maxCutSpeed = myConn.MaxSpeed.ToString();
-            if (machInfo.JobInfo.SpeedUnitMMMinute) vorschubEinheit = "mm/m";
-            else vorschubEinheit = "mm/s";
 
-            if (myConn.Job != null)
+            if (logActiveProg)
             {
-                freilauf = !myConn.Job.GetCurrent().Down;
-                spidlespeed = myConn.Job.GetCurrent().SpindleSpeed;
+                activeProg = machInfo.FileName;
             }
-            else
+            if (logDoorStatus)
             {
-                freilauf = true;
-                spidlespeed = 0;
+                doorOpen = myConn.IsHoodOpen();
             }
-
-            vorschub = machInfo.JobInfo.JobSpeed.ToString();
-
-            if (myConn.SMCSettings.HeightSensor.MeasureToolPin == Input.Default)
+            if (logSpindleStatus)
             {
-                heightSensorActive = false;
+                spindleOn = myConn.IsSpindleOn();
             }
-            else
+            if (logEndschalter)
             {
-                heightSensorActive = true;
+                Switch theSwitch = new Switch(myConn);
+                endschalterX = theSwitch.IsInputOn(InputConverter.GetInput(myConn.SMCSettings.AxisX.ReferencePinNumber), false);
+                endschalterY = theSwitch.IsInputOn(InputConverter.GetInput(myConn.SMCSettings.AxisY.ReferencePinNumber), false);
+                endschalterZ = theSwitch.IsInputOn(InputConverter.GetInput(myConn.SMCSettings.AxisZ.ReferencePinNumber), false);
             }
-
-            if (machInfo.JobInfo.StartJobTimeTicks > 0)
+            if (logStartTime)
             {
-                startDateTime = new DateTime(machInfo.JobInfo.StartJobTimeTicks); //save DateTime object for calculations
-                worktime = DateTime.Now.Subtract(startDateTime);
-                startTime = startDateTime.ToLongDateString() + " " + startDateTime.ToLongTimeString(); // human readable start time
+                if (machInfo.JobInfo.StartJobTimeTicks > 0)
+                {
+                    startDateTime = new DateTime(machInfo.JobInfo.StartJobTimeTicks); //save DateTime object for calculations
+                    worktime = DateTime.Now.Subtract(startDateTime);
+                    startTime = startDateTime.ToLongDateString() + " " + startDateTime.ToLongTimeString(); // human readable start time
+                }
+                else
+                {
+                    startTime = "?";
+                    worktime = new TimeSpan(0);
+                }
             }
-            else
+            if (logEndTime)
             {
-                startTime = "?";
-                worktime = new TimeSpan(0);
+                if (machInfo.JobInfo.EndJobTimeTicks > 0)
+                {
+                    endTIme = new DateTime(machInfo.JobInfo.EndJobTimeTicks).ToLongDateString() + " " + new DateTime(machInfo.JobInfo.EndJobTimeTicks).ToLongTimeString();
+                }
+                else
+                {
+                    endTIme = "?";
+                }
             }
-
-            if (machInfo.JobInfo.EndJobTimeTicks > 0)
+            if (logWorktime) { }
+            if (logFeedRate)
             {
-                endTIme = new DateTime(machInfo.JobInfo.EndJobTimeTicks).ToLongDateString() + " " + new DateTime(machInfo.JobInfo.EndJobTimeTicks).ToLongTimeString();
+                if (machInfo.JobInfo != null) vorschub = machInfo.JobInfo.JobSpeed.ToString();
+                else vorschub = "?";
+                if (machInfo.JobInfo.SpeedUnitMMMinute) vorschubEinheit = "mm/m";
+                else vorschubEinheit = "mm/s";
             }
-            else
+            if (logCutSpeed)
             {
-                endTIme = "?";
+                cutSpeed = myConn.CurrentSpeed.ToString();
             }
-
-            Switch theSwitch = new Switch(myConn);
-            endschalterX = theSwitch.IsInputOn(InputConverter.GetInput(myConn.SMCSettings.AxisX.ReferencePinNumber), false);
-            endschalterY = theSwitch.IsInputOn(InputConverter.GetInput(myConn.SMCSettings.AxisY.ReferencePinNumber), false);
-            endschalterZ = theSwitch.IsInputOn(InputConverter.GetInput(myConn.SMCSettings.AxisZ.ReferencePinNumber), false);
-
-            gCode = machInfo.JobInfo.GCode;
-            gCodeLine = machInfo.JobInfo.GCodeLine;
-
-            positions.X = myConn.GlobPosition.X;
-            positions.Y = myConn.GlobPosition.Y;
-            positions.Z = myConn.GlobPosition.Z;
-
+            if (logMaxCutSpeed)
+            {
+                maxCutSpeed = myConn.MaxSpeed.ToString();
+            }
+            if (logHeightSensorActive)
+            {
+                if (myConn.SMCSettings.HeightSensor.MeasureToolPin == Input.Default)
+                {
+                    heightSensorActive = false;
+                }
+                else
+                {
+                    heightSensorActive = true;
+                }
+            }
+            if (logFreilauf)
+            {
+                if (myConn.Job != null)
+                {
+                    //freilauf = !myConn.Job.GetCurrent().Down;
+                }
+                else
+                {
+                    //freilauf = true;
+                }
+            }
+            if (logGCode)
+            {
+                gCode = machInfo.JobInfo.GCode;
+                gCodeLine = machInfo.JobInfo.GCodeLine;
+            }
+            if (logPositions)
+            {
+                positions.X = myConn.GlobPosition.X;
+                positions.Y = myConn.GlobPosition.Y;
+                positions.Z = myConn.GlobPosition.Z;
+            }
+            if (logSpindleSpeed)
+            {
+                spindlespeed = 0.0;
+                //if (myConn.Job != null)
+                //{
+                //    //spidlespeed = myConn.Job.GetCurrent().SpindleSpeed;
+                //}
+                //else
+                //{
+                //    spidlespeed = 0;
+                //}
+            }
+            if (logSpannung)
+            {
+                volt1 = myConn.AD1Volt;
+                volt2 = myConn.AD2Volt;
+            }
         }
 
         public Connector Connector
@@ -213,5 +291,22 @@ namespace FraeseLogger
                 machInfo = value;
             }
         }
+
+        public bool logActiveProg { get; internal set; }
+        public bool logDoorStatus { get; internal set; }
+        public bool logSpindleStatus { get; internal set; }
+        public bool logEndschalter { get; internal set; }
+        public bool logStartTime { get; internal set; }
+        public bool logEndTime { get; internal set; }
+        public bool logWorktime { get; internal set; }
+        public bool logFeedRate { get; internal set; }
+        public bool logCutSpeed { get; internal set; }
+        public bool logMaxCutSpeed { get; internal set; }
+        public bool logHeightSensorActive { get; internal set; }
+        public bool logFreilauf { get; internal set; }
+        public bool logGCode { get; internal set; }
+        public bool logPositions { get; internal set; }
+        public bool logSpindleSpeed { get; internal set; }
+        public bool logSpannung { get; internal set; }
     }
 }
