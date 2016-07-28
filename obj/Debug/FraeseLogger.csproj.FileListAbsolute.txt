@@ -16,15 +16,6 @@ C:\Users\Admin\Source\Repos\FraeseLogger\obj\Debug\fraeselogger.pdb
 C:\Users\Admin\Source\Repos\FraeseLogger\bin\Debug\cncgraf.iplugin.dll
 C:\Users\Admin\Source\Repos\FraeseLogger\bin\Debug\smc5d.core.dll
 C:\Users\Admin\Source\Repos\FraeseLogger\bin\Debug\WinUSBNet.dll
-C:\Users\Admin\Source\Repos\FraeseLogger\obj\Debug\FraeseLogger.csprojResolveAssemblyReference.cache
-C:\Users\Admin\Source\Repos\FraeseLogger\bin\Debug\DevExpress.Utils.v15.2.dll
-C:\Users\Admin\Source\Repos\FraeseLogger\bin\Debug\DevExpress.XtraEditors.v15.2.dll
-C:\Users\Admin\Source\Repos\FraeseLogger\bin\Debug\ICSharpCode.SharpZipLib.dll
-C:\Users\Admin\Source\Repos\FraeseLogger\bin\Debug\Interop.IWshRuntimeLibrary.dll
-C:\Users\Admin\Source\Repos\FraeseLogger\bin\Debug\help.dll
-C:\Users\Admin\Source\Repos\FraeseLogger\bin\Debug\DevExpress.Data.v15.2.dll
-C:\Users\Admin\Source\Repos\FraeseLogger\bin\Debug\DevExpress.Printing.v15.2.Core.dll
-C:\Users\Admin\Source\Repos\FraeseLogger\bin\Debug\DevExpress.Sparkline.v15.2.Core.dll
 E:\Projects\FraeseLogger\bin\Debug\fraeselogger.dll
 E:\Projects\FraeseLogger\bin\Debug\fraeselogger.pdb
 E:\Projects\FraeseLogger\obj\Debug\FraeseLogger.csprojResolveAssemblyReference.cache

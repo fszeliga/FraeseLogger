@@ -94,9 +94,9 @@ namespace FraeseLogger
                     line += li.volt2 + ";";//17
                     line += li.gCodeLine.ToString() + ";";//18
                     line += li.gCode + ";";//19
-                    line += li.positions.x + ";";//20
-                    line += li.positions.y + ";";//21
-                    line += li.positions.z + ";";//22
+                    line += li.positions.X + ";";//20
+                    line += li.positions.Y + ";";//21
+                    line += li.positions.Z + ";";//22
                     line += DateTime.Now.ToString("dd-MM-yyyy") + ";";//23
                     line += DateTime.Now.ToString("HH:mm:ss.ff");//24
 

@@ -38,17 +38,51 @@ namespace FraeseLogger
          */
         public struct globPos
         {
-            public int x, y, z;
+            private int xVal, yVal, zVal;
+            public int X
+            {
+                get
+                {
+                    return xVal;
+                }
+                set
+                {
+                    xVal = value;
+                }
+            }
+            public int Y
+            {
+                get
+                {
+                    return yVal;
+                }
+                set
+                {
+                    if (value < 100)
+                        yVal = value;
+                }
+            }
+            public int Z
+            {
+                get
+                {
+                    return zVal;
+                }
+                set
+                {
+                    zVal = value;
+                }
+            }
             public globPos(int x1, int y1, int z1)
             {
-                x = x1;
-                y = y1;
-                z = z1;
+                xVal = x1;
+                yVal = y1;
+                zVal = z1;
             }
 
             public string toString()
             {
-                return x + " | " + y + " | " + z;
+                return X + " | " + Y + " | " + Z;
             }
         }
 
@@ -73,7 +107,7 @@ namespace FraeseLogger
         public bool endschalterZ { get; private set; }
         public double spidlespeed { get; private set; }
         public bool heightSensorActive { get; private set; }
-        public globPos positions { get; private set; }
+        public globPos positions = new globPos();
         public int logInterval { get; set; }
         public String LogFileDir { get; set; }
         public String serialNr { get; private set; }
@@ -82,9 +116,11 @@ namespace FraeseLogger
         public bool logThreadRunning { get; set; }
         public String log_filename { get; set; }
         public String loggerStatus { get; private set; }
+        public String statusMSG { get; private set; }
 
         public void readFromCNC()
         {
+            statusMSG = "";
             serialNr = myConn.SN;
             firmware = myConn.FirmwareVersion.ToString();
             volt1 = myConn.AD1Volt;
@@ -122,9 +158,7 @@ namespace FraeseLogger
             if (machInfo.JobInfo.StartJobTimeTicks > 0)
             {
                 startDateTime = new DateTime(machInfo.JobInfo.StartJobTimeTicks); //save DateTime object for calculations
-
                 worktime = DateTime.Now.Subtract(startDateTime);
-
                 startTime = startDateTime.ToLongDateString() + " " + startDateTime.ToLongTimeString(); // human readable start time
             }
             else
@@ -150,7 +184,9 @@ namespace FraeseLogger
             gCode = machInfo.JobInfo.GCode;
             gCodeLine = machInfo.JobInfo.GCodeLine;
 
-            positions = new globPos(myConn.GlobPosition.X, myConn.GlobPosition.Y, myConn.GlobPosition.Z);
+            positions.X = myConn.GlobPosition.X;
+            positions.Y = myConn.GlobPosition.Y;
+            positions.Z = myConn.GlobPosition.Z;
 
         }
 
