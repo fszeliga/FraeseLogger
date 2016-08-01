@@ -53,6 +53,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="2ConnectorUtility.cs" />
+    <Compile Include="FraeseHttpServer.cs" />
     <Compile Include="LoggerFileWriter.cs" />
     <Compile Include="LoggerInstance.cs" />
     <Compile Include="LoggerDlg.cs">
