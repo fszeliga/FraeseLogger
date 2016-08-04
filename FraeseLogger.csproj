@@ -53,6 +53,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="2ConnectorUtility.cs" />
+    <Compile Include="FraeseHttpServer.cs" />
     <Compile Include="LoggerFileWriter.cs" />
     <Compile Include="LoggerInstance.cs" />
     <Compile Include="LoggerDlg.cs">
@@ -71,9 +73,12 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>echo $(SolutionDir)$(OutDir)$(TargetFileName)
-echo "C:\Users\Filip\Documents\Boenigk\cncGraF7\plugins\FraeseLogger\$(TargetFileName)"
-xcopy /y "$(SolutionDir)$(OutDir)$(TargetFileName)" "C:\Users\Filip\Documents\Boenigk\cncGraF7\plugins\FraeseLogger\"</PostBuildEvent>
+    <PostBuildEvent>echo "Target copy -&gt;" $(registry:HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\User Shell Folders@Personal)\Boenigk\cncGraF7\plugins\FraeseLogger\$(TargetFileName)
+xcopy /y "$(SolutionDir)$(OutDir)$(TargetFileName)" "$(registry:HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\User Shell Folders@Personal)\Boenigk\cncGraF7\plugins\FraeseLogger\"</PostBuildEvent>
+  </PropertyGroup>
+  <PropertyGroup>
+    <PreBuildEvent>
+    </PreBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
