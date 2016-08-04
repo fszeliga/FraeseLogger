@@ -9,7 +9,6 @@ D:\Projects\FraeseLogger\FraeseLogger\obj\Debug\fraeselogger.pdb
 D:\Projects\FraeseLogger\FraeseLogger\obj\Debug\FraeseLogger.csprojResolveAssemblyReference.cache
 E:\Projects\FraeseLogger\bin\Debug\fraeselogger.dll
 E:\Projects\FraeseLogger\bin\Debug\fraeselogger.pdb
-E:\Projects\FraeseLogger\obj\Debug\FraeseLogger.csprojResolveAssemblyReference.cache
 E:\Projects\FraeseLogger\obj\Debug\FraeseLogger.LoggerDlg.resources
 E:\Projects\FraeseLogger\obj\Debug\FraeseLogger.csproj.GenerateResource.Cache
 E:\Projects\FraeseLogger\obj\Debug\fraeselogger.dll

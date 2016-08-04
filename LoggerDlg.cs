@@ -74,7 +74,7 @@ namespace FraeseLogger
             val_lblStartTime.Text = li.startTime;
             val_lblEndTime.Text = li.endTIme;
 
-            lblStatus.Text = li.loggerStatus;
+            lblStatus.Text = li.statusMSG;
 
             val_lblHeightSensorActive.Text = li.heightSensorActive.ToString();
 
@@ -235,5 +235,19 @@ namespace FraeseLogger
             foreach (var checkBox in _checkBoxes) checkBox.Enabled = v;
         }
 
+        private bool serverRunning = false;
+
+        private void btnServer_Click(object sender, EventArgs e)
+        {
+            serverRunning = !serverRunning;
+            li.setHTTPServer(serverRunning);
+            if (serverRunning)
+            {
+                btnServer.Text = "Runnig...Stop";
+            } else
+            {
+                btnServer.Text = "Start Server";
+            }
+        }
     }
 }

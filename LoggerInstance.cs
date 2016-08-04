@@ -5,6 +5,7 @@ using System.Text;
 using De.Boenigk.SMC5D.Basics;
 using De.Boenigk.Utility.CNC.Info;
 using System.IO;
+using System.Threading;
 
 namespace FraeseLogger
 {
@@ -13,6 +14,9 @@ namespace FraeseLogger
         private static LoggerInstance instance;
         private Connector myConn;
         private MachInfo machInfo;
+
+        private HttpServer httpServer = new MyHttpServer("127.0.0.1", 5454);
+        Thread thread = null;
 
         private LoggerInstance()
         {
@@ -38,8 +42,8 @@ namespace FraeseLogger
          */
         public struct globPos
         {
-            private int xVal, yVal, zVal;
-            public int X
+            private double xVal, yVal, zVal;
+            public double X
             {
                 get
                 {
@@ -50,7 +54,7 @@ namespace FraeseLogger
                     xVal = value;
                 }
             }
-            public int Y
+            public double Y
             {
                 get
                 {
@@ -62,7 +66,7 @@ namespace FraeseLogger
                         yVal = value;
                 }
             }
-            public int Z
+            public double Z
             {
                 get
                 {
@@ -73,7 +77,7 @@ namespace FraeseLogger
                     zVal = value;
                 }
             }
-            public globPos(int x1, int y1, int z1)
+            public globPos(double x1, double y1, double z1)
             {
                 xVal = x1;
                 yVal = y1;
@@ -115,8 +119,7 @@ namespace FraeseLogger
         public int logCount { get; set; }
         public bool logThreadRunning { get; set; }
         public String log_filename { get; set; }
-        public String loggerStatus { get; private set; }
-        public String statusMSG { get; private set; }
+        public String statusMSG { get; set; }
 
         public void init()
         {
@@ -152,7 +155,6 @@ namespace FraeseLogger
         public void readFromCNC()
         {
             if (myConn == null) return;
-            statusMSG = "";
             serialNr = myConn.SN;
             firmware = myConn.FirmwareVersion.ToString();
 
@@ -200,7 +202,6 @@ namespace FraeseLogger
                     endTIme = "?";
                 }
             }
-            if (logWorktime) { }
             if (logFeedRate)
             {
                 if (machInfo.JobInfo != null) vorschub = machInfo.JobInfo.JobSpeed.ToString();
@@ -245,27 +246,37 @@ namespace FraeseLogger
             }
             if (logPositions)
             {
-                positions.X = myConn.GlobPosition.X;
-                positions.Y = myConn.GlobPosition.Y;
-                positions.Z = myConn.GlobPosition.Z;
+                positions.X = StepCalc.GetMMX(myConn);
+                positions.Y = StepCalc.GetMMY(myConn);
+                positions.Z = StepCalc.GetMMZ(myConn);
             }
             if (logSpindleSpeed)
             {
-                spindlespeed = 0.0;
-                //if (myConn.Job != null)
-                //{
-                //    //spidlespeed = myConn.Job.GetCurrent().SpindleSpeed;
-                //}
-                //else
-                //{
-                //    spidlespeed = 0;
-                //}
+                //spindlespeed = 0.0;
+                try
+                {
+                    if (myConn.Job != null)
+                    {
+                    spindlespeed = myConn.Job.GetCurrent().SpindleSpeed;
+                    }
+                    else
+                    {
+                        spindlespeed = 0;
+                    }
+                }
+                catch (Exception e)
+                {
+                    statusMSG = e.Message;
+                    spindlespeed = 0;
+                }
+
             }
             if (logSpannung)
             {
                 volt1 = myConn.AD1Volt;
                 volt2 = myConn.AD2Volt;
             }
+            
         }
 
         public Connector Connector
@@ -303,6 +314,26 @@ namespace FraeseLogger
         public bool logCutSpeed { get; internal set; }
         public bool logMaxCutSpeed { get; internal set; }
         public bool logHeightSensorActive { get; internal set; }
+
+        internal void setHTTPServer(bool serverRunning)
+        {
+            if(thread == null)
+            {
+                thread = new Thread(new ThreadStart(httpServer.listen));
+                thread.Start();
+                return;
+            }
+            
+            if (serverRunning)
+            {
+                thread.Resume();
+            }
+            else
+            {
+                thread.Suspend();
+            }
+        }
+
         public bool logFreilauf { get; internal set; }
         public bool logGCode { get; internal set; }
         public bool logPositions { get; internal set; }

@@ -81,6 +81,9 @@
             this.cb_lblGCode = new System.Windows.Forms.CheckBox();
             this.cb_lblPositions = new System.Windows.Forms.CheckBox();
             this.cb_lblSpindlespeed = new System.Windows.Forms.CheckBox();
+            this.lblSpannung = new System.Windows.Forms.Label();
+            this.val_lblSpannung = new System.Windows.Forms.Label();
+            this.cb_lblSpannung = new System.Windows.Forms.CheckBox();
             this.timer = new System.Windows.Forms.Timer(this.components);
             this.lblLogCount = new System.Windows.Forms.Label();
             this.ckbWriteTitle = new System.Windows.Forms.CheckBox();
@@ -99,9 +102,7 @@
             this.btn_toggleAll = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.lblSpannung = new System.Windows.Forms.Label();
-            this.val_lblSpannung = new System.Windows.Forms.Label();
-            this.cb_lblSpannung = new System.Windows.Forms.CheckBox();
+            this.btnServer = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.numLogInterval)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -152,7 +153,7 @@
             this.tableLayoutPanel1.ColumnCount = 3;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 29.67626F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 70.32374F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 22F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 24F));
             this.tableLayoutPanel1.Controls.Add(this.lblSN, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.val_lblSN, 1, 0);
             this.tableLayoutPanel1.Controls.Add(this.lblFirmware, 0, 1);
@@ -241,7 +242,7 @@
             // val_lblSN
             // 
             this.val_lblSN.AutoSize = true;
-            this.val_lblSN.Location = new System.Drawing.Point(161, 0);
+            this.val_lblSN.Location = new System.Drawing.Point(160, 0);
             this.val_lblSN.Name = "val_lblSN";
             this.val_lblSN.Size = new System.Drawing.Size(34, 13);
             this.val_lblSN.TabIndex = 11;
@@ -304,7 +305,7 @@
             // val_lblActiveProg
             // 
             this.val_lblActiveProg.AutoSize = true;
-            this.val_lblActiveProg.Location = new System.Drawing.Point(161, 50);
+            this.val_lblActiveProg.Location = new System.Drawing.Point(160, 50);
             this.val_lblActiveProg.Name = "val_lblActiveProg";
             this.val_lblActiveProg.Size = new System.Drawing.Size(34, 13);
             this.val_lblActiveProg.TabIndex = 12;
@@ -358,7 +359,7 @@
             // val_lblEndTime
             // 
             this.val_lblEndTime.AutoSize = true;
-            this.val_lblEndTime.Location = new System.Drawing.Point(161, 175);
+            this.val_lblEndTime.Location = new System.Drawing.Point(160, 175);
             this.val_lblEndTime.Name = "val_lblEndTime";
             this.val_lblEndTime.Size = new System.Drawing.Size(34, 13);
             this.val_lblEndTime.TabIndex = 19;
@@ -367,7 +368,7 @@
             // val_lblStartTime
             // 
             this.val_lblStartTime.AutoSize = true;
-            this.val_lblStartTime.Location = new System.Drawing.Point(161, 150);
+            this.val_lblStartTime.Location = new System.Drawing.Point(160, 150);
             this.val_lblStartTime.Name = "val_lblStartTime";
             this.val_lblStartTime.Size = new System.Drawing.Size(34, 13);
             this.val_lblStartTime.TabIndex = 18;
@@ -376,7 +377,7 @@
             // val_lblWorktime
             // 
             this.val_lblWorktime.AutoSize = true;
-            this.val_lblWorktime.Location = new System.Drawing.Point(161, 200);
+            this.val_lblWorktime.Location = new System.Drawing.Point(160, 200);
             this.val_lblWorktime.Name = "val_lblWorktime";
             this.val_lblWorktime.Size = new System.Drawing.Size(34, 13);
             this.val_lblWorktime.TabIndex = 17;
@@ -385,7 +386,7 @@
             // val_lblFeedRate
             // 
             this.val_lblFeedRate.AutoSize = true;
-            this.val_lblFeedRate.Location = new System.Drawing.Point(161, 225);
+            this.val_lblFeedRate.Location = new System.Drawing.Point(160, 225);
             this.val_lblFeedRate.Name = "val_lblFeedRate";
             this.val_lblFeedRate.Size = new System.Drawing.Size(34, 13);
             this.val_lblFeedRate.TabIndex = 16;
@@ -394,7 +395,7 @@
             // val_lblDoorStatus
             // 
             this.val_lblDoorStatus.AutoSize = true;
-            this.val_lblDoorStatus.Location = new System.Drawing.Point(161, 75);
+            this.val_lblDoorStatus.Location = new System.Drawing.Point(160, 75);
             this.val_lblDoorStatus.Name = "val_lblDoorStatus";
             this.val_lblDoorStatus.Size = new System.Drawing.Size(34, 13);
             this.val_lblDoorStatus.TabIndex = 13;
@@ -403,7 +404,7 @@
             // val_lblSpindleStatus
             // 
             this.val_lblSpindleStatus.AutoSize = true;
-            this.val_lblSpindleStatus.Location = new System.Drawing.Point(161, 100);
+            this.val_lblSpindleStatus.Location = new System.Drawing.Point(160, 100);
             this.val_lblSpindleStatus.Name = "val_lblSpindleStatus";
             this.val_lblSpindleStatus.Size = new System.Drawing.Size(34, 13);
             this.val_lblSpindleStatus.TabIndex = 14;
@@ -412,7 +413,7 @@
             // val_lblCutSpeed
             // 
             this.val_lblCutSpeed.AutoSize = true;
-            this.val_lblCutSpeed.Location = new System.Drawing.Point(161, 250);
+            this.val_lblCutSpeed.Location = new System.Drawing.Point(160, 250);
             this.val_lblCutSpeed.Name = "val_lblCutSpeed";
             this.val_lblCutSpeed.Size = new System.Drawing.Size(34, 13);
             this.val_lblCutSpeed.TabIndex = 15;
@@ -421,7 +422,7 @@
             // val_lblEndschalter
             // 
             this.val_lblEndschalter.AutoSize = true;
-            this.val_lblEndschalter.Location = new System.Drawing.Point(161, 125);
+            this.val_lblEndschalter.Location = new System.Drawing.Point(160, 125);
             this.val_lblEndschalter.Name = "val_lblEndschalter";
             this.val_lblEndschalter.Size = new System.Drawing.Size(34, 13);
             this.val_lblEndschalter.TabIndex = 20;
@@ -430,7 +431,7 @@
             // val_lblMaxCutSpeed
             // 
             this.val_lblMaxCutSpeed.AutoSize = true;
-            this.val_lblMaxCutSpeed.Location = new System.Drawing.Point(161, 275);
+            this.val_lblMaxCutSpeed.Location = new System.Drawing.Point(160, 275);
             this.val_lblMaxCutSpeed.Name = "val_lblMaxCutSpeed";
             this.val_lblMaxCutSpeed.Size = new System.Drawing.Size(34, 13);
             this.val_lblMaxCutSpeed.TabIndex = 21;
@@ -439,7 +440,7 @@
             // val_lblFirmware
             // 
             this.val_lblFirmware.AutoSize = true;
-            this.val_lblFirmware.Location = new System.Drawing.Point(161, 25);
+            this.val_lblFirmware.Location = new System.Drawing.Point(160, 25);
             this.val_lblFirmware.Name = "val_lblFirmware";
             this.val_lblFirmware.Size = new System.Drawing.Size(34, 13);
             this.val_lblFirmware.TabIndex = 23;
@@ -457,7 +458,7 @@
             // val_lblHeightSensorActive
             // 
             this.val_lblHeightSensorActive.AutoSize = true;
-            this.val_lblHeightSensorActive.Location = new System.Drawing.Point(161, 300);
+            this.val_lblHeightSensorActive.Location = new System.Drawing.Point(160, 300);
             this.val_lblHeightSensorActive.Name = "val_lblHeightSensorActive";
             this.val_lblHeightSensorActive.Size = new System.Drawing.Size(34, 13);
             this.val_lblHeightSensorActive.TabIndex = 25;
@@ -475,7 +476,7 @@
             // val_lblFreilauf
             // 
             this.val_lblFreilauf.AutoSize = true;
-            this.val_lblFreilauf.Location = new System.Drawing.Point(161, 327);
+            this.val_lblFreilauf.Location = new System.Drawing.Point(160, 327);
             this.val_lblFreilauf.Name = "val_lblFreilauf";
             this.val_lblFreilauf.Size = new System.Drawing.Size(34, 13);
             this.val_lblFreilauf.TabIndex = 27;
@@ -493,7 +494,7 @@
             // val_lblGCode
             // 
             this.val_lblGCode.AutoSize = true;
-            this.val_lblGCode.Location = new System.Drawing.Point(161, 355);
+            this.val_lblGCode.Location = new System.Drawing.Point(160, 355);
             this.val_lblGCode.Name = "val_lblGCode";
             this.val_lblGCode.Size = new System.Drawing.Size(34, 13);
             this.val_lblGCode.TabIndex = 29;
@@ -511,7 +512,7 @@
             // val_lblPositions
             // 
             this.val_lblPositions.AutoSize = true;
-            this.val_lblPositions.Location = new System.Drawing.Point(161, 382);
+            this.val_lblPositions.Location = new System.Drawing.Point(160, 382);
             this.val_lblPositions.Name = "val_lblPositions";
             this.val_lblPositions.Size = new System.Drawing.Size(34, 13);
             this.val_lblPositions.TabIndex = 31;
@@ -529,7 +530,7 @@
             // val_lblSpindlespeed
             // 
             this.val_lblSpindlespeed.AutoSize = true;
-            this.val_lblSpindlespeed.Location = new System.Drawing.Point(161, 409);
+            this.val_lblSpindlespeed.Location = new System.Drawing.Point(160, 409);
             this.val_lblSpindlespeed.Name = "val_lblSpindlespeed";
             this.val_lblSpindlespeed.Size = new System.Drawing.Size(34, 13);
             this.val_lblSpindlespeed.TabIndex = 33;
@@ -538,9 +539,9 @@
             // cb_lblActiveProg
             // 
             this.cb_lblActiveProg.AutoSize = true;
-            this.cb_lblActiveProg.Location = new System.Drawing.Point(536, 53);
+            this.cb_lblActiveProg.Location = new System.Drawing.Point(534, 53);
             this.cb_lblActiveProg.Name = "cb_lblActiveProg";
-            this.cb_lblActiveProg.Size = new System.Drawing.Size(17, 17);
+            this.cb_lblActiveProg.Size = new System.Drawing.Size(19, 17);
             this.cb_lblActiveProg.TabIndex = 34;
             this.cb_lblActiveProg.Text = "checkBox1";
             this.cb_lblActiveProg.UseVisualStyleBackColor = true;
@@ -548,9 +549,9 @@
             // cb_lblDoorStatus
             // 
             this.cb_lblDoorStatus.AutoSize = true;
-            this.cb_lblDoorStatus.Location = new System.Drawing.Point(536, 78);
+            this.cb_lblDoorStatus.Location = new System.Drawing.Point(534, 78);
             this.cb_lblDoorStatus.Name = "cb_lblDoorStatus";
-            this.cb_lblDoorStatus.Size = new System.Drawing.Size(17, 17);
+            this.cb_lblDoorStatus.Size = new System.Drawing.Size(19, 17);
             this.cb_lblDoorStatus.TabIndex = 35;
             this.cb_lblDoorStatus.Text = "checkBox1";
             this.cb_lblDoorStatus.UseVisualStyleBackColor = true;
@@ -558,9 +559,9 @@
             // cb_lblSpindleStatus
             // 
             this.cb_lblSpindleStatus.AutoSize = true;
-            this.cb_lblSpindleStatus.Location = new System.Drawing.Point(536, 103);
+            this.cb_lblSpindleStatus.Location = new System.Drawing.Point(534, 103);
             this.cb_lblSpindleStatus.Name = "cb_lblSpindleStatus";
-            this.cb_lblSpindleStatus.Size = new System.Drawing.Size(17, 17);
+            this.cb_lblSpindleStatus.Size = new System.Drawing.Size(19, 17);
             this.cb_lblSpindleStatus.TabIndex = 36;
             this.cb_lblSpindleStatus.Text = "checkBox1";
             this.cb_lblSpindleStatus.UseVisualStyleBackColor = true;
@@ -568,9 +569,9 @@
             // cb_lblEndschalter
             // 
             this.cb_lblEndschalter.AutoSize = true;
-            this.cb_lblEndschalter.Location = new System.Drawing.Point(536, 128);
+            this.cb_lblEndschalter.Location = new System.Drawing.Point(534, 128);
             this.cb_lblEndschalter.Name = "cb_lblEndschalter";
-            this.cb_lblEndschalter.Size = new System.Drawing.Size(17, 17);
+            this.cb_lblEndschalter.Size = new System.Drawing.Size(19, 17);
             this.cb_lblEndschalter.TabIndex = 37;
             this.cb_lblEndschalter.Text = "checkBox1";
             this.cb_lblEndschalter.UseVisualStyleBackColor = true;
@@ -578,9 +579,9 @@
             // cb_lblStartTime
             // 
             this.cb_lblStartTime.AutoSize = true;
-            this.cb_lblStartTime.Location = new System.Drawing.Point(536, 153);
+            this.cb_lblStartTime.Location = new System.Drawing.Point(534, 153);
             this.cb_lblStartTime.Name = "cb_lblStartTime";
-            this.cb_lblStartTime.Size = new System.Drawing.Size(17, 17);
+            this.cb_lblStartTime.Size = new System.Drawing.Size(19, 17);
             this.cb_lblStartTime.TabIndex = 38;
             this.cb_lblStartTime.Text = "checkBox1";
             this.cb_lblStartTime.UseVisualStyleBackColor = true;
@@ -588,9 +589,9 @@
             // cb_lblEndTime
             // 
             this.cb_lblEndTime.AutoSize = true;
-            this.cb_lblEndTime.Location = new System.Drawing.Point(536, 178);
+            this.cb_lblEndTime.Location = new System.Drawing.Point(534, 178);
             this.cb_lblEndTime.Name = "cb_lblEndTime";
-            this.cb_lblEndTime.Size = new System.Drawing.Size(17, 17);
+            this.cb_lblEndTime.Size = new System.Drawing.Size(19, 17);
             this.cb_lblEndTime.TabIndex = 39;
             this.cb_lblEndTime.Text = "checkBox1";
             this.cb_lblEndTime.UseVisualStyleBackColor = true;
@@ -598,9 +599,9 @@
             // cb_lblWorktime
             // 
             this.cb_lblWorktime.AutoSize = true;
-            this.cb_lblWorktime.Location = new System.Drawing.Point(536, 203);
+            this.cb_lblWorktime.Location = new System.Drawing.Point(534, 203);
             this.cb_lblWorktime.Name = "cb_lblWorktime";
-            this.cb_lblWorktime.Size = new System.Drawing.Size(17, 17);
+            this.cb_lblWorktime.Size = new System.Drawing.Size(19, 17);
             this.cb_lblWorktime.TabIndex = 40;
             this.cb_lblWorktime.Text = "checkBox1";
             this.cb_lblWorktime.UseVisualStyleBackColor = true;
@@ -608,9 +609,9 @@
             // cb_lblFeedRate
             // 
             this.cb_lblFeedRate.AutoSize = true;
-            this.cb_lblFeedRate.Location = new System.Drawing.Point(536, 228);
+            this.cb_lblFeedRate.Location = new System.Drawing.Point(534, 228);
             this.cb_lblFeedRate.Name = "cb_lblFeedRate";
-            this.cb_lblFeedRate.Size = new System.Drawing.Size(17, 17);
+            this.cb_lblFeedRate.Size = new System.Drawing.Size(19, 17);
             this.cb_lblFeedRate.TabIndex = 41;
             this.cb_lblFeedRate.Text = "checkBox1";
             this.cb_lblFeedRate.UseVisualStyleBackColor = true;
@@ -618,9 +619,9 @@
             // cb_lblCutSpeed
             // 
             this.cb_lblCutSpeed.AutoSize = true;
-            this.cb_lblCutSpeed.Location = new System.Drawing.Point(536, 253);
+            this.cb_lblCutSpeed.Location = new System.Drawing.Point(534, 253);
             this.cb_lblCutSpeed.Name = "cb_lblCutSpeed";
-            this.cb_lblCutSpeed.Size = new System.Drawing.Size(17, 17);
+            this.cb_lblCutSpeed.Size = new System.Drawing.Size(19, 17);
             this.cb_lblCutSpeed.TabIndex = 42;
             this.cb_lblCutSpeed.Text = "checkBox1";
             this.cb_lblCutSpeed.UseVisualStyleBackColor = true;
@@ -628,9 +629,9 @@
             // cb_lblMaxCutSpeed
             // 
             this.cb_lblMaxCutSpeed.AutoSize = true;
-            this.cb_lblMaxCutSpeed.Location = new System.Drawing.Point(536, 278);
+            this.cb_lblMaxCutSpeed.Location = new System.Drawing.Point(534, 278);
             this.cb_lblMaxCutSpeed.Name = "cb_lblMaxCutSpeed";
-            this.cb_lblMaxCutSpeed.Size = new System.Drawing.Size(17, 17);
+            this.cb_lblMaxCutSpeed.Size = new System.Drawing.Size(19, 17);
             this.cb_lblMaxCutSpeed.TabIndex = 43;
             this.cb_lblMaxCutSpeed.Text = "checkBox1";
             this.cb_lblMaxCutSpeed.UseVisualStyleBackColor = true;
@@ -638,9 +639,9 @@
             // cb_lblHeightSensorActive
             // 
             this.cb_lblHeightSensorActive.AutoSize = true;
-            this.cb_lblHeightSensorActive.Location = new System.Drawing.Point(536, 303);
+            this.cb_lblHeightSensorActive.Location = new System.Drawing.Point(534, 303);
             this.cb_lblHeightSensorActive.Name = "cb_lblHeightSensorActive";
-            this.cb_lblHeightSensorActive.Size = new System.Drawing.Size(17, 17);
+            this.cb_lblHeightSensorActive.Size = new System.Drawing.Size(19, 17);
             this.cb_lblHeightSensorActive.TabIndex = 44;
             this.cb_lblHeightSensorActive.Text = "checkBox1";
             this.cb_lblHeightSensorActive.UseVisualStyleBackColor = true;
@@ -648,9 +649,9 @@
             // cb_lblFreilauf
             // 
             this.cb_lblFreilauf.AutoSize = true;
-            this.cb_lblFreilauf.Location = new System.Drawing.Point(536, 330);
+            this.cb_lblFreilauf.Location = new System.Drawing.Point(534, 330);
             this.cb_lblFreilauf.Name = "cb_lblFreilauf";
-            this.cb_lblFreilauf.Size = new System.Drawing.Size(17, 17);
+            this.cb_lblFreilauf.Size = new System.Drawing.Size(19, 17);
             this.cb_lblFreilauf.TabIndex = 45;
             this.cb_lblFreilauf.Text = "checkBox1";
             this.cb_lblFreilauf.UseVisualStyleBackColor = true;
@@ -658,9 +659,9 @@
             // cb_lblGCode
             // 
             this.cb_lblGCode.AutoSize = true;
-            this.cb_lblGCode.Location = new System.Drawing.Point(536, 358);
+            this.cb_lblGCode.Location = new System.Drawing.Point(534, 358);
             this.cb_lblGCode.Name = "cb_lblGCode";
-            this.cb_lblGCode.Size = new System.Drawing.Size(17, 17);
+            this.cb_lblGCode.Size = new System.Drawing.Size(19, 17);
             this.cb_lblGCode.TabIndex = 46;
             this.cb_lblGCode.Text = "checkBox1";
             this.cb_lblGCode.UseVisualStyleBackColor = true;
@@ -668,9 +669,9 @@
             // cb_lblPositions
             // 
             this.cb_lblPositions.AutoSize = true;
-            this.cb_lblPositions.Location = new System.Drawing.Point(536, 385);
+            this.cb_lblPositions.Location = new System.Drawing.Point(534, 385);
             this.cb_lblPositions.Name = "cb_lblPositions";
-            this.cb_lblPositions.Size = new System.Drawing.Size(17, 17);
+            this.cb_lblPositions.Size = new System.Drawing.Size(19, 17);
             this.cb_lblPositions.TabIndex = 47;
             this.cb_lblPositions.Text = "checkBox1";
             this.cb_lblPositions.UseVisualStyleBackColor = true;
@@ -678,12 +679,40 @@
             // cb_lblSpindlespeed
             // 
             this.cb_lblSpindlespeed.AutoSize = true;
-            this.cb_lblSpindlespeed.Location = new System.Drawing.Point(536, 412);
+            this.cb_lblSpindlespeed.Location = new System.Drawing.Point(534, 412);
             this.cb_lblSpindlespeed.Name = "cb_lblSpindlespeed";
-            this.cb_lblSpindlespeed.Size = new System.Drawing.Size(17, 17);
+            this.cb_lblSpindlespeed.Size = new System.Drawing.Size(19, 17);
             this.cb_lblSpindlespeed.TabIndex = 48;
             this.cb_lblSpindlespeed.Text = "checkBox1";
             this.cb_lblSpindlespeed.UseVisualStyleBackColor = true;
+            // 
+            // lblSpannung
+            // 
+            this.lblSpannung.AutoSize = true;
+            this.lblSpannung.Location = new System.Drawing.Point(3, 435);
+            this.lblSpannung.Name = "lblSpannung";
+            this.lblSpannung.Size = new System.Drawing.Size(113, 13);
+            this.lblSpannung.TabIndex = 49;
+            this.lblSpannung.Text = "Spannung Eingang 1&2";
+            // 
+            // val_lblSpannung
+            // 
+            this.val_lblSpannung.AutoSize = true;
+            this.val_lblSpannung.Location = new System.Drawing.Point(160, 435);
+            this.val_lblSpannung.Name = "val_lblSpannung";
+            this.val_lblSpannung.Size = new System.Drawing.Size(35, 13);
+            this.val_lblSpannung.TabIndex = 50;
+            this.val_lblSpannung.Text = "label3";
+            // 
+            // cb_lblSpannung
+            // 
+            this.cb_lblSpannung.AutoSize = true;
+            this.cb_lblSpannung.Location = new System.Drawing.Point(534, 438);
+            this.cb_lblSpannung.Name = "cb_lblSpannung";
+            this.cb_lblSpannung.Size = new System.Drawing.Size(19, 17);
+            this.cb_lblSpannung.TabIndex = 51;
+            this.cb_lblSpannung.Text = "checkBox1";
+            this.cb_lblSpannung.UseVisualStyleBackColor = true;
             // 
             // timer
             // 
@@ -803,7 +832,7 @@
             // lblStatus
             // 
             this.lblStatus.AutoSize = true;
-            this.lblStatus.Location = new System.Drawing.Point(3, 96);
+            this.lblStatus.Location = new System.Drawing.Point(-3, 123);
             this.lblStatus.Name = "lblStatus";
             this.lblStatus.Size = new System.Drawing.Size(34, 13);
             this.lblStatus.TabIndex = 7;
@@ -832,6 +861,7 @@
             // 
             this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel1.Controls.Add(this.btnServer);
             this.panel1.Controls.Add(this.ckbWriteTitle);
             this.panel1.Controls.Add(this.label1);
             this.panel1.Controls.Add(this.numLogInterval);
@@ -847,44 +877,26 @@
             this.panel1.Controls.Add(this.lblStatus);
             this.panel1.Controls.Add(this.btnOutputFolder);
             this.panel1.Controls.Add(this.btnStartStopLogging);
-            this.panel1.Location = new System.Drawing.Point(12, 528);
+            this.panel1.Location = new System.Drawing.Point(12, 527);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(556, 109);
+            this.panel1.Size = new System.Drawing.Size(556, 138);
             this.panel1.TabIndex = 19;
             // 
-            // lblSpannung
+            // btnServer
             // 
-            this.lblSpannung.AutoSize = true;
-            this.lblSpannung.Location = new System.Drawing.Point(3, 435);
-            this.lblSpannung.Name = "lblSpannung";
-            this.lblSpannung.Size = new System.Drawing.Size(113, 13);
-            this.lblSpannung.TabIndex = 49;
-            this.lblSpannung.Text = "Spannung Eingang 1&2";
-            // 
-            // val_lblSpannung
-            // 
-            this.val_lblSpannung.AutoSize = true;
-            this.val_lblSpannung.Location = new System.Drawing.Point(161, 435);
-            this.val_lblSpannung.Name = "val_lblSpannung";
-            this.val_lblSpannung.Size = new System.Drawing.Size(35, 13);
-            this.val_lblSpannung.TabIndex = 50;
-            this.val_lblSpannung.Text = "label3";
-            // 
-            // cb_lblSpannung
-            // 
-            this.cb_lblSpannung.AutoSize = true;
-            this.cb_lblSpannung.Location = new System.Drawing.Point(536, 438);
-            this.cb_lblSpannung.Name = "cb_lblSpannung";
-            this.cb_lblSpannung.Size = new System.Drawing.Size(17, 17);
-            this.cb_lblSpannung.TabIndex = 51;
-            this.cb_lblSpannung.Text = "checkBox1";
-            this.cb_lblSpannung.UseVisualStyleBackColor = true;
+            this.btnServer.Location = new System.Drawing.Point(0, 97);
+            this.btnServer.Name = "btnServer";
+            this.btnServer.Size = new System.Drawing.Size(129, 23);
+            this.btnServer.TabIndex = 17;
+            this.btnServer.Text = "Start Server";
+            this.btnServer.UseVisualStyleBackColor = true;
+            this.btnServer.Click += new System.EventHandler(this.btnServer_Click);
             // 
             // LoggerDlg
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(580, 649);
+            this.ClientSize = new System.Drawing.Size(580, 677);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.btn_toggleAll);
@@ -976,5 +988,6 @@
         private System.Windows.Forms.Label lblSpannung;
         private System.Windows.Forms.Label val_lblSpannung;
         private System.Windows.Forms.CheckBox cb_lblSpannung;
+        private System.Windows.Forms.Button btnServer;
     }
 }
