@@ -1,0 +1,22 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>EnerGenie LAN Power Meter</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="s.css" />
+<script>var mac= "AA4D6B4DDCE2";var ipid = 0;var serv = 0;var trycon = 0;var active = 0;var actbtn = 1;var warn = 0;var timer= null;var period =10000;var V  = 2245;   var I  = 0;      var P=0;         var E=352;       var load = 1;var dmod = 0;var tod  = 1357002013;var toa  = 1356998400;var tos  = 1356998400;</script><script src="eg.js"></script>
+</head><body><noscript><h2 style="color: red">WARNING! JAVASCRIPT IS DISABLED!</h2></noscript><div align="center">
+<div id="main">
+<div id="left">
+
+<div id="header"><h2>Server 1</h2></div>
+
+<div id="menu"><img src="elogo.jpg" width="190" height="70" alt="" border="0" /><br /><br /><br />
+<div class="boxmenuitem boxmenuitemactive"><a href="energenie.html">EnerGenie</a></div><div class="boxmenuitem"><a href="device_settings.html">Device Settings</a></div><div class="boxmenuitem"><a href="lan_settings.html">LAN Settings</a></div><div class="boxmenuitem"><a href="login.html">Log Out</a></div></div></div><div id="content"><div id="title"><div class="cleaner"><!-- --></div><table border="0" cellpadding="10" cellspacing="0" class="norm">
+<tr>
+<td class="ig">Voltage</td>
+<td class="ib"><span id="vC"></span></td>
+<td class="ig">V</td><td></td>
+</tr>
+
+<tr><td class="ig">Current</td><td class="ib"><span id="cC"></span></td><td class="ig">A</td><td></td></tr><tr><td class="ig">Power</td><td class="ib"><span id="pC"></span></td><td class="ig">W</td><td class="ig"><span id="loadC"></span></td></tr><tr><td class="ig">Energy</td><td class="ib"><span id="eC"></span></td><td class="ig">kWh</td><td class="ig"><span id="dmodC"></span></td></tr></table><br /><span class="tmclass">Since: <span id="tosC"></span></span><br /><br /><span class="tmclass">Time on device: <span id="todC"></span></span><br /><br /><span class="tmclass">Synchronized with NTP: <span id="toaC"></span></span><br /><br /><br /><table border="0" cellpadding="10" cellspacing="0" class="norm"><tr><td><div class="dline"><img src="1x1b.gif" width="112" height="2" alt="" border="0" /></div></td><td align="center"><h2 class="ener">Your EnerGenie account</h2></td><td><div class="dline"><img src="1x1b.gif" width="112" height="2" alt="" border="0" /></div></td></tr><tr><td colspan="3" align="center"><br /><br /><a href="javascript: ActivateDeactivate();" id="actBtn" class="onoffbtn2">Activate</a>&nbsp;&nbsp;<a href="#" id="regBtn" class="onoffbtn2" target="_blank">Register</a></td></tr></table><div class="tdcnt"><span id="regmsg"></span></div><div class="tdcnt">Status: <span class="statClr"><span id="statusA"></span> <span id="statusB"></span> <span id="statusC"></span></span></div></div><form action="./" method="post" id="tForm2" name="tForm2"><input type="hidden" name="activate" id="activate" value="1" /></form><div class="cleaner"><!----></div></div></div></body></html>
