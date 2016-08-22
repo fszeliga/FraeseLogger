@@ -7,8 +7,8 @@
     <ProjectGuid>{5FA66745-0043-40B0-B5B7-DECF68D862A8}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>FraeseLogger</RootNamespace>
-    <AssemblyName>fraeselogger</AssemblyName>
+    <RootNamespace>imi_cnc_logger</RootNamespace>
+    <AssemblyName>imi_cnc_logger</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
@@ -53,9 +53,16 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="FraeseHttpServer.cs" />
+    <Compile Include="log_comp\CNCPosition.cs" />
+    <Compile Include="log_comp\LoggerManger.cs" />
+    <Compile Include="log_comp\CNCReader.cs" />
+    <Compile Include="log_comp\energenie.cs" />
+    <Compile Include="LoggerExceptions.cs" />
+    <Compile Include="log_comp\LogEvent.cs" />
+    <Compile Include="Utils.cs" />
+    <Compile Include="WebServer\FraeseHttpServer.cs" />
     <Compile Include="LoggerFileWriter.cs" />
-    <Compile Include="LoggerInstance.cs" />
+    <Compile Include="log_comp\LoggerData.cs" />
     <Compile Include="LoggerDlg.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -64,6 +71,8 @@
     </Compile>
     <Compile Include="FraeseLogger.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="WebServer\HTTPProcessor.cs" />
+    <Compile Include="WebServer\HTTPServer.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="LoggerDlg.resx">

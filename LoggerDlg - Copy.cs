@@ -1,5 +1,4 @@
 ﻿using De.Boenigk.SMC5D.Basics;
-using imi_cnc_logger;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -44,8 +43,7 @@ namespace FraeseLogger
                 this.cb_lblGCode,
                 this.cb_lblPositions,
                 this.cb_lblSpindlespeed,
-                this.cb_lblSpannung,
-                this.cb_lblEnergy
+                this.cb_lblSpannung
             };
 
             timer.Start();
@@ -61,7 +59,7 @@ namespace FraeseLogger
             val_lblSN.Text = li.serialNr;
             val_lblFirmware.Text = li.firmware;
 
-            val_lblActiveProg.Text = LoggerManger.THE().getLastEvent().activeProg;
+            val_lblActiveProg.Text = li.activeProg;
 
             if (li.doorOpen) val_lblDoorStatus.Text = "Auf";
             else val_lblDoorStatus.Text = "Zu";
@@ -74,7 +72,9 @@ namespace FraeseLogger
             val_lblFeedRate.Text = li.vorschub + li.vorschubEinheit;
             val_lblWorktime.Text = li.worktime.ToString();
             val_lblStartTime.Text = li.startTime;
-            val_lblEndTime.Text = li.endTime;
+            val_lblEndTime.Text = li.endTIme;
+
+            lblStatus.Text = li.loggerStatus;
 
             val_lblHeightSensorActive.Text = li.heightSensorActive.ToString();
 
@@ -86,18 +86,7 @@ namespace FraeseLogger
             val_lblSpindlespeed.Text = li.spindlespeed.ToString();
 
             val_lblSpannung.Text = li.volt1.ToString() + " | " + li.volt2.ToString();
-
-            val_lblEnergy.Text = li.energy.data2String("   ", false, true);
-
-            while (LoggerManger.THE().logsQueued())
-            {
-                lb_LogOutput.Items.Add(LoggerManger.THE().popLog());
-            }
-
-            val_localIP.Text = Utils.GetLocalIPAddress();
-            val_extIP.Text = Utils.GetGlobalIPAddress();
         }
-
         private void buttonStart_Click(object sender, EventArgs e)
         {
             if (LoggerData.Instance.logThreadRunning)
@@ -148,6 +137,8 @@ namespace FraeseLogger
                 LoggerData.Instance.logPositions = this.cb_lblPositions.Checked;
                 LoggerData.Instance.logSpindleSpeed = this.cb_lblSpindlespeed.Checked;
                 LoggerData.Instance.logSpannung = this.cb_lblSpannung.Checked;
+
+                LoggerData.Instance.startEnergenie();
 
                 Thread logThread = new Thread(new ThreadStart(log.logCNC));
                 logThread.Start();
@@ -246,25 +237,19 @@ namespace FraeseLogger
             foreach (var checkBox in _checkBoxes) checkBox.Enabled = v;
         }
 
-        //used for starting/stopping webserver
         private bool serverRunning = false;
-        private void btnWebServer_Click(object sender, EventArgs e)
+
+        private void btnServer_Click(object sender, EventArgs e)
         {
-            LoggerManger.THE().setWebServerRunning(!serverRunning);
             serverRunning = !serverRunning;
-            if (serverRunning) btnServer.Text = "Running...Stop";
-            else btnServer.Text = "Start WebServer";
-        }
-
-        private void LoggerDlg_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            LoggerManger.THE().stop();
-            LoggerData.Instance.stoplogger();
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            LoggerManger.THE().readFromCNC();
+            li.setHTTPServer(serverRunning);
+            if (serverRunning)
+            {
+                btnServer.Text = "Runnig...Stop";
+            } else
+            {
+                btnServer.Text = "Start Server";
+            }
         }
     }
 }

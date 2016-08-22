@@ -4,12 +4,12 @@ using System.IO;
 using System.Linq;
 using System.Text;
 
-namespace FraeseLogger
+namespace imi_cnc_logger
 {
     public class LoggerFileWriter
     {
         private bool writeTitle;
-        private LoggerInstance li = LoggerInstance.Instance;
+        private LoggerData li = LoggerData.Instance;
 
         public bool logActiveProg { get; internal set; }
         public bool logDoorStatus { get; internal set; }
@@ -115,7 +115,7 @@ namespace FraeseLogger
                     String line = "";
                     if (logActiveProg)
                     {
-                        line = li.activeProg + ";";//1
+                        //line = li.activeProg + ";";//1
                     }
                     if (logDoorStatus)
                     {
@@ -141,7 +141,7 @@ namespace FraeseLogger
                     }
                     if (logEndTime)
                     {
-                        line += li.endTIme + ";";//10
+                        line += li.endTime + ";";//10
                     }
                     if (logWorktime)
                     {
