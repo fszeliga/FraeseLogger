@@ -1,7 +1,11 @@
 ﻿using System.Windows.Forms;
 using cncGraF.iPlugin;
+using System.Threading;
+using System;
+using FraeseLogger;
 
-namespace FraeseLogger {
+namespace imi_cnc_logger
+{
 
     public class FraeseLogger: IPlugin {
 
@@ -13,7 +17,7 @@ namespace FraeseLogger {
                 return "CNC Fräse Logger";                
             }
         }
-
+        
         /// <summary>
         /// Description
         /// </summary>
@@ -30,10 +34,13 @@ namespace FraeseLogger {
         /// <returns>plugin results</returns>
         public PluginResult Execute(PluginArgs aPluginArgs)
         {
-            LoggerInstance.Instance.init();
-            LoggerInstance.Instance.Connector = aPluginArgs.Connector;
-            LoggerInstance.Instance.MachInfo = aPluginArgs.MachInfo;
+            LoggerManger.THE().init(aPluginArgs.Connector, aPluginArgs.MachInfo);
+            LoggerManger.THE().pushLog("initialized connector and machinfo");
+            LoggerManger.THE().initDummy();
+            LoggerManger.THE().pushLog("initialized dummies");
 
+            LoggerData.Instance.init(aPluginArgs.Connector, aPluginArgs.MachInfo);
+          
             LoggerDlg loggerDlg = new LoggerDlg();
             loggerDlg.Show();
 
