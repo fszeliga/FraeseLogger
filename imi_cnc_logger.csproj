@@ -35,6 +35,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\..\..\Program Files\Boenigk\cncGraF 7\cncgraf.iplugin.dll</HintPath>
     </Reference>
+    <Reference Include="HtmlAgilityPack, Version=1.4.9.5, Culture=neutral, PublicKeyToken=bd319b19eaf3b43a, processorArchitecture=MSIL">
+      <HintPath>packages\HtmlAgilityPack.1.4.9.5\lib\Net40\HtmlAgilityPack.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="smc5d.core, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\..\..\Program Files\Boenigk\cncGraF 7\smc5d.core.dll</HintPath>
@@ -53,10 +57,14 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="log_comp\data\base_impl\CNCIntegerData.cs" />
+    <Compile Include="log_comp\data\base_impl\CNCStringData.cs" />
+    <Compile Include="log_comp\data\base_impl\CNCDataBase.cs" />
+    <Compile Include="log_comp\data\base_impl\CNCDataInterface.cs" />
     <Compile Include="log_comp\CNCPosition.cs" />
-    <Compile Include="log_comp\LoggerManger.cs" />
+    <Compile Include="log_comp\LoggerManager.cs" />
     <Compile Include="log_comp\CNCReader.cs" />
-    <Compile Include="log_comp\energenie.cs" />
+    <Compile Include="log_comp\data\energenie.cs" />
     <Compile Include="LoggerExceptions.cs" />
     <Compile Include="log_comp\LogEvent.cs" />
     <Compile Include="Utils.cs" />
@@ -78,6 +86,9 @@
     <EmbeddedResource Include="LoggerDlg.resx">
       <DependentUpon>LoggerDlg.cs</DependentUpon>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

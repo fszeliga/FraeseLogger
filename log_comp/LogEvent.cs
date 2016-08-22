@@ -25,7 +25,7 @@ namespace imi_cnc_logger.log_comp
 
         public bool Equals(LogEvent other)
         {
-            LoggerManger.THE().pushLog("compare: " + this.activeProg+" with "+other.activeProg);
+            LoggerManager.THE().pushLog("compare: " + this.activeProg+" with "+other.activeProg);
             if (other.activeProg != this.activeProg) return false;
             if (other.startTime != this.startTime) return false;
             if (!other.cncPos.Equals(this.cncPos)) return false;

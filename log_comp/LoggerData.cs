@@ -234,7 +234,7 @@ namespace imi_cnc_logger
             }
             catch (Exception e)
             {
-                LoggerManger.THE().pushLog(e.Message);
+                LoggerManager.THE().pushLog(e.Message);
                 spindlespeed = 0;
             }
             volt1 = myConn.AD1Volt;

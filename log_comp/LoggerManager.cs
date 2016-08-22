@@ -10,7 +10,7 @@ using System.Threading;
 
 namespace imi_cnc_logger
 {
-    public class LoggerManger
+    public class LoggerManager
     {
         private CNCReader cncReader = null;
         private List<LogEvent> data = new List<LogEvent>();
@@ -19,7 +19,10 @@ namespace imi_cnc_logger
         private HTTPServer webserver;
         private Thread webserver_thread = null;
 
-        private LoggerManger()
+        public energenie energy;
+        private Thread threadEnergenie;
+
+        private LoggerManager()
         {
         }
 
@@ -27,17 +30,22 @@ namespace imi_cnc_logger
         /// Returns always the same instance of LoggerManager (singleton)
         /// </summary>
         /// <returns>static LoggerManger</returns>
-        private static LoggerManger instance = null;
-        public static LoggerManger THE()
+        private static LoggerManager instance = null;
+
+        public static LoggerManager THE()
         {
             if (instance == null)
-                instance = new LoggerManger();
+                instance = new LoggerManager();
             return instance;
         }
 
         public void init(Connector c, MachInfo m)
         {
             this.cncReader = new CNCReader(c, m);
+
+            energy = new energenie(System.Net.IPAddress.Parse("192.168.0.102"));
+            threadEnergenie = new Thread(new ThreadStart(energy.readEnergenie));
+            threadEnergenie.Start();
         }
 
         /// <summary>
@@ -49,7 +57,7 @@ namespace imi_cnc_logger
             if (cncReader == null) throw new CNCReaderNotInitialized("You need to run init on LoggerManager first!");
             Tuple<bool, LogEvent> newData = cncReader.getNewData(getLastEvent());
             if (newData.Item1) data.Add(newData.Item2);
-            else LoggerManger.THE().pushLog("same data! not logging");
+            else LoggerManager.THE().pushLog("same data! not logging");
         }
 
         public void initDummy()
@@ -137,7 +145,7 @@ namespace imi_cnc_logger
             //oder bis er durch Thread.Abort beendet wird.
             if (webserver_running)
             {
-                LoggerManger.THE().pushLog("starting webserver");
+                LoggerManager.THE().pushLog("starting webserver");
                 webserver = new FraeseHttpServer("127.0.0.1", 8000);
                 webserver_thread = new Thread(new ThreadStart(webserver.listen));
                 webserver_thread.Start();

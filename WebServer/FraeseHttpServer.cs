@@ -82,7 +82,7 @@ namespace imi_cnc_logger.WebServer
                         
             json += "[";
 
-            List<LogEvent> events = LoggerManger.THE().getAllEventsAfterId(lastid);
+            List<LogEvent> events = LoggerManager.THE().getAllEventsAfterId(lastid);
 
             LogEvent lastEvent = events.FindLast(o => o.EventId >= 0);
 

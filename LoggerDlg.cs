@@ -61,7 +61,7 @@ namespace FraeseLogger
             val_lblSN.Text = li.serialNr;
             val_lblFirmware.Text = li.firmware;
 
-            val_lblActiveProg.Text = LoggerManger.THE().getLastEvent().activeProg;
+            val_lblActiveProg.Text = LoggerManager.THE().getLastEvent().activeProg;
 
             if (li.doorOpen) val_lblDoorStatus.Text = "Auf";
             else val_lblDoorStatus.Text = "Zu";
@@ -87,11 +87,11 @@ namespace FraeseLogger
 
             val_lblSpannung.Text = li.volt1.ToString() + " | " + li.volt2.ToString();
 
-            val_lblEnergy.Text = li.energy.data2String("   ", false, true);
+            val_lblEnergy.Text = LoggerManager.THE().energy.data2String("   ", false, true);
 
-            while (LoggerManger.THE().logsQueued())
+            while (LoggerManager.THE().logsQueued())
             {
-                lb_LogOutput.Items.Add(LoggerManger.THE().popLog());
+                lb_LogOutput.Items.Add(LoggerManager.THE().popLog());
             }
 
             val_localIP.Text = Utils.GetLocalIPAddress();
@@ -250,7 +250,7 @@ namespace FraeseLogger
         private bool serverRunning = false;
         private void btnWebServer_Click(object sender, EventArgs e)
         {
-            LoggerManger.THE().setWebServerRunning(!serverRunning);
+            LoggerManager.THE().setWebServerRunning(!serverRunning);
             serverRunning = !serverRunning;
             if (serverRunning) btnServer.Text = "Running...Stop";
             else btnServer.Text = "Start WebServer";
@@ -258,13 +258,13 @@ namespace FraeseLogger
 
         private void LoggerDlg_FormClosing(object sender, FormClosingEventArgs e)
         {
-            LoggerManger.THE().stop();
+            LoggerManager.THE().stop();
             LoggerData.Instance.stoplogger();
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            LoggerManger.THE().readFromCNC();
+            LoggerManager.THE().readFromCNC();
         }
     }
 }

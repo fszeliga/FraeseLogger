@@ -115,10 +115,10 @@
             this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.btnServer = new System.Windows.Forms.Button();
             this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.button1 = new System.Windows.Forms.Button();
             this.lb_LogOutput = new System.Windows.Forms.ListBox();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
-            this.button1 = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -136,8 +136,8 @@
             // 
             // btn_toggleAll
             // 
-            this.btn_toggleAll.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btn_toggleAll.Location = new System.Drawing.Point(493, 487);
+            this.btn_toggleAll.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btn_toggleAll.Location = new System.Drawing.Point(490, 542);
             this.btn_toggleAll.Name = "btn_toggleAll";
             this.btn_toggleAll.Size = new System.Drawing.Size(126, 23);
             this.btn_toggleAll.TabIndex = 17;
@@ -158,7 +158,7 @@
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.Padding = new System.Drawing.Point(0, 0);
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(630, 544);
+            this.tabControl1.Size = new System.Drawing.Size(630, 597);
             this.tabControl1.TabIndex = 23;
             // 
             // tabPage1
@@ -167,7 +167,7 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(622, 518);
+            this.tabPage1.Size = new System.Drawing.Size(622, 571);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "File Logger";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -193,7 +193,7 @@
             this.panel1.Controls.Add(this.btnStartStopLogging);
             this.panel1.Location = new System.Drawing.Point(6, 6);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(611, 514);
+            this.panel1.Size = new System.Drawing.Size(611, 567);
             this.panel1.TabIndex = 20;
             // 
             // ckbWriteTitle
@@ -349,21 +349,20 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(622, 258);
+            this.tabPage2.Size = new System.Drawing.Size(622, 571);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Live Data";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
             // tableLayoutPanel1
             // 
-            this.tableLayoutPanel1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+            this.tableLayoutPanel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tableLayoutPanel1.AutoSize = true;
             this.tableLayoutPanel1.ColumnCount = 3;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 29.67626F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 70.32374F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 29F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 30F));
             this.tableLayoutPanel1.Controls.Add(this.lblSN, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.val_lblSN, 1, 0);
             this.tableLayoutPanel1.Controls.Add(this.lblFirmware, 0, 1);
@@ -441,7 +440,7 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 25F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 25F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 25F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(610, 475);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(610, 477);
             this.tableLayoutPanel1.TabIndex = 23;
             // 
             // lblSN
@@ -855,7 +854,7 @@
             // cb_lblActiveProg
             // 
             this.cb_lblActiveProg.AutoSize = true;
-            this.cb_lblActiveProg.Location = new System.Drawing.Point(583, 53);
+            this.cb_lblActiveProg.Location = new System.Drawing.Point(582, 53);
             this.cb_lblActiveProg.Name = "cb_lblActiveProg";
             this.cb_lblActiveProg.Size = new System.Drawing.Size(15, 14);
             this.cb_lblActiveProg.TabIndex = 34;
@@ -864,7 +863,7 @@
             // cb_lblDoorStatus
             // 
             this.cb_lblDoorStatus.AutoSize = true;
-            this.cb_lblDoorStatus.Location = new System.Drawing.Point(583, 78);
+            this.cb_lblDoorStatus.Location = new System.Drawing.Point(582, 78);
             this.cb_lblDoorStatus.Name = "cb_lblDoorStatus";
             this.cb_lblDoorStatus.Size = new System.Drawing.Size(15, 14);
             this.cb_lblDoorStatus.TabIndex = 35;
@@ -873,7 +872,7 @@
             // cb_lblSpindleStatus
             // 
             this.cb_lblSpindleStatus.AutoSize = true;
-            this.cb_lblSpindleStatus.Location = new System.Drawing.Point(583, 103);
+            this.cb_lblSpindleStatus.Location = new System.Drawing.Point(582, 103);
             this.cb_lblSpindleStatus.Name = "cb_lblSpindleStatus";
             this.cb_lblSpindleStatus.Size = new System.Drawing.Size(15, 14);
             this.cb_lblSpindleStatus.TabIndex = 36;
@@ -882,7 +881,7 @@
             // cb_lblEndschalter
             // 
             this.cb_lblEndschalter.AutoSize = true;
-            this.cb_lblEndschalter.Location = new System.Drawing.Point(583, 128);
+            this.cb_lblEndschalter.Location = new System.Drawing.Point(582, 128);
             this.cb_lblEndschalter.Name = "cb_lblEndschalter";
             this.cb_lblEndschalter.Size = new System.Drawing.Size(15, 14);
             this.cb_lblEndschalter.TabIndex = 37;
@@ -891,7 +890,7 @@
             // cb_lblStartTime
             // 
             this.cb_lblStartTime.AutoSize = true;
-            this.cb_lblStartTime.Location = new System.Drawing.Point(583, 153);
+            this.cb_lblStartTime.Location = new System.Drawing.Point(582, 153);
             this.cb_lblStartTime.Name = "cb_lblStartTime";
             this.cb_lblStartTime.Size = new System.Drawing.Size(15, 14);
             this.cb_lblStartTime.TabIndex = 38;
@@ -900,7 +899,7 @@
             // cb_lblEndTime
             // 
             this.cb_lblEndTime.AutoSize = true;
-            this.cb_lblEndTime.Location = new System.Drawing.Point(583, 178);
+            this.cb_lblEndTime.Location = new System.Drawing.Point(582, 178);
             this.cb_lblEndTime.Name = "cb_lblEndTime";
             this.cb_lblEndTime.Size = new System.Drawing.Size(15, 14);
             this.cb_lblEndTime.TabIndex = 39;
@@ -909,7 +908,7 @@
             // cb_lblWorktime
             // 
             this.cb_lblWorktime.AutoSize = true;
-            this.cb_lblWorktime.Location = new System.Drawing.Point(583, 203);
+            this.cb_lblWorktime.Location = new System.Drawing.Point(582, 203);
             this.cb_lblWorktime.Name = "cb_lblWorktime";
             this.cb_lblWorktime.Size = new System.Drawing.Size(15, 14);
             this.cb_lblWorktime.TabIndex = 40;
@@ -918,7 +917,7 @@
             // cb_lblFeedRate
             // 
             this.cb_lblFeedRate.AutoSize = true;
-            this.cb_lblFeedRate.Location = new System.Drawing.Point(583, 228);
+            this.cb_lblFeedRate.Location = new System.Drawing.Point(582, 228);
             this.cb_lblFeedRate.Name = "cb_lblFeedRate";
             this.cb_lblFeedRate.Size = new System.Drawing.Size(15, 14);
             this.cb_lblFeedRate.TabIndex = 41;
@@ -927,7 +926,7 @@
             // cb_lblCutSpeed
             // 
             this.cb_lblCutSpeed.AutoSize = true;
-            this.cb_lblCutSpeed.Location = new System.Drawing.Point(583, 253);
+            this.cb_lblCutSpeed.Location = new System.Drawing.Point(582, 253);
             this.cb_lblCutSpeed.Name = "cb_lblCutSpeed";
             this.cb_lblCutSpeed.Size = new System.Drawing.Size(15, 14);
             this.cb_lblCutSpeed.TabIndex = 42;
@@ -936,7 +935,7 @@
             // cb_lblMaxCutSpeed
             // 
             this.cb_lblMaxCutSpeed.AutoSize = true;
-            this.cb_lblMaxCutSpeed.Location = new System.Drawing.Point(583, 278);
+            this.cb_lblMaxCutSpeed.Location = new System.Drawing.Point(582, 278);
             this.cb_lblMaxCutSpeed.Name = "cb_lblMaxCutSpeed";
             this.cb_lblMaxCutSpeed.Size = new System.Drawing.Size(15, 14);
             this.cb_lblMaxCutSpeed.TabIndex = 43;
@@ -945,7 +944,7 @@
             // cb_lblHeightSensorActive
             // 
             this.cb_lblHeightSensorActive.AutoSize = true;
-            this.cb_lblHeightSensorActive.Location = new System.Drawing.Point(583, 303);
+            this.cb_lblHeightSensorActive.Location = new System.Drawing.Point(582, 303);
             this.cb_lblHeightSensorActive.Name = "cb_lblHeightSensorActive";
             this.cb_lblHeightSensorActive.Size = new System.Drawing.Size(15, 14);
             this.cb_lblHeightSensorActive.TabIndex = 44;
@@ -954,7 +953,7 @@
             // cb_lblFreilauf
             // 
             this.cb_lblFreilauf.AutoSize = true;
-            this.cb_lblFreilauf.Location = new System.Drawing.Point(583, 328);
+            this.cb_lblFreilauf.Location = new System.Drawing.Point(582, 328);
             this.cb_lblFreilauf.Name = "cb_lblFreilauf";
             this.cb_lblFreilauf.Size = new System.Drawing.Size(15, 14);
             this.cb_lblFreilauf.TabIndex = 45;
@@ -963,7 +962,7 @@
             // cb_lblGCode
             // 
             this.cb_lblGCode.AutoSize = true;
-            this.cb_lblGCode.Location = new System.Drawing.Point(583, 353);
+            this.cb_lblGCode.Location = new System.Drawing.Point(582, 353);
             this.cb_lblGCode.Name = "cb_lblGCode";
             this.cb_lblGCode.Size = new System.Drawing.Size(15, 14);
             this.cb_lblGCode.TabIndex = 46;
@@ -972,7 +971,7 @@
             // cb_lblPositions
             // 
             this.cb_lblPositions.AutoSize = true;
-            this.cb_lblPositions.Location = new System.Drawing.Point(583, 378);
+            this.cb_lblPositions.Location = new System.Drawing.Point(582, 378);
             this.cb_lblPositions.Name = "cb_lblPositions";
             this.cb_lblPositions.Size = new System.Drawing.Size(15, 14);
             this.cb_lblPositions.TabIndex = 47;
@@ -981,7 +980,7 @@
             // cb_lblSpindlespeed
             // 
             this.cb_lblSpindlespeed.AutoSize = true;
-            this.cb_lblSpindlespeed.Location = new System.Drawing.Point(583, 403);
+            this.cb_lblSpindlespeed.Location = new System.Drawing.Point(582, 403);
             this.cb_lblSpindlespeed.Name = "cb_lblSpindlespeed";
             this.cb_lblSpindlespeed.Size = new System.Drawing.Size(15, 14);
             this.cb_lblSpindlespeed.TabIndex = 48;
@@ -1014,7 +1013,7 @@
             // cb_lblSpannung
             // 
             this.cb_lblSpannung.AutoSize = true;
-            this.cb_lblSpannung.Location = new System.Drawing.Point(583, 428);
+            this.cb_lblSpannung.Location = new System.Drawing.Point(582, 428);
             this.cb_lblSpannung.Name = "cb_lblSpannung";
             this.cb_lblSpannung.Size = new System.Drawing.Size(15, 14);
             this.cb_lblSpannung.TabIndex = 51;
@@ -1027,7 +1026,7 @@
             this.lblEnergy.AutoSize = true;
             this.lblEnergy.Location = new System.Drawing.Point(3, 450);
             this.lblEnergy.Name = "lblEnergy";
-            this.lblEnergy.Size = new System.Drawing.Size(75, 25);
+            this.lblEnergy.Size = new System.Drawing.Size(75, 27);
             this.lblEnergy.TabIndex = 52;
             this.lblEnergy.Text = "Energie Daten";
             this.lblEnergy.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -1039,7 +1038,7 @@
             this.val_lblEnergy.AutoSize = true;
             this.val_lblEnergy.Location = new System.Drawing.Point(175, 450);
             this.val_lblEnergy.Name = "val_lblEnergy";
-            this.val_lblEnergy.Size = new System.Drawing.Size(34, 25);
+            this.val_lblEnergy.Size = new System.Drawing.Size(34, 27);
             this.val_lblEnergy.TabIndex = 53;
             this.val_lblEnergy.Text = "UNIN";
             this.val_lblEnergy.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -1047,7 +1046,7 @@
             // cb_lblEnergy
             // 
             this.cb_lblEnergy.AutoSize = true;
-            this.cb_lblEnergy.Location = new System.Drawing.Point(583, 453);
+            this.cb_lblEnergy.Location = new System.Drawing.Point(582, 453);
             this.cb_lblEnergy.Name = "cb_lblEnergy";
             this.cb_lblEnergy.Size = new System.Drawing.Size(15, 14);
             this.cb_lblEnergy.TabIndex = 54;
@@ -1065,7 +1064,7 @@
             this.tabPage3.Location = new System.Drawing.Point(4, 22);
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(622, 258);
+            this.tabPage3.Size = new System.Drawing.Size(622, 571);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "WebServer";
             this.tabPage3.UseVisualStyleBackColor = true;
@@ -1144,10 +1143,21 @@
             this.tabPage4.Location = new System.Drawing.Point(4, 22);
             this.tabPage4.Name = "tabPage4";
             this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage4.Size = new System.Drawing.Size(622, 518);
+            this.tabPage4.Size = new System.Drawing.Size(622, 571);
             this.tabPage4.TabIndex = 3;
             this.tabPage4.Text = "Log";
             this.tabPage4.UseVisualStyleBackColor = true;
+            // 
+            // button1
+            // 
+            this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.button1.Location = new System.Drawing.Point(541, 542);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 1;
+            this.button1.Text = "button1";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // lb_LogOutput
             // 
@@ -1158,14 +1168,14 @@
             this.lb_LogOutput.Location = new System.Drawing.Point(3, 6);
             this.lb_LogOutput.Name = "lb_LogOutput";
             this.lb_LogOutput.ScrollAlwaysVisible = true;
-            this.lb_LogOutput.Size = new System.Drawing.Size(613, 381);
+            this.lb_LogOutput.Size = new System.Drawing.Size(613, 433);
             this.lb_LogOutput.TabIndex = 0;
             // 
             // statusStrip1
             // 
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripStatusLabel});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 559);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 613);
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.Size = new System.Drawing.Size(654, 22);
             this.statusStrip1.TabIndex = 21;
@@ -1177,21 +1187,11 @@
             this.toolStripStatusLabel.Size = new System.Drawing.Size(24, 17);
             this.toolStripStatusLabel.Text = "NA";
             // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(312, 445);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 1;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
             // LoggerDlg
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(654, 581);
+            this.ClientSize = new System.Drawing.Size(654, 635);
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.statusStrip1);
             this.MinimumSize = new System.Drawing.Size(670, 620);

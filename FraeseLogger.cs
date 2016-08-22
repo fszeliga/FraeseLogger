@@ -34,10 +34,10 @@ namespace imi_cnc_logger
         /// <returns>plugin results</returns>
         public PluginResult Execute(PluginArgs aPluginArgs)
         {
-            LoggerManger.THE().init(aPluginArgs.Connector, aPluginArgs.MachInfo);
-            LoggerManger.THE().pushLog("initialized connector and machinfo");
-            LoggerManger.THE().initDummy();
-            LoggerManger.THE().pushLog("initialized dummies");
+            LoggerManager.THE().init(aPluginArgs.Connector, aPluginArgs.MachInfo);
+            LoggerManager.THE().pushLog("initialized connector and machinfo");
+            LoggerManager.THE().initDummy();
+            LoggerManager.THE().pushLog("initialized dummies");
 
             LoggerData.Instance.init(aPluginArgs.Connector, aPluginArgs.MachInfo);
           

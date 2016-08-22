@@ -29,7 +29,7 @@ namespace imi_cnc_logger.WebServer
             try
             {
                 listener.Start();
-                LoggerManger.THE().pushLog("Starting HTTPServer listener...accepting connections");
+                LoggerManager.THE().pushLog("Starting HTTPServer listener...accepting connections");
                 while (is_active)
                 {
                     TcpClient s = listener.AcceptTcpClient();
@@ -45,7 +45,7 @@ namespace imi_cnc_logger.WebServer
             }
             finally
             {
-                LoggerManger.THE().pushLog("Stopped HTTPServer");
+                LoggerManager.THE().pushLog("Stopped HTTPServer");
             }
 
         }

@@ -21,7 +21,7 @@ namespace imi_cnc_logger.log_comp
         public Tuple<bool, LogEvent> getNewData(LogEvent lastData)
         {
             if (conn == null || machInfo == null) return new Tuple<bool, LogEvent>(false, null);
-            LoggerManger.THE().pushLog("[CNCRead] - id of last event: " + lastData.EventId );
+            LoggerManager.THE().pushLog("[CNCRead] - id of last event: " + lastData.EventId );
             //set flag that it changed, so LoggerManager can add it (no duplicates if machine not moving)
 
             LogEvent e = new LogEvent(lastData.EventId + 1);
