@@ -91,9 +91,9 @@ namespace imi_cnc_logger.WebServer
                 json += "{";
 
                 json += "\"event_id\" : \"" + e.EventId + "\"" + ",";
-                json += "\"activeProg\" : \"" + e.activeProg + "\"" + ",";
-                json += "\"startTime\" : \"" + e.startTime + "\",";
-                json += "\"globalPostition\" : {" + "\"x\":" + e.cncPos._x + ",\"y\":" + e.cncPos._y + ",\"z\":" + e.cncPos._z + "}";
+                //json += "\"activeProg\" : \"" + e.activeProg + "\"" + ",";
+                //json += "\"startTime\" : \"" + e.startTime + "\",";
+                //json += "\"globalPostition\" : {" + "\"x\":" + e.cncPos._x + ",\"y\":" + e.cncPos._y + ",\"z\":" + e.cncPos._z + "}";
 
                 json += "}";
 

@@ -61,7 +61,7 @@ namespace FraeseLogger
             val_lblSN.Text = li.serialNr;
             val_lblFirmware.Text = li.firmware;
 
-            val_lblActiveProg.Text = LoggerManager.THE().getLastEvent().activeProg;
+            //val_lblActiveProg.Text = LoggerManager.THE().getLastEvent().activeProg;
 
             if (li.doorOpen) val_lblDoorStatus.Text = "Auf";
             else val_lblDoorStatus.Text = "Zu";

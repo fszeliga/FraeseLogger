@@ -26,12 +26,19 @@ namespace imi_cnc_logger.log_comp
 
             LogEvent e = new LogEvent(lastData.EventId + 1);
 
-            e.activeProg = machInfo.FileName;
-            e.startTime = "asd";
-            
+            foreach (KeyValuePair<string, data.CNCDataBase> entry in e.data)
+            {
+                bool success = entry.Value.read();
+            }
+
+            //...check for changes
+
+
+            // e.activeProg = machInfo.FileName;
+            //e.startTime = "asd";
+
             Tuple<bool, LogEvent> newData = new Tuple<bool, LogEvent>(!e.Equals(lastData), e);
             
-            //...check for changes
             return newData;
         }
     }

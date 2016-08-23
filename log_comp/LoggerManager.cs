@@ -12,6 +12,8 @@ namespace imi_cnc_logger
 {
     public class LoggerManager
     {
+        public Connector connector { get; private set; }
+        public MachInfo machInfo { get; private set; }
         private CNCReader cncReader = null;
         private List<LogEvent> data = new List<LogEvent>();
         private Queue<String> logs = new Queue<String>();
@@ -42,6 +44,8 @@ namespace imi_cnc_logger
         public void init(Connector c, MachInfo m)
         {
             this.cncReader = new CNCReader(c, m);
+            this.connector = c;
+            this.machInfo = m;
 
             energy = new energenie(System.Net.IPAddress.Parse("192.168.0.102"));
             threadEnergenie = new Thread(new ThreadStart(energy.readEnergenie));
