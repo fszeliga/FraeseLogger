@@ -1,7 +1,6 @@
 ﻿using HtmlAgilityPack;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -9,14 +8,12 @@ using System.Net.Configuration;
 using System.Reflection;
 using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading;
 
 namespace imi_cnc_logger
 {
     public class energenie
     {
         private bool read = false;
-        private int val = 0;
         private readonly IPAddress ip;
 
         public double watt { get; private set; } = 0.0;
@@ -46,7 +43,6 @@ namespace imi_cnc_logger
         public void stop()
         {
             read = false;
-            val = 0;
         }
 
         public void readEnergenie()

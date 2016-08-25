@@ -35,18 +35,20 @@ namespace imi_cnc_logger.WebServer
 
             if (rest[0] == rest[1]){
                 p.writeSuccess("application/json");
-                p.outputStream.WriteLine("[error:'Wrong REST API command!']");
+                p.outputStream.WriteLine("[error:'Wrong REST API command!']" + p.http_url);
                 return;
             }
-
+            
             p.writeSuccess("application/json");
 
-            p.outputStream.WriteLine("rest lengt " + rest.Length);
+            p.outputStream.WriteLine("rest length " + rest.Length);
 
             String eventsJson = "";
 
             if (rest[1] == "all")
+            {
                 eventsJson = parseRESTallEvents(p);
+            }
             else if (rest[1] == "lastid")
             {
                 try
@@ -58,6 +60,10 @@ namespace imi_cnc_logger.WebServer
                     p.outputStream.WriteLine("[error:'Wrong REST API command! URL: " + p.http_url + "']");
                     return;
                 }
+            } else if (parsePotentialSingleData(p, rest))
+            {
+                p.outputStream.WriteLine("parsePotentialSingleData = true");
+                return;
             }
             else
             {
@@ -68,6 +74,19 @@ namespace imi_cnc_logger.WebServer
             p.outputStream.WriteLine("{\"events\":");
             p.outputStream.WriteLine(eventsJson);
             p.outputStream.WriteLine("}");
+        }
+
+        private bool parsePotentialSingleData(HTTPProcessor p, string[] v)
+        {
+            LogEvent e = LoggerManager.THE().getLastEvent();
+
+            String[] result = new String[v.Length-2];
+            Array.Copy(v, 2, result, 0, result.Length);
+
+            string output = e.getValueByKey(v[1], result);
+            if (output == "keynotfound") return false;
+            p.outputStream.WriteLine(output);
+            return true;
         }
 
         /// <summary>

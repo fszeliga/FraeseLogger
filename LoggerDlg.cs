@@ -258,8 +258,8 @@ namespace FraeseLogger
 
         private void LoggerDlg_FormClosing(object sender, FormClosingEventArgs e)
         {
-            LoggerManager.THE().stop();
-            LoggerData.Instance.stoplogger();
+            //LoggerManager.THE().stop();
+            //LoggerData.Instance.stoplogger();
         }
 
         private void button1_Click(object sender, EventArgs e)

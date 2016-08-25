@@ -5,6 +5,7 @@ using imi_cnc_logger.WebServer;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading;
 
@@ -49,7 +50,7 @@ namespace imi_cnc_logger
 
             energy = new energenie(System.Net.IPAddress.Parse("192.168.0.102"));
             threadEnergenie = new Thread(new ThreadStart(energy.readEnergenie));
-            threadEnergenie.Start();
+            //threadEnergenie.Start();
         }
 
         /// <summary>
@@ -66,7 +67,7 @@ namespace imi_cnc_logger
 
         public void initDummy()
         {
-            for(int i = 0; i < 15; i++)
+            for(int i = 0; i < 1; i++)
             {
                 data.Add(new LogEvent(i));
             }
@@ -152,6 +153,7 @@ namespace imi_cnc_logger
                 LoggerManager.THE().pushLog("starting webserver");
                 webserver = new FraeseHttpServer("127.0.0.1", 8000);
                 webserver_thread = new Thread(new ThreadStart(webserver.listen));
+                webserver_thread.IsBackground = true;
                 webserver_thread.Start();
             }
             else

@@ -57,9 +57,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="log_comp\data\base_impl\CNCDataBase.cs" />
-    <Compile Include="log_comp\data\base_impl\cncPosition.cs" />
-    <Compile Include="log_comp\data\base_impl\CNCDataGenericBase.cs" />
+    <Compile Include="log_comp\data\data_types\position.cs" />
+    <Compile Include="log_comp\data\CNCDataBase.cs" />
+    <Compile Include="log_comp\data\impl\cncHood.cs" />
+    <Compile Include="log_comp\data\impl\cncPosition.cs" />
+    <Compile Include="log_comp\data\CNCDataGenericBase.cs" />
     <Compile Include="log_comp\CNCPosition.cs" />
     <Compile Include="log_comp\LoggerManager.cs" />
     <Compile Include="log_comp\CNCReader.cs" />
@@ -89,6 +91,7 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>echo "Target copy -&gt;" $(registry:HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\User Shell Folders@Personal)\Boenigk\cncGraF7\plugins\FraeseLogger\$(TargetFileName)

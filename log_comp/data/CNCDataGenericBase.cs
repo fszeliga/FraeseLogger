@@ -10,17 +10,14 @@ namespace imi_cnc_logger.log_comp.data
     abstract class CNCDataGenericBase<T> : CNCDataBase
     {
         private T val;
-        internal String Name { get; set; }
-        internal String Description { get; set; } = "You can set description here...";
         internal Connector myConn { get; }
         internal MachInfo myInfo { get; }
 
-        public CNCDataGenericBase(String n, String desc)
+        public CNCDataGenericBase()
         {
-            this.Name = n;
-            this.Description = desc;
             myConn = LoggerManager.THE().connector;
             myInfo = LoggerManager.THE().machInfo;
+            initialize();
         }
 
         public T Value

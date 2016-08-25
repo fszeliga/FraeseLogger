@@ -1,7 +1,9 @@
 ﻿using imi_cnc_logger.log_comp.data;
-using imi_cnc_logger.log_comp.data.base_impl;
+using imi_cnc_logger.log_comp.data.impl;
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
 
 namespace imi_cnc_logger.log_comp
 {
@@ -19,7 +21,14 @@ namespace imi_cnc_logger.log_comp
         {
             this.EventId = eventID;
 
-            data.Add("position", new cncPosition("", ""));
+            string @namespace = "imi_cnc_logger.log_comp.data.impl";
+            var theList = Assembly.GetExecutingAssembly().GetTypes().Where(t => t.Namespace == @namespace).ToList();
+
+            foreach (Type d in theList)
+            {
+                CNCDataBase obj = (CNCDataBase)Activator.CreateInstance(d);
+                data.Add(obj.Key, obj);
+            }
         }
 
         public string getValueByKey(string key, string[] args = null)
@@ -31,7 +40,7 @@ namespace imi_cnc_logger.log_comp
             catch (KeyNotFoundException)
             {
                 LoggerManager.THE().addLog("Key not found: " + key);
-                return "Key Not Found!";
+                return "keynotfound";
             }
         }
         

@@ -108,7 +108,6 @@ namespace imi_cnc_logger
         public bool endschalterZ { get; private set; }
         public double spindlespeed { get; private set; }
         public bool heightSensorActive { get; private set; }
-        public globPos positions = new globPos();
         public int logInterval { get; set; }
 
         public String LogFileDir { get; set; }
