@@ -1,17 +1,18 @@
-﻿using De.Boenigk.SMC5D.Basics;
-using imi_cnc_logger.log_comp.data.data_types;
+﻿using imi_cnc_logger.log_comp.data.data_types;
 using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
 
 namespace imi_cnc_logger.log_comp.data.impl
 {
-    class cncPosition : CNCDataGenericBase<position>
-    { 
-
+    class cncGCode : CNCDataGenericBase<gcode>
+    {
         internal override string Description
         {
             get
             {
-                return "Yay you found position Description!!!";
+                return "Return current gcode and line";
             }
         }
 
@@ -19,7 +20,7 @@ namespace imi_cnc_logger.log_comp.data.impl
         {
             get
             {
-                return "position";
+               return "gcode";
             }
         }
 
@@ -27,7 +28,7 @@ namespace imi_cnc_logger.log_comp.data.impl
         {
             get
             {
-                return "Position of the CNC in MM";
+                return "Gcode";
             }
         }
 
@@ -40,20 +41,17 @@ namespace imi_cnc_logger.log_comp.data.impl
         {
             if (args == null || args[0] == "all" || args[0] == "")
             {
-                return "x:"+Value.X.ToString() + ", y:" + Value.Y.ToString() + ", z:" + Value.Z.ToString();
+                return "line:" + Value.Line.ToString() + ", code:" + Value.Code;
             }
-            else if (args[0] == "x")
+            else if (args[0] == "line")
             {
-                return Value.X.ToString();
+                return Value.Line.ToString();
             }
-            else if (args[0] == "y")
+            else if (args[0] == "code")
             {
-                return Value.Y.ToString();
+                return Value.Code;
             }
-            else if (args[0] == "z")
-            {
-                return Value.Z.ToString();
-            } else
+            else
             {
                 return "Parameters not accepted: args=" + args[0];
             }
@@ -61,12 +59,12 @@ namespace imi_cnc_logger.log_comp.data.impl
 
         public override void initialize()
         {
-            Value = new position(0,0,0);
+            Value = new gcode();
         }
 
         public override bool read()
         {
-            Value = new position(StepCalc.GetMMX(myConn), StepCalc.GetMMY(myConn), StepCalc.GetMMZ(myConn));
+            Value = new gcode(myInfo.JobInfo.GCodeLine, myInfo.JobInfo.GCode);
             return true;
         }
     }

@@ -35,60 +35,6 @@ namespace imi_cnc_logger
             }
         }
         
-        public struct globPos
-        {
-            private double xVal, yVal, zVal;
-            public double X
-            {
-                get
-                {
-                    return xVal;
-                }
-                set
-                {
-                    xVal = value;
-                }
-            }
-            public double Y
-            {
-                get
-                {
-                    return yVal;
-                }
-                set
-                {
-                    yVal = value;
-                }
-            }
-            public double Z
-            {
-                get
-                {
-                    return zVal;
-                }
-                set
-                {
-                    zVal = value;
-                }
-            }
-            public globPos(double x1, double y1, double z1)
-            {
-                xVal = x1;
-                yVal = y1;
-                zVal = z1;
-            }
-
-            public string toString()
-            {
-                return X + " | " + Y + " | " + Z;
-            }
-        }
-
-
-
-
-        public String gCode { get; private set; }
-        public int gCodeLine { get; private set; }
         public double volt1 { get; private set; }
         public double volt2 { get; private set; }
         //public String activeProg { get; private set; } = "NA";
@@ -103,9 +49,6 @@ namespace imi_cnc_logger
         public String startTime { get; private set; }
         public DateTime startDateTime { get; private set; }
         public String endTime { get; private set; }
-        public bool endschalterX { get; private set; }
-        public bool endschalterY { get; private set; }
-        public bool endschalterZ { get; private set; }
         public double spindlespeed { get; private set; }
         public bool heightSensorActive { get; private set; }
         public int logInterval { get; set; }
@@ -142,14 +85,6 @@ namespace imi_cnc_logger
             startTime = "?";
             worktime = new TimeSpan(0);
             endTime = "?";
-            endschalterX = false;
-            endschalterY = false;
-            endschalterZ = false;
-            gCode = "";
-            gCodeLine = 0;
-            positions.X = 0;
-            positions.Y = 0;
-            positions.Z = 0;
 
             energy = new energenie(System.Net.IPAddress.Parse("127.0.0.1"));
             //threadEnergenie = new Thread(new ThreadStart(energy.start));
@@ -166,10 +101,6 @@ namespace imi_cnc_logger
             //activeProg = myMachInfo.FileName;
             doorOpen = myConn.IsHoodOpen();
             spindleOn = myConn.IsSpindleOn();
-            Switch theSwitch = new Switch(myConn);
-            endschalterX = theSwitch.IsInputOn(InputConverter.GetInput(myConn.SMCSettings.AxisX.ReferencePinNumber), false);
-            endschalterY = theSwitch.IsInputOn(InputConverter.GetInput(myConn.SMCSettings.AxisY.ReferencePinNumber), false);
-            endschalterZ = theSwitch.IsInputOn(InputConverter.GetInput(myConn.SMCSettings.AxisZ.ReferencePinNumber), false);
             if (myMachInfo.JobInfo.StartJobTimeTicks > 0)
             {
                 startDateTime = new DateTime(myMachInfo.JobInfo.StartJobTimeTicks); //save DateTime object for calculations
@@ -213,13 +144,8 @@ namespace imi_cnc_logger
             {
                 freilauf = true;
             }
-            
-            gCode = myMachInfo.JobInfo.GCode;
-            gCodeLine = myMachInfo.JobInfo.GCodeLine;
 
-            positions.X = StepCalc.GetMMX(myConn);
-            positions.Y = StepCalc.GetMMY(myConn);
-            positions.Z = StepCalc.GetMMZ(myConn);
+            
             try
             {
                 if ((myConn.Job != null) && (myConn.Job.GetCurrent() != null))

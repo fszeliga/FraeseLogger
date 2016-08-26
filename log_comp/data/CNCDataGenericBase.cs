@@ -32,6 +32,6 @@ namespace imi_cnc_logger.log_comp.data
                 val = value;
             }
         }
-
+        
     }
 }

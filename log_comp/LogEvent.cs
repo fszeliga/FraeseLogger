@@ -19,7 +19,7 @@ namespace imi_cnc_logger.log_comp
 
         public LogEvent(int eventID)
         {
-            this.EventId = eventID;
+            EventId = eventID;
 
             string @namespace = "imi_cnc_logger.log_comp.data.impl";
             var theList = Assembly.GetExecutingAssembly().GetTypes().Where(t => t.Namespace == @namespace).ToList();

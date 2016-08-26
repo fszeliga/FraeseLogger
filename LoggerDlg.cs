@@ -1,5 +1,6 @@
 ﻿using De.Boenigk.SMC5D.Basics;
 using imi_cnc_logger;
+using imi_cnc_logger.log_comp;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -50,6 +51,15 @@ namespace FraeseLogger
 
             timer.Start();
             LoggerData.Instance.logInterval = Convert.ToInt32(numLogInterval.Value);
+
+            string[] keys = LoggerManager.THE().getAllKeys();
+
+            for (int i = 0; i < keys.Length; i++)
+            {
+                Label l = createLabel(keys[i]);
+                dataLabels.Add(l);
+                tableData.Controls.Add(l, 1, i);
+            }
         }
 
         private void timer_Tick(object sender, EventArgs e)
@@ -80,9 +90,9 @@ namespace FraeseLogger
 
             val_lblFreilauf.Text = li.freilauf.ToString();
 
-            val_lblEndschalter.Text = li.endschalterX + " | " + li.endschalterY + " | " + li.endschalterZ;
-            val_lblGCode.Text = li.gCodeLine + " | " + li.gCode;
-            val_lblPositions.Text = li.positions.toString();
+            //val_lblEndschalter.Text = li.endschalterX + " | " + li.endschalterY + " | " + li.endschalterZ;
+            //val_lblGCode.Text = li.gCodeLine + " | " + li.gCode;
+            //val_lblPositions.Text = li.positions.toString();
             val_lblSpindlespeed.Text = li.spindlespeed.ToString();
 
             val_lblSpannung.Text = li.volt1.ToString() + " | " + li.volt2.ToString();
@@ -96,6 +106,15 @@ namespace FraeseLogger
 
             val_localIP.Text = Utils.GetLocalIPAddress();
             val_extIP.Text = Utils.GetGlobalIPAddress();
+        }
+
+        private List<Label> dataLabels = new List<Label>();
+        private Label createLabel(string tag)
+        {
+            Label l = new Label();
+            l.Text = "UNIN: " + tag;
+            l.Tag = tag;
+            return l;
         }
 
         private void buttonStart_Click(object sender, EventArgs e)

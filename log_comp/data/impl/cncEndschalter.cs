@@ -1,17 +1,19 @@
 ﻿using De.Boenigk.SMC5D.Basics;
 using imi_cnc_logger.log_comp.data.data_types;
 using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
 
 namespace imi_cnc_logger.log_comp.data.impl
 {
-    class cncPosition : CNCDataGenericBase<position>
-    { 
-
+    class cncEndschalter : CNCDataGenericBase<endschalter>
+    {
         internal override string Description
         {
             get
             {
-                return "Yay you found position Description!!!";
+                throw new NotImplementedException();
             }
         }
 
@@ -19,7 +21,7 @@ namespace imi_cnc_logger.log_comp.data.impl
         {
             get
             {
-                return "position";
+                return "endschalter";
             }
         }
 
@@ -27,7 +29,7 @@ namespace imi_cnc_logger.log_comp.data.impl
         {
             get
             {
-                return "Position of the CNC in MM";
+                return "Endschalter von der CN";
             }
         }
 
@@ -40,7 +42,7 @@ namespace imi_cnc_logger.log_comp.data.impl
         {
             if (args == null || args[0] == "all" || args[0] == "")
             {
-                return "x:"+Value.X.ToString() + ", y:" + Value.Y.ToString() + ", z:" + Value.Z.ToString();
+                return "x:" + Value.X.ToString() + ", y:" + Value.Y.ToString() + ", z:" + Value.Z.ToString();
             }
             else if (args[0] == "x")
             {
@@ -53,7 +55,8 @@ namespace imi_cnc_logger.log_comp.data.impl
             else if (args[0] == "z")
             {
                 return Value.Z.ToString();
-            } else
+            }
+            else
             {
                 return "Parameters not accepted: args=" + args[0];
             }
@@ -61,12 +64,17 @@ namespace imi_cnc_logger.log_comp.data.impl
 
         public override void initialize()
         {
-            Value = new position(0,0,0);
+            Value = new endschalter();
         }
 
         public override bool read()
         {
-            Value = new position(StepCalc.GetMMX(myConn), StepCalc.GetMMY(myConn), StepCalc.GetMMZ(myConn));
+            Switch theSwitch = new Switch(myConn);
+
+            Value = new endschalter(theSwitch.IsInputOn(InputConverter.GetInput(myConn.SMCSettings.AxisX.ReferencePinNumber), false),
+                theSwitch.IsInputOn(InputConverter.GetInput(myConn.SMCSettings.AxisY.ReferencePinNumber), false),
+                theSwitch.IsInputOn(InputConverter.GetInput(myConn.SMCSettings.AxisZ.ReferencePinNumber), false));
+
             return true;
         }
     }

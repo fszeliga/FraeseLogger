@@ -17,7 +17,9 @@ namespace imi_cnc_logger
         public MachInfo machInfo { get; private set; }
         private CNCReader cncReader = null;
         private List<LogEvent> data = new List<LogEvent>();
-        private Queue<String> logs = new Queue<String>();
+        private Queue<string> logs = new Queue<string>();
+        private LogEvent defaultLogEvent = null;
+        private string[] possibleKeys;
 
         private HTTPServer webserver;
         private Thread webserver_thread = null;
@@ -50,7 +52,9 @@ namespace imi_cnc_logger
 
             energy = new energenie(System.Net.IPAddress.Parse("192.168.0.102"));
             threadEnergenie = new Thread(new ThreadStart(energy.readEnergenie));
-            //threadEnergenie.Start();
+            //threadEnergenie.Start();            
+
+            possibleKeys = new LogEvent(0).data.Keys.ToArray();
         }
 
         /// <summary>
@@ -73,7 +77,7 @@ namespace imi_cnc_logger
             }
         }
 
-        public void addLog(String log)
+        public void addLog(string log)
         {
             lock (logs)
             {
@@ -86,7 +90,7 @@ namespace imi_cnc_logger
         /// </summary>
         /// <param name="peek"></param>
         /// <returns>Next log in queue\n</returns>
-        public String popLog(bool peek = false)
+        public string popLog(bool peek = false)
         {
             lock (logs)
             {
@@ -105,7 +109,7 @@ namespace imi_cnc_logger
         /// </summary>
         /// <param name="log"></param>
         /// <returns>Next log in queue\n</returns>
-        public void pushLog(String log)
+        public void pushLog(string log)
         {
             lock (logs)
             {
@@ -160,6 +164,11 @@ namespace imi_cnc_logger
             {
                 webserver.stop();
             }
+        }
+
+        public String[] getAllKeys()
+        {
+            return possibleKeys;
         }
 
         internal void stop()

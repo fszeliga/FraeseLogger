@@ -131,9 +131,9 @@ namespace imi_cnc_logger
                     }
                     if (logEndschalter)
                     {
-                        line += li.endschalterX + ";";//11
-                        line += li.endschalterY + ";";//12
-                        line += li.endschalterZ + ";";//13
+                        //line += li.endschalterX + ";";//11
+                        //line += li.endschalterY + ";";//12
+                        //line += li.endschalterZ + ";";//13
                     }
                     if (logStartTime)
                     {
@@ -169,14 +169,14 @@ namespace imi_cnc_logger
                     }
                     if (logGCode)
                     {
-                        line += li.gCodeLine.ToString() + ";";//18
-                        line += li.gCode + ";";//19
+                        //line += li.gCodeLine.ToString() + ";";//18
+                        //line += li.gCode + ";";//19
                     }
                     if (logPositions)
                     {
-                        line += li.positions.X + ";";//20
-                        line += li.positions.Y + ";";//21
-                        line += li.positions.Z + ";";//22
+                        //line += li.positions.X + ";";//20
+                        //line += li.positions.Y + ";";//21
+                        //line += li.positions.Z + ";";//22
                     }
                     if (logSpannung)
                     {

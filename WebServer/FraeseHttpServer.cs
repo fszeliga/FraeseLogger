@@ -1,4 +1,6 @@
-﻿using imi_cnc_logger.log_comp;
+﻿
+using imi_cnc_logger.log_comp;
+using imi_cnc_logger.log_comp.data;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -49,6 +51,11 @@ namespace imi_cnc_logger.WebServer
             {
                 eventsJson = parseRESTallEvents(p);
             }
+            else if (rest[1] == "help")
+            {
+                printHelp(p);
+                return;
+            }
             else if (rest[1] == "lastid")
             {
                 try
@@ -76,12 +83,32 @@ namespace imi_cnc_logger.WebServer
             p.outputStream.WriteLine("}");
         }
 
+        private void printHelp(HTTPProcessor p)
+        {
+            p.outputStream.WriteLine("Possible keys are");
+            p.outputStream.WriteLine("{\"possibleKeys\": [");
+            string[] keys = LoggerManager.THE().getAllKeys();
+
+            for(int i = 0; i < keys.Length; i++)
+            {
+                p.outputStream.Write("\"" + keys[i] + "\"");
+                if (i < keys.Length - 1) p.outputStream.WriteLine(",");
+            }
+            p.outputStream.WriteLine("]}");
+        }
+
         private bool parsePotentialSingleData(HTTPProcessor p, string[] v)
         {
             LogEvent e = LoggerManager.THE().getLastEvent();
+            String[] result = { "" };
 
-            String[] result = new String[v.Length-2];
-            Array.Copy(v, 2, result, 0, result.Length);
+            if (v.Length > 2)
+            {
+                result = new String[v.Length - 2];
+                Array.Copy(v, 2, result, 0, v.Length - 2);
+            }
+
+            LoggerManager.THE().addLog("cerated array");
 
             string output = e.getValueByKey(v[1], result);
             if (output == "keynotfound") return false;

@@ -57,12 +57,15 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="log_comp\data\data_types\endschalter.cs" />
+    <Compile Include="log_comp\data\data_types\gcode.cs" />
     <Compile Include="log_comp\data\data_types\position.cs" />
     <Compile Include="log_comp\data\CNCDataBase.cs" />
+    <Compile Include="log_comp\data\impl\cncEndschalter.cs" />
+    <Compile Include="log_comp\data\impl\cncGCode.cs" />
     <Compile Include="log_comp\data\impl\cncHood.cs" />
     <Compile Include="log_comp\data\impl\cncPosition.cs" />
     <Compile Include="log_comp\data\CNCDataGenericBase.cs" />
-    <Compile Include="log_comp\CNCPosition.cs" />
     <Compile Include="log_comp\LoggerManager.cs" />
     <Compile Include="log_comp\CNCReader.cs" />
     <Compile Include="log_comp\data\energenie.cs" />

@@ -39,7 +39,7 @@ namespace imi_cnc_logger.WebServer
                     Thread.Sleep(1);
                 }
             }
-            catch(Exception e)
+            catch(Exception)
             {
                 is_active = false;
             }
