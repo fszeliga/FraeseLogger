@@ -1,6 +1,7 @@
 ﻿using De.Boenigk.SMC5D.Basics;
 using imi_cnc_logger;
 using imi_cnc_logger.log_comp;
+using imi_cnc_logger.log_comp.data;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -50,7 +51,7 @@ namespace FraeseLogger
             };
 
             timer.Start();
-            LoggerData.Instance.logInterval = Convert.ToInt32(numLogInterval.Value);
+            LoggerSettings.Instance().logInterval = Convert.ToInt32(numLogInterval.Value);
 
             tableData.CellBorderStyle = TableLayoutPanelCellBorderStyle.Outset;
             tableData.AutoSize = true;
@@ -71,49 +72,19 @@ namespace FraeseLogger
                 dataLabels.Add(l);
                 tableData.Controls.Add(createLabel(keys[i]), 0, i);
                 tableData.Controls.Add(l, 1, i);
+                CheckBox c = createCheckbox(keys[i]);
+                tableData.Controls.Add(c, 2, i);
             }
         }
 
         private void timer_Tick(object sender, EventArgs e)
         {
-            foreach(Label l in dataLabels)
+            LoggerManager.THE().readFromCNC();
+            foreach (Label l in dataLabels)
             {
                 LogEvent ev = LoggerManager.THE().getLastEvent();
                 l.Text = ev.getValueByKey(l.Tag.ToString());
             }
-
-            LoggerData.Instance.readFromCNC();
-            val_lblLogCount.Text = li.logCount.ToString();
-            val_lblUsedInterval.Text = li.logInterval.ToString();
-
-            val_lblSN.Text = li.serialNr;
-            val_lblFirmware.Text = li.firmware;
-
-            //val_lblActiveProg.Text = LoggerManager.THE().getLastEvent().activeProg;
-
-            if (li.doorOpen) val_lblDoorStatus.Text = "Auf";
-            else val_lblDoorStatus.Text = "Zu";
-
-            if (li.spindleOn) val_lblSpindleStatus.Text = "Spindel ist an";
-            else val_lblSpindleStatus.Text = "Spindel ist aus";
-
-            val_lblCutSpeed.Text = li.cutSpeed;
-            val_lblMaxCutSpeed.Text = li.maxCutSpeed;
-            val_lblFeedRate.Text = li.vorschub + li.vorschubEinheit;
-            val_lblWorktime.Text = li.worktime.ToString();
-            val_lblStartTime.Text = li.startTime;
-            val_lblEndTime.Text = li.endTime;
-
-            val_lblHeightSensorActive.Text = li.heightSensorActive.ToString();
-
-            val_lblFreilauf.Text = li.freilauf.ToString();
-
-            //val_lblEndschalter.Text = li.endschalterX + " | " + li.endschalterY + " | " + li.endschalterZ;
-            //val_lblGCode.Text = li.gCodeLine + " | " + li.gCode;
-            //val_lblPositions.Text = li.positions.toString();
-            val_lblSpindlespeed.Text = li.spindlespeed.ToString();
-
-            val_lblSpannung.Text = li.volt1.ToString() + " | " + li.volt2.ToString();
 
             val_lblEnergy.Text = LoggerManager.THE().energy.data2String("   ", false, true);
 
@@ -136,13 +107,22 @@ namespace FraeseLogger
             return l;
         }
 
+        private List<CheckBox> dataCheckboxes = new List<CheckBox>();
+        private CheckBox createCheckbox(string tag)
+        {
+            CheckBox c = new CheckBox();
+            c.Tag = tag;
+            c.CheckedChanged += (s, e) => LoggerManager.THE().addLog("cb: " + (s as CheckBox).Tag.ToString() + " | " + (s as CheckBox).Checked);
+            return c;
+        }
+
         private void buttonStart_Click(object sender, EventArgs e)
         {
-            if (LoggerData.Instance.logThreadRunning)
+            if (LoggerSettings.Instance().logThreadRunning)
             {
                 checkLogSelectionEnabled(true);//enable all log selection checkboxes
                 //stop logging
-                li.logThreadRunning = false;
+                LoggerSettings.Instance().logThreadRunning = false;
                 btnStartStopLogging.Text = "Start Logging";
             }
             else
@@ -150,7 +130,7 @@ namespace FraeseLogger
                 //start logging
 
                 checkLogSelectionEnabled(false);//disable all log selection checkboxes
-                LoggerData.Instance.logThreadRunning = true;
+                LoggerSettings.Instance().logThreadRunning= true;
                 LoggerFileWriter log = new LoggerFileWriter(ckbWriteTitle.Checked);
 
                 log.logActiveProg = this.cb_lblActiveProg.Checked;
@@ -178,15 +158,15 @@ namespace FraeseLogger
 
         private void numLogInterval_ValueChanged(object sender, EventArgs e)
         {
-            li.logInterval = Convert.ToInt32(numLogInterval.Value);
+            LoggerSettings.Instance().logInterval = Convert.ToInt32(numLogInterval.Value);
         }
 
         private void lblOutputFolderPicker_Click(object sender, EventArgs e)
         {
             if (folderBrowserDialog1.ShowDialog() == DialogResult.OK)
             {
-                li.LogFileDir = folderBrowserDialog1.SelectedPath + "\\";
-                val_lblOutputFolder.Text = li.LogFileDir;
+                LoggerSettings.Instance().logFiledir = folderBrowserDialog1.SelectedPath + "\\";
+                val_lblOutputFolder.Text = LoggerSettings.Instance().logFiledir;
                 btnStartStopLogging.Enabled = true;
             }
         }
@@ -235,11 +215,11 @@ namespace FraeseLogger
 
         private void btnFilename_Click(object sender, EventArgs e)
         {
-            String value = li.log_filename;
+            String value = LoggerSettings.Instance().logFilename;
             if (InputBox("Output Datei Name", "Änder Sie hier den Dateiname:", ref value) == DialogResult.OK)
             {
-                li.log_filename = value;
-                val_lblFilename.Text = li.log_filename;
+                LoggerSettings.Instance().logFilename = value;
+                val_lblFilename.Text = LoggerSettings.Instance().logFilename;
             }
         }
 

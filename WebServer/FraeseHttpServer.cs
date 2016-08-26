@@ -35,7 +35,8 @@ namespace imi_cnc_logger.WebServer
             //*************first value will be empty*************
             String[] rest = p.http_url.Split(delimiterChars);
 
-            if (rest[0] == rest[1]){
+            if (rest[0] == rest[1])
+            {
                 p.writeSuccess("application/json");
                 p.outputStream.WriteLine("[error:'Wrong REST API command!']" + p.http_url);
                 return;

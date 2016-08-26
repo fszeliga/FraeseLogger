@@ -7,6 +7,11 @@ namespace imi_cnc_logger.log_comp.data
 {
     class LoggerSettings
     {
+        public int logInterval = 1000; //in ms
+        public string logFiledir = ""; //in ms
+        public string logFilename = ""; //in ms
+        public bool logThreadRunning = false;
+
         private static LoggerSettings i = null;
 
         private LoggerSettings()

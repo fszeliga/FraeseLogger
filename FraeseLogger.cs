@@ -39,7 +39,7 @@ namespace imi_cnc_logger
             LoggerManager.THE().initDummy();
             LoggerManager.THE().pushLog("initialized dummies");
 
-            LoggerData.Instance.init(aPluginArgs.Connector, aPluginArgs.MachInfo);
+            //LoggerData.Instance.init(aPluginArgs.Connector, aPluginArgs.MachInfo);
           
             LoggerDlg loggerDlg = new LoggerDlg();
             loggerDlg.Show();

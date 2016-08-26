@@ -23,6 +23,8 @@ namespace imi_cnc_logger
         private LogEvent defaultLogEvent = null;
         private string[] possibleKeys;
 
+        private Dictionary<string, bool> entriesToLog = new Dictionary<string, bool>();
+
         private HTTPServer webserver;
         private Thread webserver_thread = null;
 
@@ -58,6 +60,32 @@ namespace imi_cnc_logger
             //threadEnergenie.Start();            
 
             possibleKeys = new LogEvent(0).data.Keys.ToArray();
+            foreach (string s in possibleKeys) entriesToLog.Add(s, true);
+        }
+
+        public bool getLogEntry(string key)
+        {
+            try
+            {
+                return entriesToLog[key];
+            }
+            catch (KeyNotFoundException)
+            {
+                LoggerManager.THE().addLog("getLogEntry - key not found: " + key);
+                return false;
+            }
+        }
+
+        public void setLogEntry(string key, bool log)
+        {
+            try
+            {
+                entriesToLog[key] = log;
+            }
+            catch (KeyNotFoundException)
+            {
+                LoggerManager.THE().addLog("setLogEntry - key not found: " + key);
+            }
         }
 
         /// <summary>

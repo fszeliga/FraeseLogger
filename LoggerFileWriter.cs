@@ -1,4 +1,5 @@
-﻿using System;
+﻿using imi_cnc_logger.log_comp.data;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -9,7 +10,7 @@ namespace imi_cnc_logger
     public class LoggerFileWriter
     {
         private bool writeTitle;
-        private LoggerData li = LoggerData.Instance;
+        //private LoggerData li = LoggerData.Instance;
 
         public bool logActiveProg { get; internal set; }
         public bool logDoorStatus { get; internal set; }
@@ -30,13 +31,13 @@ namespace imi_cnc_logger
 
         public LoggerFileWriter(bool writeTitle)
         {
-            li.logCount = 0;
+            //li.logCount = 0;
             this.writeTitle = writeTitle;
         }
 
         public void logCNC()
         {
-            String filename = li.LogFileDir + li.log_filename;
+           /* String filename = li.LogFileDir + li.log_filename;
 
             using(StreamWriter file = new StreamWriter(@filename))
             {
@@ -188,10 +189,10 @@ namespace imi_cnc_logger
                     line += DateTime.Now.ToString("HH:mm:ss.ff");//24
 
                     file.WriteLine(line);
-                    li.logCount += 1;
-                    System.Threading.Thread.Sleep(li.logInterval);
-                }
-            }
+                    li.logCount += 1;*/
+                    System.Threading.Thread.Sleep(LoggerSettings.Instance().logInterval);
+                //}
+            //}
 
         }
     }
