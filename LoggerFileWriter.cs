@@ -11,24 +11,7 @@ namespace imi_cnc_logger
     {
         private bool writeTitle;
         //private LoggerData li = LoggerData.Instance;
-
-        public bool logActiveProg { get; internal set; }
-        public bool logDoorStatus { get; internal set; }
-        public bool logSpindleStatus { get; internal set; }
-        public bool logEndschalter { get; internal set; }
-        public bool logStartTime { get; internal set; }
-        public bool logEndTime { get; internal set; }
-        public bool logWorktime { get; internal set; }
-        public bool logFeedRate { get; internal set; }
-        public bool logCutSpeed { get; internal set; }
-        public bool logMaxCutSpeed { get; internal set; }
-        public bool logHeightSensorActive { get; internal set; }
-        public bool logFreilauf { get; internal set; }
-        public bool logGCode { get; internal set; }
-        public bool logPositions { get; internal set; }
-        public bool logSpindleSpeed { get; internal set; }
-        public bool logSpannung { get; internal set; }
-
+        
         public LoggerFileWriter(bool writeTitle)
         {
             //li.logCount = 0;

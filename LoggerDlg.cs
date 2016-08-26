@@ -21,7 +21,6 @@ namespace FraeseLogger
         //private Connector myConnector;
         private LoggerManager _l = LoggerManager.THE();
         private bool toggleState = false; // false means log none
-        CheckBox[] _checkBoxes;
 
         public LoggerDlg()
         {
@@ -29,26 +28,6 @@ namespace FraeseLogger
             
             //val_lblOutputFolder.Text = li.LogFileDir;
             //val_lblFilename.Text = li.log_filename;
-
-            _checkBoxes = new CheckBox[]{
-                this.cb_lblActiveProg,
-                this.cb_lblDoorStatus,
-                this.cb_lblSpindleStatus,
-                this.cb_lblEndschalter,
-                this.cb_lblStartTime,
-                this.cb_lblEndTime,
-                this.cb_lblWorktime,
-                this.cb_lblFeedRate,
-                this.cb_lblCutSpeed,
-                this.cb_lblMaxCutSpeed,
-                this.cb_lblHeightSensorActive,
-                this.cb_lblFreilauf,
-                this.cb_lblGCode,
-                this.cb_lblPositions,
-                this.cb_lblSpindlespeed,
-                this.cb_lblSpannung,
-                this.cb_lblEnergy
-            };
 
             timer.Start();
             LoggerSettings.Instance().logInterval = Convert.ToInt32(numLogInterval.Value);
@@ -86,7 +65,7 @@ namespace FraeseLogger
                 l.Text = ev.getValueByKey(l.Tag.ToString());
             }
 
-            val_lblEnergy.Text = LoggerManager.THE().energy.data2String("   ", false, true);
+//            val_lblEnergy.Text = LoggerManager.THE().energy.data2String("   ", false, true);
 
             while (LoggerManager.THE().logsQueued())
             {
@@ -95,6 +74,9 @@ namespace FraeseLogger
 
             val_localIP.Text = Utils.GetLocalIPAddress();
             val_extIP.Text = Utils.GetGlobalIPAddress();
+
+            //File Logger Tab
+            val_lblUsedInterval.Text = LoggerSettings.Instance().logInterval.ToString();
         }
 
         private List<Label> dataLabels = new List<Label>();
@@ -132,23 +114,6 @@ namespace FraeseLogger
                 checkLogSelectionEnabled(false);//disable all log selection checkboxes
                 LoggerSettings.Instance().logThreadRunning= true;
                 LoggerFileWriter log = new LoggerFileWriter(ckbWriteTitle.Checked);
-
-                log.logActiveProg = this.cb_lblActiveProg.Checked;
-                log.logDoorStatus = this.cb_lblDoorStatus.Checked;
-                log.logSpindleStatus = this.cb_lblSpindleStatus.Checked;
-                log.logEndschalter = this.cb_lblEndschalter.Checked;
-                log.logStartTime = this.cb_lblStartTime.Checked;
-                log.logEndTime = this.cb_lblEndTime.Checked;
-                log.logWorktime = this.cb_lblWorktime.Checked;
-                log.logFeedRate = this.cb_lblFeedRate.Checked;
-                log.logCutSpeed = this.cb_lblCutSpeed.Checked;
-                log.logMaxCutSpeed = this.cb_lblMaxCutSpeed.Checked;
-                log.logHeightSensorActive = this.cb_lblHeightSensorActive.Checked;
-                log.logFreilauf = this.cb_lblFreilauf.Checked;
-                log.logGCode = this.cb_lblGCode.Checked;
-                log.logPositions = this.cb_lblPositions.Checked;
-                log.logSpindleSpeed = this.cb_lblSpindlespeed.Checked;
-                log.logSpannung = this.cb_lblSpannung.Checked;
                 
                 Thread logThread = new Thread(new ThreadStart(log.logCNC));
                 logThread.Start();
@@ -239,12 +204,12 @@ namespace FraeseLogger
 
         private void checkLogSelectionToggle(bool v)
         {
-            foreach (var checkBox in _checkBoxes) checkBox.Checked = v;
+           // foreach (var checkBox in _checkBoxes) checkBox.Checked = v;
         }
         
         private void checkLogSelectionEnabled(bool v)
         {
-            foreach (var checkBox in _checkBoxes) checkBox.Enabled = v;
+            //foreach (var checkBox in _checkBoxes) checkBox.Enabled = v;
         }
 
         //used for starting/stopping webserver
@@ -260,7 +225,6 @@ namespace FraeseLogger
         private void LoggerDlg_FormClosing(object sender, FormClosingEventArgs e)
         {
             //LoggerManager.THE().stop();
-            //LoggerData.Instance.stoplogger();
         }
 
         private void button1_Click(object sender, EventArgs e)
