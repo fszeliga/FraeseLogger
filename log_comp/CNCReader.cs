@@ -33,7 +33,6 @@ namespace imi_cnc_logger.log_comp
 
             //...check for changes
 
-
             // e.activeProg = machInfo.FileName;
             //e.startTime = "asd";
 

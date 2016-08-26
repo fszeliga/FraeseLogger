@@ -54,6 +54,9 @@ namespace imi_cnc_logger.log_comp
             return false; 
         }
 
-
+        internal string getNameByKey(string key)
+        {
+            return data[key].Name;
+        }
     }
 }

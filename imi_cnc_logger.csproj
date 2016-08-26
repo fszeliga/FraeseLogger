@@ -66,15 +66,15 @@
     <Compile Include="log_comp\data\impl\cncHood.cs" />
     <Compile Include="log_comp\data\impl\cncPosition.cs" />
     <Compile Include="log_comp\data\CNCDataGenericBase.cs" />
+    <Compile Include="log_comp\data\LoggerSettings.cs" />
     <Compile Include="log_comp\LoggerManager.cs" />
     <Compile Include="log_comp\CNCReader.cs" />
-    <Compile Include="log_comp\data\energenie.cs" />
+    <Compile Include="log_comp\data\data_types\energenie.cs" />
     <Compile Include="LoggerExceptions.cs" />
     <Compile Include="log_comp\LogEvent.cs" />
     <Compile Include="Utils.cs" />
     <Compile Include="WebServer\FraeseHttpServer.cs" />
     <Compile Include="LoggerFileWriter.cs" />
-    <Compile Include="log_comp\LoggerData.cs" />
     <Compile Include="LoggerDlg.cs">
       <SubType>Form</SubType>
     </Compile>

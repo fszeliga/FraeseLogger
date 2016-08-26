@@ -1,6 +1,7 @@
 ﻿using De.Boenigk.SMC5D.Basics;
 using De.Boenigk.Utility.CNC.Info;
 using imi_cnc_logger.log_comp;
+using imi_cnc_logger.log_comp.data;
 using imi_cnc_logger.WebServer;
 using System;
 using System.Collections.Generic;
@@ -16,6 +17,7 @@ namespace imi_cnc_logger
         public Connector connector { get; private set; }
         public MachInfo machInfo { get; private set; }
         private CNCReader cncReader = null;
+        private LoggerSettings setting = null;
         private List<LogEvent> data = new List<LogEvent>();
         private Queue<string> logs = new Queue<string>();
         private LogEvent defaultLogEvent = null;
@@ -47,6 +49,7 @@ namespace imi_cnc_logger
         public void init(Connector c, MachInfo m)
         {
             this.cncReader = new CNCReader(c, m);
+            setting = LoggerSettings.Instance();
             this.connector = c;
             this.machInfo = m;
 
@@ -145,7 +148,10 @@ namespace imi_cnc_logger
             return getAllEventsAfterId(-1);
         }
 
-
+        public string getDataNameByKey(string key)
+        {
+            return defaultLogEvent.getNameByKey(key);
+        }
 
         public void setWebServerRunning(bool webserver_running)
         {

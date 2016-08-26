@@ -13,7 +13,7 @@ namespace imi_cnc_logger.log_comp.data.impl
         {
             get
             {
-                throw new NotImplementedException();
+                return "Positionen von den endschalter x/y/z";
             }
         }
 

@@ -18,7 +18,7 @@ namespace FraeseLogger
     {
         //private De.Boenigk.Utility.CNC.Info.MachInfo myMachInfo;
         //private Connector myConnector;
-        private LoggerData li = LoggerData.Instance;
+        private LoggerManager _l = LoggerManager.THE();
         private bool toggleState = false; // false means log none
         CheckBox[] _checkBoxes;
 
@@ -26,8 +26,8 @@ namespace FraeseLogger
         {
             InitializeComponent();
             
-            val_lblOutputFolder.Text = li.LogFileDir;
-            val_lblFilename.Text = li.log_filename;
+            //val_lblOutputFolder.Text = li.LogFileDir;
+            //val_lblFilename.Text = li.log_filename;
 
             _checkBoxes = new CheckBox[]{
                 this.cb_lblActiveProg,
@@ -52,18 +52,36 @@ namespace FraeseLogger
             timer.Start();
             LoggerData.Instance.logInterval = Convert.ToInt32(numLogInterval.Value);
 
-            string[] keys = LoggerManager.THE().getAllKeys();
+            tableData.CellBorderStyle = TableLayoutPanelCellBorderStyle.Outset;
+            tableData.AutoSize = true;
+            tableData.AutoSizeMode = AutoSizeMode.GrowOnly;
 
+            TableLayoutRowStyleCollection styles = tableData.RowStyles;
+            foreach (RowStyle style in styles)
+            {
+                // Set the row height to 20 pixels.
+                style.SizeType = SizeType.Absolute;
+                style.Height = 20;
+            }
+
+            string[] keys = LoggerManager.THE().getAllKeys();
             for (int i = 0; i < keys.Length; i++)
             {
                 Label l = createLabel(keys[i]);
                 dataLabels.Add(l);
+                tableData.Controls.Add(createLabel(keys[i]), 0, i);
                 tableData.Controls.Add(l, 1, i);
             }
         }
 
         private void timer_Tick(object sender, EventArgs e)
         {
+            foreach(Label l in dataLabels)
+            {
+                LogEvent ev = LoggerManager.THE().getLastEvent();
+                l.Text = ev.getValueByKey(l.Tag.ToString());
+            }
+
             LoggerData.Instance.readFromCNC();
             val_lblLogCount.Text = li.logCount.ToString();
             val_lblUsedInterval.Text = li.logInterval.ToString();
@@ -112,8 +130,9 @@ namespace FraeseLogger
         private Label createLabel(string tag)
         {
             Label l = new Label();
-            l.Text = "UNIN: " + tag;
+            l.Text = tag;
             l.Tag = tag;
+            l.AutoSize = true;
             return l;
         }
 
@@ -150,24 +169,7 @@ namespace FraeseLogger
                 log.logPositions = this.cb_lblPositions.Checked;
                 log.logSpindleSpeed = this.cb_lblSpindlespeed.Checked;
                 log.logSpannung = this.cb_lblSpannung.Checked;
-
-                LoggerData.Instance.logActiveProg = this.cb_lblActiveProg.Checked;
-                LoggerData.Instance.logDoorStatus = this.cb_lblDoorStatus.Checked;
-                LoggerData.Instance.logSpindleStatus = this.cb_lblSpindleStatus.Checked;
-                LoggerData.Instance.logEndschalter = this.cb_lblEndschalter.Checked;
-                LoggerData.Instance.logStartTime = this.cb_lblStartTime.Checked;
-                LoggerData.Instance.logEndTime = this.cb_lblEndTime.Checked;
-                LoggerData.Instance.logWorktime = this.cb_lblWorktime.Checked;
-                LoggerData.Instance.logFeedRate = this.cb_lblFeedRate.Checked;
-                LoggerData.Instance.logCutSpeed = this.cb_lblCutSpeed.Checked;
-                LoggerData.Instance.logMaxCutSpeed = this.cb_lblMaxCutSpeed.Checked;
-                LoggerData.Instance.logHeightSensorActive = this.cb_lblHeightSensorActive.Checked;
-                LoggerData.Instance.logFreilauf = this.cb_lblFreilauf.Checked;
-                LoggerData.Instance.logGCode = this.cb_lblGCode.Checked;
-                LoggerData.Instance.logPositions = this.cb_lblPositions.Checked;
-                LoggerData.Instance.logSpindleSpeed = this.cb_lblSpindlespeed.Checked;
-                LoggerData.Instance.logSpannung = this.cb_lblSpannung.Checked;
-
+                
                 Thread logThread = new Thread(new ThreadStart(log.logCNC));
                 logThread.Start();
                 btnStartStopLogging.Text = "Stop Logging";
