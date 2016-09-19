@@ -61,8 +61,22 @@
     <Compile Include="log_comp\data\data_types\gcode.cs" />
     <Compile Include="log_comp\data\data_types\position.cs" />
     <Compile Include="log_comp\data\CNCDataBase.cs" />
+    <Compile Include="log_comp\data\impl\cncEnergy.cs" />
+    <Compile Include="log_comp\data\impl\cncFirmwareVersion.cs" />
+    <Compile Include="log_comp\data\impl\cncSerialNr.cs" />
+    <Compile Include="log_comp\data\impl\cncFeedRate.cs" />
+    <Compile Include="log_comp\data\impl\cncMaxCutSpeed.cs" />
     <Compile Include="log_comp\data\impl\cncEndschalter.cs" />
+    <Compile Include="log_comp\data\impl\cncActiveProgramm.cs" />
     <Compile Include="log_comp\data\impl\cncGCode.cs" />
+    <Compile Include="log_comp\data\impl\cncFreilauf.cs" />
+    <Compile Include="log_comp\data\impl\cncHeightSensor.cs" />
+    <Compile Include="log_comp\data\impl\cncSpindleOn.cs" />
+    <Compile Include="log_comp\data\impl\cncCutSpeed.cs" />
+    <Compile Include="log_comp\data\impl\cncSpindleSpeedJob.cs" />
+    <Compile Include="log_comp\data\impl\cncSpindleSpeed.cs" />
+    <Compile Include="log_comp\data\impl\cncVoltage_2.cs" />
+    <Compile Include="log_comp\data\impl\cncVoltage_1.cs" />
     <Compile Include="log_comp\data\impl\cncHood.cs" />
     <Compile Include="log_comp\data\impl\cncPosition.cs" />
     <Compile Include="log_comp\data\CNCDataGenericBase.cs" />
@@ -92,6 +106,7 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <None Include="LoggerManager.datasource" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup />

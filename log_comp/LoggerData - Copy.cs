@@ -35,11 +35,7 @@ namespace imi_cnc_logger
             }
         }
         
-        public double volt1 { get; private set; }
-        public double volt2 { get; private set; }
         //public String activeProg { get; private set; } = "NA";
-        public bool doorOpen { get; private set; }
-        public bool spindleOn { get; private set; }
         public bool freilauf { get; private set; }
         public String cutSpeed { get; private set; }
         public String maxCutSpeed { get; private set; }
@@ -95,12 +91,7 @@ namespace imi_cnc_logger
         {
             return;
             if (myConn == null) return;
-            serialNr = myConn.SN;
-            firmware = myConn.FirmwareVersion.ToString();
             
-            //activeProg = myMachInfo.FileName;
-            doorOpen = myConn.IsHoodOpen();
-            spindleOn = myConn.IsSpindleOn();
             if (myMachInfo.JobInfo.StartJobTimeTicks > 0)
             {
                 startDateTime = new DateTime(myMachInfo.JobInfo.StartJobTimeTicks); //save DateTime object for calculations
@@ -120,50 +111,16 @@ namespace imi_cnc_logger
             {
                 endTime = "?";
             }
-            if (myMachInfo.JobInfo != null) vorschub = myMachInfo.JobInfo.JobSpeed.ToString();
-            else vorschub = "?";
-            if (myMachInfo.JobInfo.SpeedUnitMMMinute) vorschubEinheit = "mm/m";
-            else vorschubEinheit = "mm/s";
-            
-            cutSpeed = myConn.CurrentSpeed.ToString();
-            maxCutSpeed = myConn.MaxSpeed.ToString();
-            if (myConn.SMCSettings.HeightSensor.MeasureToolPin == Input.Default)
-            {
-                heightSensorActive = false;
-            }
-            else
-            {
-                heightSensorActive = true;
-            }
-            
-            if ((myConn.Job != null) && (myConn.Job.GetCurrent() != null))
-            {
-                freilauf = !myConn.Job.GetCurrent().Down;
-            }
-            else
-            {
-                freilauf = true;
-            }
+			
+
+			
 
             
-            try
-            {
-                if ((myConn.Job != null) && (myConn.Job.GetCurrent() != null))
-                {
-                    spindlespeed = myConn.Job.GetCurrent().SpindleSpeed;
-                }
-                else
-                {
-                    spindlespeed = 0;
-                }
-            }
-            catch (Exception e)
-            {
-                LoggerManager.THE().pushLog(e.Message);
-                spindlespeed = 0;
-            }
-            volt1 = myConn.AD1Volt;
-            volt2 = myConn.AD2Volt;
+
+            
+            
+
+            
         
 
             

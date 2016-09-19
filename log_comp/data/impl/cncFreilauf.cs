@@ -5,14 +5,14 @@ using System.Text;
 
 namespace imi_cnc_logger.log_comp.data.impl
 {
-    class cncHood : CNCDataGenericBase<bool>
+    class cncFreilauf : CNCDataGenericBase<bool>
     {
  
         internal override string Description
         {
             get
             {
-                return "true if hood open, false otherwise";
+                return "true if freilauf, false otherwise";
             }
         }
 
@@ -20,7 +20,7 @@ namespace imi_cnc_logger.log_comp.data.impl
         {
             get
             {
-                return "hoodOpen";
+                return "freilauf";
             }
         }
 
@@ -28,7 +28,7 @@ namespace imi_cnc_logger.log_comp.data.impl
         {
             get
             {
-                return "State of the CNC hood";
+                return "Ist CNC im freilauf";
             }
         }
 
@@ -49,7 +49,14 @@ namespace imi_cnc_logger.log_comp.data.impl
 
         public override bool read()
         {
-            Value = myConn.IsHoodOpen();
+            if ((myConn.Job != null) && (myConn.Job.GetCurrent() != null))
+            {
+                Value = !myConn.Job.GetCurrent().Down;
+            }
+            else
+            {
+                Value = true;
+            }
             return true;
         }
     }

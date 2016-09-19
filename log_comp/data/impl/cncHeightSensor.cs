@@ -1,18 +1,19 @@
-﻿using System;
+﻿using De.Boenigk.SMC5D.Basics;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
 namespace imi_cnc_logger.log_comp.data.impl
 {
-    class cncHood : CNCDataGenericBase<bool>
+    class cncHeightSensor: CNCDataGenericBase<bool>
     {
  
         internal override string Description
         {
             get
             {
-                return "true if hood open, false otherwise";
+                return "true if height sensor active, false otherwise";
             }
         }
 
@@ -20,7 +21,7 @@ namespace imi_cnc_logger.log_comp.data.impl
         {
             get
             {
-                return "hoodOpen";
+                return "heightSensor";
             }
         }
 
@@ -28,7 +29,7 @@ namespace imi_cnc_logger.log_comp.data.impl
         {
             get
             {
-                return "State of the CNC hood";
+                return "asd";
             }
         }
 
@@ -49,7 +50,14 @@ namespace imi_cnc_logger.log_comp.data.impl
 
         public override bool read()
         {
-            Value = myConn.IsHoodOpen();
+            if (myConn.SMCSettings.HeightSensor.MeasureToolPin == Input.Default)
+            {
+                Value = false;
+            }
+            else
+            {
+                Value = true;
+            }
             return true;
         }
     }

@@ -37,32 +37,32 @@
             this.tableData = new System.Windows.Forms.TableLayoutPanel();
             this.tabPage4 = new System.Windows.Forms.TabPage();
             this.lb_LogOutput = new System.Windows.Forms.ListBox();
-            this.button1 = new System.Windows.Forms.Button();
             this.tabPage3 = new System.Windows.Forms.TabPage();
-            this.btnServer = new System.Windows.Forms.Button();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
-            this.checkBox2 = new System.Windows.Forms.CheckBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.val_localIP = new System.Windows.Forms.Label();
             this.val_extIP = new System.Windows.Forms.Label();
+            this.val_localIP = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.checkBox2 = new System.Windows.Forms.CheckBox();
+            this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.btnServer = new System.Windows.Forms.Button();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.btnStartStopLogging = new System.Windows.Forms.Button();
-            this.btnOutputFolder = new System.Windows.Forms.Button();
-            this.btnFilename = new System.Windows.Forms.Button();
-            this.val_lblUsedInterval = new System.Windows.Forms.Label();
-            this.lblFilename = new System.Windows.Forms.Label();
-            this.lblUsedInterval = new System.Windows.Forms.Label();
-            this.lblOutputFolder = new System.Windows.Forms.Label();
-            this.val_lblLogCount = new System.Windows.Forms.Label();
-            this.val_lblOutputFolder = new System.Windows.Forms.Label();
-            this.lblLogCount = new System.Windows.Forms.Label();
-            this.val_lblFilename = new System.Windows.Forms.Label();
-            this.numLogInterval = new System.Windows.Forms.NumericUpDown();
-            this.label1 = new System.Windows.Forms.Label();
             this.ckbWriteTitle = new System.Windows.Forms.CheckBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.numLogInterval = new System.Windows.Forms.NumericUpDown();
+            this.val_lblFilename = new System.Windows.Forms.Label();
+            this.lblLogCount = new System.Windows.Forms.Label();
+            this.val_lblOutputFolder = new System.Windows.Forms.Label();
+            this.val_lblLogCount = new System.Windows.Forms.Label();
+            this.lblOutputFolder = new System.Windows.Forms.Label();
+            this.lblUsedInterval = new System.Windows.Forms.Label();
+            this.lblFilename = new System.Windows.Forms.Label();
+            this.val_lblUsedInterval = new System.Windows.Forms.Label();
+            this.btnFilename = new System.Windows.Forms.Button();
+            this.btnOutputFolder = new System.Windows.Forms.Button();
+            this.btnStartStopLogging = new System.Windows.Forms.Button();
             this.tabData = new System.Windows.Forms.TabControl();
+            this.loggerManagerBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.statusStrip1.SuspendLayout();
             this.tabPage5.SuspendLayout();
             this.tabPage4.SuspendLayout();
@@ -71,6 +71,7 @@
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numLogInterval)).BeginInit();
             this.tabData.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.loggerManagerBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // timer
@@ -109,7 +110,7 @@
             this.tableData.ColumnCount = 3;
             this.tableData.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 31.57895F));
             this.tableData.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 68.42105F));
-            this.tableData.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 21F));
+            this.tableData.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 28F));
             this.tableData.Location = new System.Drawing.Point(6, 6);
             this.tableData.Name = "tableData";
             this.tableData.RowCount = 1;
@@ -120,7 +121,6 @@
             // 
             // tabPage4
             // 
-            this.tabPage4.Controls.Add(this.button1);
             this.tabPage4.Controls.Add(this.lb_LogOutput);
             this.tabPage4.Location = new System.Drawing.Point(4, 22);
             this.tabPage4.Name = "tabPage4";
@@ -139,19 +139,8 @@
             this.lb_LogOutput.Location = new System.Drawing.Point(3, 6);
             this.lb_LogOutput.Name = "lb_LogOutput";
             this.lb_LogOutput.ScrollAlwaysVisible = true;
-            this.lb_LogOutput.Size = new System.Drawing.Size(613, 433);
+            this.lb_LogOutput.Size = new System.Drawing.Size(613, 563);
             this.lb_LogOutput.TabIndex = 0;
-            // 
-            // button1
-            // 
-            this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.button1.Location = new System.Drawing.Point(541, 542);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 1;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // tabPage3
             // 
@@ -170,26 +159,41 @@
             this.tabPage3.Text = "WebServer";
             this.tabPage3.UseVisualStyleBackColor = true;
             // 
-            // btnServer
+            // val_extIP
             // 
-            this.btnServer.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnServer.Location = new System.Drawing.Point(3, 183);
-            this.btnServer.Name = "btnServer";
-            this.btnServer.Size = new System.Drawing.Size(129, 23);
-            this.btnServer.TabIndex = 18;
-            this.btnServer.Text = "Start Server";
-            this.btnServer.UseVisualStyleBackColor = true;
-            this.btnServer.Click += new System.EventHandler(this.btnWebServer_Click);
+            this.val_extIP.AutoSize = true;
+            this.val_extIP.Location = new System.Drawing.Point(87, 72);
+            this.val_extIP.Name = "val_extIP";
+            this.val_extIP.Size = new System.Drawing.Size(35, 13);
+            this.val_extIP.TabIndex = 24;
+            this.val_extIP.Text = "label4";
             // 
-            // checkBox1
+            // val_localIP
             // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(7, 7);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(74, 17);
-            this.checkBox1.TabIndex = 19;
-            this.checkBox1.Text = "Custom IP";
-            this.checkBox1.UseVisualStyleBackColor = true;
+            this.val_localIP.AutoSize = true;
+            this.val_localIP.Location = new System.Drawing.Point(84, 51);
+            this.val_localIP.Name = "val_localIP";
+            this.val_localIP.Size = new System.Drawing.Size(35, 13);
+            this.val_localIP.TabIndex = 23;
+            this.val_localIP.Text = "label4";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(3, 72);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(53, 13);
+            this.label3.TabIndex = 22;
+            this.label3.Text = "Global IP:";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(3, 52);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(49, 13);
+            this.label2.TabIndex = 21;
+            this.label2.Text = "Local IP:";
             // 
             // checkBox2
             // 
@@ -201,41 +205,26 @@
             this.checkBox2.Text = "Custom Port";
             this.checkBox2.UseVisualStyleBackColor = true;
             // 
-            // label2
+            // checkBox1
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(3, 52);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(49, 13);
-            this.label2.TabIndex = 21;
-            this.label2.Text = "Local IP:";
+            this.checkBox1.AutoSize = true;
+            this.checkBox1.Location = new System.Drawing.Point(7, 7);
+            this.checkBox1.Name = "checkBox1";
+            this.checkBox1.Size = new System.Drawing.Size(74, 17);
+            this.checkBox1.TabIndex = 19;
+            this.checkBox1.Text = "Custom IP";
+            this.checkBox1.UseVisualStyleBackColor = true;
             // 
-            // label3
+            // btnServer
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(3, 72);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(53, 13);
-            this.label3.TabIndex = 22;
-            this.label3.Text = "Global IP:";
-            // 
-            // val_localIP
-            // 
-            this.val_localIP.AutoSize = true;
-            this.val_localIP.Location = new System.Drawing.Point(84, 51);
-            this.val_localIP.Name = "val_localIP";
-            this.val_localIP.Size = new System.Drawing.Size(35, 13);
-            this.val_localIP.TabIndex = 23;
-            this.val_localIP.Text = "label4";
-            // 
-            // val_extIP
-            // 
-            this.val_extIP.AutoSize = true;
-            this.val_extIP.Location = new System.Drawing.Point(87, 72);
-            this.val_extIP.Name = "val_extIP";
-            this.val_extIP.Size = new System.Drawing.Size(35, 13);
-            this.val_extIP.TabIndex = 24;
-            this.val_extIP.Text = "label4";
+            this.btnServer.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnServer.Location = new System.Drawing.Point(3, 183);
+            this.btnServer.Name = "btnServer";
+            this.btnServer.Size = new System.Drawing.Size(129, 23);
+            this.btnServer.TabIndex = 18;
+            this.btnServer.Text = "Start Server";
+            this.btnServer.UseVisualStyleBackColor = true;
+            this.btnServer.Click += new System.EventHandler(this.btnWebServer_Click);
             // 
             // tabPage1
             // 
@@ -272,105 +261,24 @@
             this.panel1.Size = new System.Drawing.Size(611, 567);
             this.panel1.TabIndex = 20;
             // 
-            // btnStartStopLogging
+            // ckbWriteTitle
             // 
-            this.btnStartStopLogging.Enabled = false;
-            this.btnStartStopLogging.Location = new System.Drawing.Point(6, 86);
-            this.btnStartStopLogging.Name = "btnStartStopLogging";
-            this.btnStartStopLogging.Size = new System.Drawing.Size(129, 23);
-            this.btnStartStopLogging.TabIndex = 0;
-            this.btnStartStopLogging.Text = "Start";
-            this.btnStartStopLogging.UseVisualStyleBackColor = true;
+            this.ckbWriteTitle.AutoSize = true;
+            this.ckbWriteTitle.Location = new System.Drawing.Point(6, 63);
+            this.ckbWriteTitle.Name = "ckbWriteTitle";
+            this.ckbWriteTitle.Size = new System.Drawing.Size(128, 17);
+            this.ckbWriteTitle.TabIndex = 5;
+            this.ckbWriteTitle.Text = "Überschrift Schreiben";
+            this.ckbWriteTitle.UseVisualStyleBackColor = true;
             // 
-            // btnOutputFolder
+            // label1
             // 
-            this.btnOutputFolder.Location = new System.Drawing.Point(6, 4);
-            this.btnOutputFolder.Name = "btnOutputFolder";
-            this.btnOutputFolder.Size = new System.Drawing.Size(59, 23);
-            this.btnOutputFolder.TabIndex = 8;
-            this.btnOutputFolder.Text = "Ändern";
-            this.btnOutputFolder.UseVisualStyleBackColor = true;
-            // 
-            // btnFilename
-            // 
-            this.btnFilename.Location = new System.Drawing.Point(6, 33);
-            this.btnFilename.Name = "btnFilename";
-            this.btnFilename.Size = new System.Drawing.Size(59, 23);
-            this.btnFilename.TabIndex = 12;
-            this.btnFilename.Text = "Ändern";
-            this.btnFilename.UseVisualStyleBackColor = true;
-            // 
-            // val_lblUsedInterval
-            // 
-            this.val_lblUsedInterval.AutoSize = true;
-            this.val_lblUsedInterval.Location = new System.Drawing.Point(112, 153);
-            this.val_lblUsedInterval.Name = "val_lblUsedInterval";
-            this.val_lblUsedInterval.Size = new System.Drawing.Size(34, 13);
-            this.val_lblUsedInterval.TabIndex = 11;
-            this.val_lblUsedInterval.Text = "UNIN";
-            // 
-            // lblFilename
-            // 
-            this.lblFilename.AutoSize = true;
-            this.lblFilename.Location = new System.Drawing.Point(67, 39);
-            this.lblFilename.Name = "lblFilename";
-            this.lblFilename.Size = new System.Drawing.Size(66, 13);
-            this.lblFilename.TabIndex = 13;
-            this.lblFilename.Text = "Datei Name:";
-            // 
-            // lblUsedInterval
-            // 
-            this.lblUsedInterval.AutoSize = true;
-            this.lblUsedInterval.Location = new System.Drawing.Point(3, 153);
-            this.lblUsedInterval.Name = "lblUsedInterval";
-            this.lblUsedInterval.Size = new System.Drawing.Size(90, 13);
-            this.lblUsedInterval.TabIndex = 10;
-            this.lblUsedInterval.Text = "Log Intervall (ms):";
-            // 
-            // lblOutputFolder
-            // 
-            this.lblOutputFolder.AutoSize = true;
-            this.lblOutputFolder.Location = new System.Drawing.Point(67, 9);
-            this.lblOutputFolder.Name = "lblOutputFolder";
-            this.lblOutputFolder.Size = new System.Drawing.Size(77, 13);
-            this.lblOutputFolder.TabIndex = 14;
-            this.lblOutputFolder.Text = "Output Ordner:";
-            // 
-            // val_lblLogCount
-            // 
-            this.val_lblLogCount.AutoSize = true;
-            this.val_lblLogCount.Location = new System.Drawing.Point(112, 135);
-            this.val_lblLogCount.Name = "val_lblLogCount";
-            this.val_lblLogCount.Size = new System.Drawing.Size(34, 13);
-            this.val_lblLogCount.TabIndex = 9;
-            this.val_lblLogCount.Text = "UNIN";
-            // 
-            // val_lblOutputFolder
-            // 
-            this.val_lblOutputFolder.AutoSize = true;
-            this.val_lblOutputFolder.Location = new System.Drawing.Point(141, 9);
-            this.val_lblOutputFolder.Name = "val_lblOutputFolder";
-            this.val_lblOutputFolder.Size = new System.Drawing.Size(35, 13);
-            this.val_lblOutputFolder.TabIndex = 15;
-            this.val_lblOutputFolder.Text = "label2";
-            // 
-            // lblLogCount
-            // 
-            this.lblLogCount.AutoSize = true;
-            this.lblLogCount.Location = new System.Drawing.Point(3, 135);
-            this.lblLogCount.Name = "lblLogCount";
-            this.lblLogCount.Size = new System.Drawing.Size(81, 13);
-            this.lblLogCount.TabIndex = 3;
-            this.lblLogCount.Text = "Logged Entries:";
-            // 
-            // val_lblFilename
-            // 
-            this.val_lblFilename.AutoSize = true;
-            this.val_lblFilename.Location = new System.Drawing.Point(140, 39);
-            this.val_lblFilename.Name = "val_lblFilename";
-            this.val_lblFilename.Size = new System.Drawing.Size(35, 13);
-            this.val_lblFilename.TabIndex = 16;
-            this.val_lblFilename.Text = "label2";
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(3, 174);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(92, 13);
+            this.label1.TabIndex = 6;
+            this.label1.Text = "Log Intervall in ms";
             // 
             // numLogInterval
             // 
@@ -399,24 +307,108 @@
             0,
             0});
             // 
-            // label1
+            // val_lblFilename
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(3, 174);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(92, 13);
-            this.label1.TabIndex = 6;
-            this.label1.Text = "Log Intervall in ms";
+            this.val_lblFilename.AutoSize = true;
+            this.val_lblFilename.Location = new System.Drawing.Point(140, 39);
+            this.val_lblFilename.Name = "val_lblFilename";
+            this.val_lblFilename.Size = new System.Drawing.Size(35, 13);
+            this.val_lblFilename.TabIndex = 16;
+            this.val_lblFilename.Text = "label2";
             // 
-            // ckbWriteTitle
+            // lblLogCount
             // 
-            this.ckbWriteTitle.AutoSize = true;
-            this.ckbWriteTitle.Location = new System.Drawing.Point(6, 63);
-            this.ckbWriteTitle.Name = "ckbWriteTitle";
-            this.ckbWriteTitle.Size = new System.Drawing.Size(128, 17);
-            this.ckbWriteTitle.TabIndex = 5;
-            this.ckbWriteTitle.Text = "Überschrift Schreiben";
-            this.ckbWriteTitle.UseVisualStyleBackColor = true;
+            this.lblLogCount.AutoSize = true;
+            this.lblLogCount.Location = new System.Drawing.Point(3, 135);
+            this.lblLogCount.Name = "lblLogCount";
+            this.lblLogCount.Size = new System.Drawing.Size(81, 13);
+            this.lblLogCount.TabIndex = 3;
+            this.lblLogCount.Text = "Logged Entries:";
+            // 
+            // val_lblOutputFolder
+            // 
+            this.val_lblOutputFolder.AutoSize = true;
+            this.val_lblOutputFolder.Location = new System.Drawing.Point(141, 9);
+            this.val_lblOutputFolder.Name = "val_lblOutputFolder";
+            this.val_lblOutputFolder.Size = new System.Drawing.Size(35, 13);
+            this.val_lblOutputFolder.TabIndex = 15;
+            this.val_lblOutputFolder.Text = "label2";
+            // 
+            // val_lblLogCount
+            // 
+            this.val_lblLogCount.AutoSize = true;
+            this.val_lblLogCount.Location = new System.Drawing.Point(112, 135);
+            this.val_lblLogCount.Name = "val_lblLogCount";
+            this.val_lblLogCount.Size = new System.Drawing.Size(34, 13);
+            this.val_lblLogCount.TabIndex = 9;
+            this.val_lblLogCount.Text = "UNIN";
+            // 
+            // lblOutputFolder
+            // 
+            this.lblOutputFolder.AutoSize = true;
+            this.lblOutputFolder.Location = new System.Drawing.Point(67, 9);
+            this.lblOutputFolder.Name = "lblOutputFolder";
+            this.lblOutputFolder.Size = new System.Drawing.Size(77, 13);
+            this.lblOutputFolder.TabIndex = 14;
+            this.lblOutputFolder.Text = "Output Ordner:";
+            // 
+            // lblUsedInterval
+            // 
+            this.lblUsedInterval.AutoSize = true;
+            this.lblUsedInterval.Location = new System.Drawing.Point(3, 153);
+            this.lblUsedInterval.Name = "lblUsedInterval";
+            this.lblUsedInterval.Size = new System.Drawing.Size(90, 13);
+            this.lblUsedInterval.TabIndex = 10;
+            this.lblUsedInterval.Text = "Log Intervall (ms):";
+            // 
+            // lblFilename
+            // 
+            this.lblFilename.AutoSize = true;
+            this.lblFilename.Location = new System.Drawing.Point(67, 39);
+            this.lblFilename.Name = "lblFilename";
+            this.lblFilename.Size = new System.Drawing.Size(66, 13);
+            this.lblFilename.TabIndex = 13;
+            this.lblFilename.Text = "Datei Name:";
+            // 
+            // val_lblUsedInterval
+            // 
+            this.val_lblUsedInterval.AutoSize = true;
+            this.val_lblUsedInterval.Location = new System.Drawing.Point(112, 153);
+            this.val_lblUsedInterval.Name = "val_lblUsedInterval";
+            this.val_lblUsedInterval.Size = new System.Drawing.Size(34, 13);
+            this.val_lblUsedInterval.TabIndex = 11;
+            this.val_lblUsedInterval.Text = "UNIN";
+            // 
+            // btnFilename
+            // 
+            this.btnFilename.Location = new System.Drawing.Point(6, 33);
+            this.btnFilename.Name = "btnFilename";
+            this.btnFilename.Size = new System.Drawing.Size(59, 23);
+            this.btnFilename.TabIndex = 12;
+            this.btnFilename.Text = "Ändern";
+            this.btnFilename.UseVisualStyleBackColor = true;
+            this.btnFilename.Click += new System.EventHandler(this.btnFilename_Click);
+            // 
+            // btnOutputFolder
+            // 
+            this.btnOutputFolder.Location = new System.Drawing.Point(6, 4);
+            this.btnOutputFolder.Name = "btnOutputFolder";
+            this.btnOutputFolder.Size = new System.Drawing.Size(59, 23);
+            this.btnOutputFolder.TabIndex = 8;
+            this.btnOutputFolder.Text = "Ändern";
+            this.btnOutputFolder.UseVisualStyleBackColor = true;
+            this.btnOutputFolder.Click += new System.EventHandler(this.btnOutputFolder_Click);
+            // 
+            // btnStartStopLogging
+            // 
+            this.btnStartStopLogging.Enabled = false;
+            this.btnStartStopLogging.Location = new System.Drawing.Point(6, 86);
+            this.btnStartStopLogging.Name = "btnStartStopLogging";
+            this.btnStartStopLogging.Size = new System.Drawing.Size(129, 23);
+            this.btnStartStopLogging.TabIndex = 0;
+            this.btnStartStopLogging.Text = "Start";
+            this.btnStartStopLogging.UseVisualStyleBackColor = true;
+            this.btnStartStopLogging.Click += new System.EventHandler(this.btnStartStopLogging_Click);
             // 
             // tabData
             // 
@@ -456,6 +448,7 @@
             this.panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numLogInterval)).EndInit();
             this.tabData.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.loggerManagerBindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -469,7 +462,6 @@
         private System.Windows.Forms.TabPage tabPage5;
         private System.Windows.Forms.TableLayoutPanel tableData;
         private System.Windows.Forms.TabPage tabPage4;
-        private System.Windows.Forms.Button button1;
         private System.Windows.Forms.ListBox lb_LogOutput;
         private System.Windows.Forms.TabPage tabPage3;
         private System.Windows.Forms.Label val_extIP;
@@ -496,5 +488,6 @@
         private System.Windows.Forms.Button btnOutputFolder;
         private System.Windows.Forms.Button btnStartStopLogging;
         private System.Windows.Forms.TabControl tabData;
+        private System.Windows.Forms.BindingSource loggerManagerBindingSource;
     }
 }

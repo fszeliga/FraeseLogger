@@ -21,6 +21,8 @@ namespace imi_cnc_logger.log_comp
         {
             EventId = eventID;
 
+
+
             string @namespace = "imi_cnc_logger.log_comp.data.impl";
             var theList = Assembly.GetExecutingAssembly().GetTypes().Where(t => t.Namespace == @namespace).ToList();
 
@@ -29,6 +31,12 @@ namespace imi_cnc_logger.log_comp
                 CNCDataBase obj = (CNCDataBase)Activator.CreateInstance(d);
                 data.Add(obj.Key, obj);
             }
+
+        }
+
+        public void update()
+        {
+            foreach (CNCDataBase d in data.Values) d.read();
         }
 
         public string getValueByKey(string key, string[] args = null)
@@ -57,6 +65,16 @@ namespace imi_cnc_logger.log_comp
         internal string getNameByKey(string key)
         {
             return data[key].Name;
+        }
+
+        internal string getLoggableValue(string k)
+        {
+            return data[k].getLoggableValue();
+        }
+
+        internal string getLoggableName(string k)
+        {
+            return data[k].LogKey;
         }
     }
 }

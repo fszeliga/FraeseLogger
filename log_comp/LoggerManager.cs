@@ -5,9 +5,8 @@ using imi_cnc_logger.log_comp.data;
 using imi_cnc_logger.WebServer;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
-using System.Reflection;
-using System.Text;
 using System.Threading;
 
 namespace imi_cnc_logger
@@ -20,8 +19,10 @@ namespace imi_cnc_logger
         private LoggerSettings setting = null;
         private List<LogEvent> data = new List<LogEvent>();
         private Queue<string> logs = new Queue<string>();
-        private LogEvent defaultLogEvent = null;
+        private LogEvent currentLogEvent;
         private string[] possibleKeys;
+
+        private DataTable dataTable = new DataTable("cncDataTabel");
 
         private Dictionary<string, bool> entriesToLog = new Dictionary<string, bool>();
 
@@ -55,12 +56,20 @@ namespace imi_cnc_logger
             this.connector = c;
             this.machInfo = m;
 
-            energy = new energenie(System.Net.IPAddress.Parse("192.168.0.102"));
-            threadEnergenie = new Thread(new ThreadStart(energy.readEnergenie));
-            //threadEnergenie.Start();            
+                        
+            currentLogEvent = new LogEvent(0);
+            //possibleKeys = new LogEvent(0).data.Keys.ToArray();
+            possibleKeys = currentLogEvent.data.Keys.ToArray();
+            try
+            {
+                foreach (string s in possibleKeys) entriesToLog.Add(s, true);
+            }
+            catch (Exception e)
+            {
+                LoggerManager.THE().addLog(e.Message);
+            }
 
-            possibleKeys = new LogEvent(0).data.Keys.ToArray();
-            foreach (string s in possibleKeys) entriesToLog.Add(s, true);
+            
         }
 
         public bool getLogEntry(string key)
@@ -81,6 +90,7 @@ namespace imi_cnc_logger
             try
             {
                 entriesToLog[key] = log;
+                LoggerManager.THE().addLog("setLogEntry - key: " + key + " - " + log);
             }
             catch (KeyNotFoundException)
             {
@@ -94,10 +104,22 @@ namespace imi_cnc_logger
         /// </summary>
         public void readFromCNC()
         {
+            currentLogEvent.update();
+            return;
+
             if (cncReader == null) throw new CNCReaderNotInitialized("You need to run init on LoggerManager first!");
-            Tuple<bool, LogEvent> newData = cncReader.getNewData(getLastEvent());
-            if (newData.Item1) data.Add(newData.Item2);
-            else LoggerManager.THE().pushLog("same data! not logging");
+            Tuple<bool, LogEvent> newData = cncReader.getNewData(currentLogEvent);
+            lock (currentLogEvent)
+            {
+                currentLogEvent = newData.Item2;
+            }
+            //if (newData.Item1) data.Add(newData.Item2);
+            //else LoggerManager.THE().pushLog("same data! not logging");
+        }
+
+        public LogEvent getCurrentLogEvent()
+        {
+            return currentLogEvent;
         }
 
         public void initDummy()
@@ -178,7 +200,7 @@ namespace imi_cnc_logger
 
         public string getDataNameByKey(string key)
         {
-            return defaultLogEvent.getNameByKey(key);
+            return currentLogEvent.getNameByKey(key);
         }
 
         public void setWebServerRunning(bool webserver_running)
@@ -205,9 +227,22 @@ namespace imi_cnc_logger
             return possibleKeys;
         }
 
+        public bool getBoolLogKey(string key)
+        {
+            try
+            {
+                return entriesToLog[key];
+            }
+            catch (KeyNotFoundException)
+            {
+                return false;
+            }
+        }
+
         internal void stop()
         {
             webserver.stop();
         }
+
     }
 }

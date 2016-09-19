@@ -5,14 +5,14 @@ using System.Text;
 
 namespace imi_cnc_logger.log_comp.data.impl
 {
-    class cncHood : CNCDataGenericBase<bool>
+    class cncEnergy : CNCDataGenericBase<energenie>
     {
  
         internal override string Description
         {
             get
             {
-                return "true if hood open, false otherwise";
+                return "CNC Energy Usage Data";
             }
         }
 
@@ -20,7 +20,7 @@ namespace imi_cnc_logger.log_comp.data.impl
         {
             get
             {
-                return "hoodOpen";
+                return "energy";
             }
         }
 
@@ -28,7 +28,15 @@ namespace imi_cnc_logger.log_comp.data.impl
         {
             get
             {
-                return "State of the CNC hood";
+                return "asd";
+            }
+        }
+
+        internal override string LogKey
+        {
+            get
+            {
+                return "Ewatt;Eampere;Evolt;Ewatthours";
             }
         }
 
@@ -37,19 +45,25 @@ namespace imi_cnc_logger.log_comp.data.impl
             throw new NotImplementedException();
         }
 
+        public override string getLoggableValue()
+        {
+            return Value.watt.ToString() + ";" + Value.current.ToString() + ";" + Value.voltage.ToString() + ";" + Value.energy.ToString();
+        }
+
         public override string getValue(string[] args)
         {
-            return Value.ToString();
+            return Value.data2String(" ", false, true);
         }
 
         public override void initialize()
         {
-            Value = false;
+            Value = new energenie(System.Net.IPAddress.Parse("192.168.178.46"));
+
+            //Value = new energenie(System.Net.IPAddress.Parse("192.168.0.102"));
         }
 
         public override bool read()
         {
-            Value = myConn.IsHoodOpen();
             return true;
         }
     }

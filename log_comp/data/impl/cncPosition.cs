@@ -23,6 +23,14 @@ namespace imi_cnc_logger.log_comp.data.impl
             }
         }
 
+        internal override string LogKey
+        {
+            get
+            {
+                return "posX;posY;posZ";
+            }
+        }
+
         internal override string Name
         {
             get
@@ -34,6 +42,11 @@ namespace imi_cnc_logger.log_comp.data.impl
         public override string asString()
         {
             throw new NotImplementedException();
+        }
+
+        public override string getLoggableValue()
+        {
+            return Value.X.ToString() + ";" +Value.X.ToString() + ";" + Value.X.ToString();
         }
 
         public override string getValue(string[] args)

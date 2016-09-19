@@ -5,14 +5,14 @@ using System.Text;
 
 namespace imi_cnc_logger.log_comp.data.impl
 {
-    class cncHood : CNCDataGenericBase<bool>
+    class cncActiveProgramm : CNCDataGenericBase<string>
     {
  
         internal override string Description
         {
             get
             {
-                return "true if hood open, false otherwise";
+                return "Return currently prossessed file name";
             }
         }
 
@@ -20,7 +20,7 @@ namespace imi_cnc_logger.log_comp.data.impl
         {
             get
             {
-                return "hoodOpen";
+                return "activeProg";
             }
         }
 
@@ -28,7 +28,7 @@ namespace imi_cnc_logger.log_comp.data.impl
         {
             get
             {
-                return "State of the CNC hood";
+                return "Active CNC Programm Name";
             }
         }
 
@@ -39,17 +39,17 @@ namespace imi_cnc_logger.log_comp.data.impl
 
         public override string getValue(string[] args)
         {
-            return Value.ToString();
+            return Value;
         }
 
         public override void initialize()
         {
-            Value = false;
+            Value = "";
         }
 
         public override bool read()
         {
-            Value = myConn.IsHoodOpen();
+            Value = myInfo.FileName;
             return true;
         }
     }

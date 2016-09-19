@@ -5,14 +5,14 @@ using System.Text;
 
 namespace imi_cnc_logger.log_comp.data.impl
 {
-    class cncHood : CNCDataGenericBase<bool>
+    class cncFeedRate : CNCDataGenericBase<double>
     {
  
         internal override string Description
         {
             get
             {
-                return "true if hood open, false otherwise";
+                return "CNC Feed Rate (vorschub) mm/m";
             }
         }
 
@@ -20,7 +20,7 @@ namespace imi_cnc_logger.log_comp.data.impl
         {
             get
             {
-                return "hoodOpen";
+                return "feedRate";
             }
         }
 
@@ -28,7 +28,7 @@ namespace imi_cnc_logger.log_comp.data.impl
         {
             get
             {
-                return "State of the CNC hood";
+                return "asd";
             }
         }
 
@@ -44,12 +44,17 @@ namespace imi_cnc_logger.log_comp.data.impl
 
         public override void initialize()
         {
-            Value = false;
+            Value = 0;
+
+            if (myInfo.JobInfo.SpeedUnitMMMinute) _units = "mm/m";
+            else _units = "mm/s";
         }
 
         public override bool read()
         {
-            Value = myConn.IsHoodOpen();
+            if (myInfo.JobInfo != null) Value = myInfo.JobInfo.JobSpeed;
+            else Value = 0;
+
             return true;
         }
     }

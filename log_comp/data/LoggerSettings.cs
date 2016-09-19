@@ -13,10 +13,11 @@ namespace imi_cnc_logger.log_comp.data
         public bool logThreadRunning = false;
 
         private static LoggerSettings i = null;
+        internal int loggedEntriesCount;
 
         private LoggerSettings()
         {
-
+            logFilename = "cncLog.txt";
         }
 
         public static LoggerSettings Instance()

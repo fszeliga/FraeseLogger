@@ -5,9 +5,11 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Configuration;
+using System.Net.NetworkInformation;
 using System.Reflection;
 using System.Text;
 using System.Text.RegularExpressions;
+using System.Threading;
 
 namespace imi_cnc_logger
 {
@@ -28,16 +30,16 @@ namespace imi_cnc_logger
         public double energy { get; private set; } = 0.0;
         private const double energyConst = 25.6;
 
-
-        //'V', 'Voltage',  10.0, 'V',        # factors are take from script: eg.js
-        //'I', 'Current', 100.0, 'A',
-        //'P', 'Power',   466.0, 'W',
-        //'E', 'Energie',  25.6, 'Wh'
+        private Thread thread;
 
         public energenie(IPAddress ip)
         {
             this.ip = ip;
             ToggleAllowUnsafeHeaderParsing(true);
+
+            thread = new Thread(new ThreadStart(readEnergenie));
+            thread.IsBackground = true;
+            thread.Start();
         }
 
         public void stop()
@@ -50,8 +52,10 @@ namespace imi_cnc_logger
             read = true;
             while (read)
             {
-                LoggerManager.THE().addLog("reading from energy...");
-                WebRequest req = WebRequest.Create("http://" + ip +"/login.html");
+                if (!isOnline()) continue; //ping to make sure is online
+
+
+                WebRequest req = WebRequest.Create("http://" + ip + "/login.html");
                 string postData = "pw=1";
 
                 byte[] send = Encoding.Default.GetBytes(postData);
@@ -68,6 +72,7 @@ namespace imi_cnc_logger
                 StreamReader sr = new StreamReader(res.GetResponseStream());
                 string returnvalue = sr.ReadToEnd();
                 sr.Close();
+                res.Close();
 
                 returnvalue = WebUtility.HtmlDecode(returnvalue);
                 returnvalue = Regex.Replace(returnvalue, @"\s+", "");
@@ -106,10 +111,31 @@ namespace imi_cnc_logger
                     }
                 }
 
-                System.Threading.Thread.Sleep(5000);
+                Thread.Sleep(5000);
             }
         }
         
+        public bool isOnline()
+        {
+            try
+            {
+                Ping pingSender = new Ping();
+                PingReply reply = pingSender.Send(ip.ToString());
+                if (reply.Status == IPStatus.Success)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            catch
+            {
+                return false;
+            }
+
+        }
 
         /// <summary>
         /// Get a String representation of Ampere/Voltage/Watts/total Power.
@@ -118,31 +144,30 @@ namespace imi_cnc_logger
         /// <param name="names">include name infront of value/</param>
         /// <param name="units">include units after value?</param>
         /// <returns></returns>
-        public String data2String(String seperator = " ", bool names = true, bool units = false)
+        public string data2String(string seperator = " ", bool names = true, bool units = false)
         {
-
             return (names ? "Ampere: " : "") + current + (units ? "A" : "") + seperator
                 + (names ? "Voltage: " : "") + voltage + (units ? "V" : "") + seperator
                 + (names ? "Watt: " : "") + watt + (units ? "W" : "") + seperator
                 + (names ? "Energy: " : "") + energy + (units ? "Wh" : "");
         }
 
-        public String watt2String(bool name = true, bool units = false)
+        public string watt2String(bool name = true, bool units = false)
         {
             return name ? "Watt: " : "" + watt + (units ? "A" : "");
         }
 
-        public String ampere2String(bool name = true, bool units = false)
+        public string ampere2String(bool name = true, bool units = false)
         {
             return name ? "Ampere: " : "" + current + (units ? "A" : "");
         }
 
-        public String volt2String(bool name = true, bool units = false)
+        public string volt2String(bool name = true, bool units = false)
         {
             return name ? "Voltage: " : "" + voltage + (units ? "A" : "");
         }
 
-        public String power2String(bool name = true, bool units = false)
+        public string power2String(bool name = true, bool units = false)
         {
             return name ? "Energy: " : "" + energy + (units ? "Wh" : "");
         }

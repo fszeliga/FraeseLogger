@@ -24,6 +24,18 @@ namespace imi_cnc_logger.log_comp.data.impl
             }
         }
 
+        internal override string LogKey
+        {
+            get
+            {
+                return "gcode;gcodeline";
+            }
+        }
+        public override string getLoggableValue()
+        {
+            return Value.Code + ";" + Value.Line;
+        }
+
         internal override string Name
         {
             get

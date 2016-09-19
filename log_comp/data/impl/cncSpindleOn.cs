@@ -5,14 +5,14 @@ using System.Text;
 
 namespace imi_cnc_logger.log_comp.data.impl
 {
-    class cncHood : CNCDataGenericBase<bool>
+    class cncSpindleOn : CNCDataGenericBase<bool>
     {
  
         internal override string Description
         {
             get
             {
-                return "true if hood open, false otherwise";
+                return "asd";
             }
         }
 
@@ -20,7 +20,7 @@ namespace imi_cnc_logger.log_comp.data.impl
         {
             get
             {
-                return "hoodOpen";
+                return "spindleOn";
             }
         }
 
@@ -28,7 +28,7 @@ namespace imi_cnc_logger.log_comp.data.impl
         {
             get
             {
-                return "State of the CNC hood";
+                return "asd";
             }
         }
 
@@ -49,7 +49,7 @@ namespace imi_cnc_logger.log_comp.data.impl
 
         public override bool read()
         {
-            Value = myConn.IsHoodOpen();
+            Value = myConn.IsSpindleOn();
             return true;
         }
     }

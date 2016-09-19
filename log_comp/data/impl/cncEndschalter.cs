@@ -25,11 +25,23 @@ namespace imi_cnc_logger.log_comp.data.impl
             }
         }
 
+        internal override string LogKey
+        {
+            get
+            {
+                return "endX;endY;endZ";
+            }
+        }
+        public override string getLoggableValue()
+        {
+            return Value.X.ToString() + ";" + Value.Y.ToString() + ";" + Value.Z.ToString();
+        }
+
         internal override string Name
         {
             get
             {
-                return "Endschalter von der CN";
+                return "Endschalter von der CNC";
             }
         }
 

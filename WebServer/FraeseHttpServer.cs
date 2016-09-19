@@ -68,7 +68,22 @@ namespace imi_cnc_logger.WebServer
                     p.outputStream.WriteLine("[error:'Wrong REST API command! URL: " + p.http_url + "']");
                     return;
                 }
-            } else if (parsePotentialSingleData(p, rest))
+            }
+            else if (rest[1] == "current")
+            {
+                p.outputStream.WriteLine("current" + p.http_url);
+                return;
+                try
+                {
+                    //eventsJson = parseCurrent(p, Int32.Parse(rest[2]));
+                }
+                catch
+                {
+                    p.outputStream.WriteLine("[error:'Wrong REST API command! URL: " + p.http_url + "']");
+                    return;
+                }
+            }
+            else if (parsePotentialSingleData(p, rest))
             {
                 p.outputStream.WriteLine("parsePotentialSingleData = true");
                 return;

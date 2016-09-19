@@ -1,15 +1,9 @@
-﻿using De.Boenigk.SMC5D.Basics;
-using imi_cnc_logger;
+﻿using imi_cnc_logger;
 using imi_cnc_logger.log_comp;
 using imi_cnc_logger.log_comp.data;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.IO;
-using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Windows.Forms;
 
@@ -17,19 +11,19 @@ namespace FraeseLogger
 {
     public partial class LoggerDlg : Form
     {
-        //private De.Boenigk.Utility.CNC.Info.MachInfo myMachInfo;
-        //private Connector myConnector;
+
         private LoggerManager _l = LoggerManager.THE();
         private bool toggleState = false; // false means log none
+        private List<Label> dataLabels = new List<Label>();
+        private List<CheckBox> dataCheckboxes = new List<CheckBox>();
+
+        //used for starting/stopping webserver
+        private bool serverRunning = false;
 
         public LoggerDlg()
         {
             InitializeComponent();
-            
-            //val_lblOutputFolder.Text = li.LogFileDir;
-            //val_lblFilename.Text = li.log_filename;
 
-            timer.Start();
             LoggerSettings.Instance().logInterval = Convert.ToInt32(numLogInterval.Value);
 
             tableData.CellBorderStyle = TableLayoutPanelCellBorderStyle.Outset;
@@ -39,7 +33,6 @@ namespace FraeseLogger
             TableLayoutRowStyleCollection styles = tableData.RowStyles;
             foreach (RowStyle style in styles)
             {
-                // Set the row height to 20 pixels.
                 style.SizeType = SizeType.Absolute;
                 style.Height = 20;
             }
@@ -47,25 +40,30 @@ namespace FraeseLogger
             string[] keys = LoggerManager.THE().getAllKeys();
             for (int i = 0; i < keys.Length; i++)
             {
+                LoggerManager.THE().addLog("added key: " + keys[i]);
                 Label l = createLabel(keys[i]);
                 dataLabels.Add(l);
                 tableData.Controls.Add(createLabel(keys[i]), 0, i);
                 tableData.Controls.Add(l, 1, i);
                 CheckBox c = createCheckbox(keys[i]);
+                dataCheckboxes.Add(c);
                 tableData.Controls.Add(c, 2, i);
             }
+
+            timer.Start();
+
         }
 
         private void timer_Tick(object sender, EventArgs e)
         {
+            SuspendLayout();
             LoggerManager.THE().readFromCNC();
+
+            LogEvent ev = LoggerManager.THE().getCurrentLogEvent();
             foreach (Label l in dataLabels)
             {
-                LogEvent ev = LoggerManager.THE().getLastEvent();
                 l.Text = ev.getValueByKey(l.Tag.ToString());
             }
-
-//            val_lblEnergy.Text = LoggerManager.THE().energy.data2String("   ", false, true);
 
             while (LoggerManager.THE().logsQueued())
             {
@@ -77,9 +75,10 @@ namespace FraeseLogger
 
             //File Logger Tab
             val_lblUsedInterval.Text = LoggerSettings.Instance().logInterval.ToString();
+            lblLogCount.Text = LoggerSettings.Instance().loggedEntriesCount.ToString();
+            ResumeLayout();
         }
 
-        private List<Label> dataLabels = new List<Label>();
         private Label createLabel(string tag)
         {
             Label l = new Label();
@@ -89,52 +88,20 @@ namespace FraeseLogger
             return l;
         }
 
-        private List<CheckBox> dataCheckboxes = new List<CheckBox>();
-        private CheckBox createCheckbox(string tag)
+        private CheckBox createCheckbox(string key)
         {
             CheckBox c = new CheckBox();
-            c.Tag = tag;
-            c.CheckedChanged += (s, e) => LoggerManager.THE().addLog("cb: " + (s as CheckBox).Tag.ToString() + " | " + (s as CheckBox).Checked);
+            c.Tag = key;
+            c.Checked = true;
+            c.CheckedChanged += (s, e) => LoggerManager.THE().setLogEntry(key, (s as CheckBox).Checked);
             return c;
-        }
-
-        private void buttonStart_Click(object sender, EventArgs e)
-        {
-            if (LoggerSettings.Instance().logThreadRunning)
-            {
-                checkLogSelectionEnabled(true);//enable all log selection checkboxes
-                //stop logging
-                LoggerSettings.Instance().logThreadRunning = false;
-                btnStartStopLogging.Text = "Start Logging";
-            }
-            else
-            {
-                //start logging
-
-                checkLogSelectionEnabled(false);//disable all log selection checkboxes
-                LoggerSettings.Instance().logThreadRunning= true;
-                LoggerFileWriter log = new LoggerFileWriter(ckbWriteTitle.Checked);
-                
-                Thread logThread = new Thread(new ThreadStart(log.logCNC));
-                logThread.Start();
-                btnStartStopLogging.Text = "Stop Logging";
-            }
         }
 
         private void numLogInterval_ValueChanged(object sender, EventArgs e)
         {
             LoggerSettings.Instance().logInterval = Convert.ToInt32(numLogInterval.Value);
         }
-
-        private void lblOutputFolderPicker_Click(object sender, EventArgs e)
-        {
-            if (folderBrowserDialog1.ShowDialog() == DialogResult.OK)
-            {
-                LoggerSettings.Instance().logFiledir = folderBrowserDialog1.SelectedPath + "\\";
-                val_lblOutputFolder.Text = LoggerSettings.Instance().logFiledir;
-                btnStartStopLogging.Enabled = true;
-            }
-        }
+        
 
         public static DialogResult InputBox(string title, string promptText, ref string value)
         {
@@ -187,33 +154,11 @@ namespace FraeseLogger
                 val_lblFilename.Text = LoggerSettings.Instance().logFilename;
             }
         }
-
-        private void btn_toggleAll_Click(object sender, EventArgs e)
-        {
-            if (toggleState)
-            {
-                checkLogSelectionToggle(false);//AllowDrop are on, so turn them off
-                toggleState = false;//just turned all off
-            }
-            else
-            {
-                checkLogSelectionToggle(true);
-                toggleState = true;//just turned all back on
-            }
-        }
-
-        private void checkLogSelectionToggle(bool v)
-        {
-           // foreach (var checkBox in _checkBoxes) checkBox.Checked = v;
-        }
         
-        private void checkLogSelectionEnabled(bool v)
-        {
-            //foreach (var checkBox in _checkBoxes) checkBox.Enabled = v;
-        }
 
-        //used for starting/stopping webserver
-        private bool serverRunning = false;
+
+
+
         private void btnWebServer_Click(object sender, EventArgs e)
         {
             LoggerManager.THE().setWebServerRunning(!serverRunning);
@@ -226,10 +171,46 @@ namespace FraeseLogger
         {
             //LoggerManager.THE().stop();
         }
-
-        private void button1_Click(object sender, EventArgs e)
+       
+        private void btnOutputFolder_Click(object sender, EventArgs e)
         {
-            LoggerManager.THE().readFromCNC();
+            if (folderBrowserDialog1.ShowDialog() == DialogResult.OK)
+            {
+                LoggerSettings.Instance().logFiledir = folderBrowserDialog1.SelectedPath + "\\";
+                val_lblOutputFolder.Text = LoggerSettings.Instance().logFiledir;
+                btnStartStopLogging.Enabled = true;
+            }
         }
+
+        private void btnStartStopLogging_Click(object sender, EventArgs e)
+        {
+
+            if (LoggerSettings.Instance().logThreadRunning)
+            {
+                checkLogSelectionEnabled(true);//enable all log selection checkboxes
+                //stop logging
+                LoggerSettings.Instance().logThreadRunning = false;
+                btnStartStopLogging.Text = "Start Logging";
+            }
+            else
+            {
+                //start logging
+
+                checkLogSelectionEnabled(false);//disable all log selection checkboxes
+                LoggerSettings.Instance().logThreadRunning = true;
+                LoggerFileWriter log = new LoggerFileWriter(ckbWriteTitle.Checked);
+
+                Thread logThread = new Thread(new ThreadStart(log.logCNC));
+                logThread.IsBackground = true;
+                logThread.Start();
+                btnStartStopLogging.Text = "Stop Logging";
+            }
+        }
+
+        private void checkLogSelectionEnabled(bool v)
+        {
+            foreach (CheckBox checkBox in dataCheckboxes) checkBox.Enabled = v;
+        }
+        
     }
 }
