@@ -61,6 +61,7 @@
     <Compile Include="log_comp\data\data_types\gcode.cs" />
     <Compile Include="log_comp\data\data_types\position.cs" />
     <Compile Include="log_comp\data\CNCDataBase.cs" />
+    <Compile Include="log_comp\data\impl\cncCutSpeed.cs" />
     <Compile Include="log_comp\data\impl\cncEnergy.cs" />
     <Compile Include="log_comp\data\impl\cncFirmwareVersion.cs" />
     <Compile Include="log_comp\data\impl\cncSerialNr.cs" />
@@ -72,7 +73,8 @@
     <Compile Include="log_comp\data\impl\cncFreilauf.cs" />
     <Compile Include="log_comp\data\impl\cncHeightSensor.cs" />
     <Compile Include="log_comp\data\impl\cncSpindleOn.cs" />
-    <Compile Include="log_comp\data\impl\cncCutSpeed.cs" />
+    <Compile Include="log_comp\data\impl\cncWayTurn.cs" />
+    <Compile Include="log_comp\data\impl\cncStepsTurn.cs" />
     <Compile Include="log_comp\data\impl\cncSpindleSpeedJob.cs" />
     <Compile Include="log_comp\data\impl\cncSpindleSpeed.cs" />
     <Compile Include="log_comp\data\impl\cncVoltage_2.cs" />
